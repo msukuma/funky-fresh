@@ -4,8 +4,8 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.string :location, :default => "The Cookie Jar"
       t.date :expiration_date, :default => Time.now
-      t.references :pantry, index: true
-      t.references :prototype, index: true
+      t.integer :pantry_id
+      t.integer :prototype_id
 
       t.timestamps
     end
