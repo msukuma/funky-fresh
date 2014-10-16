@@ -4,6 +4,17 @@ Refrigeratory::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root to: 'home#index'
+
+  resources :login, only: [:index] 
+
+  resources :user, except: [:index] do 
+    resources :pantry do 
+      resources :items, except: [:show] 
+    end
+  end
+  # get '/register' => 'users#new', as: 'new_user'
+  # post '/register' => 'users#create' as: 'create_user'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
