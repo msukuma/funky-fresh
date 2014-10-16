@@ -54,3 +54,305 @@ Migrating to CreatePantryParticipations (20141016133947)
   [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
   [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
   [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[36m (174.6ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[36m (341.5ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (3.1ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date, "pantry_id_id" integer, "prototype_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_items_on_pantry_id_id" ON "items"  ("pantry_id_id")
+  [1m[36m (0.7ms)[0m  [1mCREATE  INDEX  "index_items_on_prototype_id_id" ON "items"  ("prototype_id_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id_id" ON "pantries"  ("creator_id_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133908"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreatePrototypes (20141016133929)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.9ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133929"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "pantry_participations" ("id" serial primary key, "user_id_id" integer, "pantry_id_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id_id" ON "pantry_participations"  ("user_id_id")[0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id_id" ON "pantry_participations"  ("pantry_id_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133947"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (220.8ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_test"[0m
+  [1m[35m (238.7ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (5.4ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date, "pantry_id_id" integer, "prototype_id_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id_id" ON "items" USING btree ("pantry_id_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_items_on_prototype_id_id" ON "items" USING btree ("prototype_id_id")
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id_id" ON "pantries" USING btree ("creator_id_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id_id" integer, "pantry_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id_id" ON "pantry_participations" USING btree ("pantry_id_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id_id" ON "pantry_participations" USING btree ("user_id_id")[0m
+  [1m[35m (2.2ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133947')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[36m (115.7ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[36m (422.6ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (4.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date, "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id_id" ON "pantries"  ("creator_id_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133908"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreatePrototypes (20141016133929)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133929"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "pantry_participations" ("id" serial primary key, "user_id_id" integer, "pantry_id_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id_id" ON "pantry_participations"  ("user_id_id")[0m
+  [1m[35m (0.7ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id_id" ON "pantry_participations"  ("pantry_id_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133947"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (120.2ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_test"[0m
+  [1m[35m (250.6ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (5.7ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date, "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id_id" ON "pantries" USING btree ("creator_id_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id_id" integer, "pantry_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id_id" ON "pantry_participations" USING btree ("pantry_id_id")
+  [1m[36m (1.6ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id_id" ON "pantry_participations" USING btree ("user_id_id")[0m
+  [1m[35m (2.2ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133947')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 16:27:08.678597"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$3x7oIAnGMiLpX9mEVHsA2.b40QG0Rlir94qthLChvj7Ei8prEMc5q"], ["updated_at", "2014-10-16 16:27:08.678597"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 16:27:08.754307"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$5m4v3amJcxwHW.18wSNMoO/BwvSdUdbIvP7eFH2spbr03SEwZ0lom"], ["updated_at", "2014-10-16 16:27:08.754307"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36m (4053.4ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[36m (277.4ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (3.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-16 16:54:09.250905', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_items_on_pantry_id" ON "items"  ("pantry_id")
+  [1m[36m (0.7ms)[0m  [1mCREATE  INDEX  "index_items_on_prototype_id" ON "items"  ("prototype_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id" ON "pantries"  ("creator_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133908"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreatePrototypes (20141016133929)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133929"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations"  ("user_id")[0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations"  ("pantry_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141016133947"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 16:54:12.592777"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$b7PuFgHC1UWRSYTvAzOHlOm5w5N85ThwW4zGjKzPhkobcE3m1CQ9W"], ["updated_at", "2014-10-16 16:54:12.592777"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 16:54:12.673564"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$dExOGsKkXIYf0UZXqUdzz.Qy58gA81PcLLszl9VeElc1NSKusOyqy"], ["updated_at", "2014-10-16 16:54:12.673564"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPantry Load (18.4ms)[0m  [1mSELECT "pantries".* FROM "pantries" INNER JOIN "pantry_participations" ON "pantries"."id" = "pantry_participations"."pantry_id" WHERE "pantry_participations"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPantry Load (0.8ms)[0m  [1mSELECT "pantries".* FROM "pantries" INNER JOIN "pantry_participations" ON "pantries"."id" = "pantry_participations"."pantry_id" WHERE "pantry_participations"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (7.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 17:14:13.598320"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$kGa1uwXZ9W8njZfD64KfSetyQJGyxJgiXw6jwU.s1/KRHxbcjH.Na"], ["updated_at", "2014-10-16 17:14:13.598320"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 17:14:13.674247"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$ErhC7GURb0Rgre/aS7zBFumvlFwMqv39lAdIQXmzKxVGhlKcCFIkO"], ["updated_at", "2014-10-16 17:14:13.674247"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36m (5039.0ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+PG::ObjectInUse: ERROR:  database "refrigeratory_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+: DROP DATABASE IF EXISTS "refrigeratory_development"
+  [1m[36m (116.3ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[36m (366.2ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (20.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (15.7ms)[0m  BEGIN
+  [1m[36m (3.8ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-16 17:17:55.895364', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_items_on_pantry_id" ON "items"  ("pantry_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_items_on_prototype_id" ON "items"  ("prototype_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133908"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePrototypes (20141016133929)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133929"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[35m (15.5ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations"  ("user_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations"  ("pantry_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133947"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 17:17:59.740850"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$FxUEolbHjuB7FHO9CSxPU.Qab0yx3v8lZ6JlJB3GAPzgDtD/CEw52"], ["updated_at", "2014-10-16 17:17:59.740850"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 17:17:59.819807"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$yUmM05hl69HtwT8/V3LIrOUB4fSylBBe8KO0yK.fN2SNgFt4tIGLy"], ["updated_at", "2014-10-16 17:17:59.819807"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 17:18:36.303759"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$xq8HZ1utk3XvDTrpZmScOu0Di3/Gsc/JLC4JOpsbDl89N4nXFFQra"], ["updated_at", "2014-10-16 17:18:36.303759"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 17:18:36.381681"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$vT3BF7DHMRbcLJcWFZjcXOjJ/0QOh0f0VhgUDpfdD6n5UCG2rOd.a"], ["updated_at", "2014-10-16 17:18:36.381681"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 17:23:23.524340"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$yYFIN7ngExHLdKwjphylleQSfXX1LMTi1nJpzvQsY61Eys63F9MNq"], ["updated_at", "2014-10-16 17:23:23.524340"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 17:23:23.603208"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$WgHfnMv1OjPSnu6jxpP41O60uAamrP2zemUHXweLZKCqPvFTPDNN2"], ["updated_at", "2014-10-16 17:23:23.603208"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "pantries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-10-16 17:23:23.615933"], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-16 17:23:23.615933"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pantries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-10-16 17:23:23.619173"], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-16 17:23:23.619173"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36m (117.3ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_test"[0m
+  [1m[35m (303.8ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (5.3ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date, "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id_id" ON "pantries" USING btree ("creator_id_id")
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id_id" integer, "pantry_id_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id_id" ON "pantry_participations" USING btree ("pantry_id_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id_id" ON "pantry_participations" USING btree ("user_id_id")[0m
+  [1m[35m (2.3ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133947')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[36m (120.3ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[36m (244.2ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-16 17:36:39.376242', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_items_on_pantry_id" ON "items"  ("pantry_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_items_on_prototype_id" ON "items"  ("prototype_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133908"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePrototypes (20141016133929)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133929"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations"  ("user_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations"  ("pantry_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133947"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

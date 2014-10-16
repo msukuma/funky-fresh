@@ -19,33 +19,31 @@ ActiveRecord::Schema.define(version: 20141016133947) do
   create_table "items", force: true do |t|
     t.string   "name"
     t.string   "location",        default: "The Cookie Jar"
-    t.date     "expiration_date"
-    t.integer  "pantry_id_id"
-    t.integer  "prototype_id_id"
+    t.date     "expiration_date", default: '2014-10-16'
+    t.integer  "pantry_id"
+    t.integer  "prototype_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "items", ["pantry_id_id"], name: "index_items_on_pantry_id_id", using: :btree
-  add_index "items", ["prototype_id_id"], name: "index_items_on_prototype_id_id", using: :btree
+  add_index "items", ["pantry_id"], name: "index_items_on_pantry_id", using: :btree
+  add_index "items", ["prototype_id"], name: "index_items_on_prototype_id", using: :btree
 
   create_table "pantries", force: true do |t|
-    t.integer  "creator_id_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "pantries", ["creator_id_id"], name: "index_pantries_on_creator_id_id", using: :btree
 
   create_table "pantry_participations", force: true do |t|
-    t.integer  "user_id_id"
-    t.integer  "pantry_id_id"
+    t.integer  "user_id"
+    t.integer  "pantry_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pantry_participations", ["pantry_id_id"], name: "index_pantry_participations_on_pantry_id_id", using: :btree
-  add_index "pantry_participations", ["user_id_id"], name: "index_pantry_participations_on_user_id_id", using: :btree
+  add_index "pantry_participations", ["pantry_id"], name: "index_pantry_participations_on_pantry_id", using: :btree
+  add_index "pantry_participations", ["user_id"], name: "index_pantry_participations_on_user_id", using: :btree
 
   create_table "prototypes", force: true do |t|
     t.string   "name"
