@@ -31,9 +31,12 @@ ActiveRecord::Schema.define(version: 20141016133947) do
 
   create_table "pantries", force: true do |t|
     t.string   "name"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pantries", ["creator_id"], name: "index_pantries_on_creator_id", using: :btree
 
   create_table "pantry_participations", force: true do |t|
     t.integer  "user_id"
