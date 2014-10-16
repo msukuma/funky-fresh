@@ -1,7 +1,7 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
 	def show
-		show_door
+		show_door #need to check if the logged-in user owns the profile
 		@user = User.find(params[:id])
 	end
 
