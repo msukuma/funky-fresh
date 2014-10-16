@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   post "/login",                      to: "users#login",                      as: "login"
   get "/logout",                      to: "users#logout",                     as: "logout"
 
-  resources :users, except: [:index] do
-    resources :pantries do
-      resources :items, except: [:show]
+
+  resources :users, except: [:index] do 
+    resources :pantries do 
+      resources :items, except: [:show] 
     end
   end
   # get '/register' => 'users#new', as: 'new_user'
