@@ -1,14 +1,14 @@
 User.create!(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "password")
 User.create!(first_name: "Brian", last_name: "Urlacher", email: "burlacher@gmail.com", password: "password")
 
-Pantry.create!(name: "Joe's Kitchen")
-Pantry.create!(name: "Brian's Kitchen")
+Pantry.create!(name: "Joe's Kitchen", creator_id: 1)
+Pantry.create!(name: "Brian's Kitchen", creator_id: 2)
 
-PantryParticipations.create!(user: 1, pantry: 2)
-PantryParticipations.create!(user: 2, pantry: 1)
+PantryParticipation.create!(user_id: 1, pantry_id: 2)
+PantryParticipation.create!(user_id: 2, pantry_id: 1)
 
-Item.create!(name: "Cheese", pantry: 1, prototype: 1)
-Item.create!(name: "Milk", pantry: 2, prototype: 2)
+Item.create!(name: "Cheese", pantry_id: 1, prototype_id: 1)
+Item.create!(name: "Milk", pantry_id: 2, prototype_id: 2)
 
 Prototype.create!(name: "Cheese", shelf_life: 5)
 Prototype.create!(name: "Milk", shelf_life: 10)
