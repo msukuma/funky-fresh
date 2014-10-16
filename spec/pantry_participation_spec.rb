@@ -1,1 +1,0 @@
-pantry_participation_spec.rb
