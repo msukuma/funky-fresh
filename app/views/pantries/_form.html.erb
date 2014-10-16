@@ -1,0 +1,6 @@
+<%= form_for([@user, @pantry]) do |p| %>
+<%= p.text_field :name, placeholder: "Pantry Name" %>
+<%= p.hidden_field 'creator_id', value: @user.id %>
+<br>
+<%= p.submit %>
+<% end %>
