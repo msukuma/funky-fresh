@@ -28,6 +28,8 @@ gem 'spring'
 
 gem 'bcrypt'
 
+gem 'yummly'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'capybara', '~> 2.2.1'
