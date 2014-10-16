@@ -89,7 +89,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="274" y="46" name="participations">
+<table x="274" y="46" name="pantry_participations">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
