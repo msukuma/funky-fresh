@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016133947) do
+ActiveRecord::Schema.define(version: 20141016184559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20141016133947) do
     t.datetime "updated_at"
   end
 
+  add_index "items", ["pantry_id"], name: "index_items_on_pantry_id", using: :btree
+  add_index "items", ["prototype_id"], name: "index_items_on_prototype_id", using: :btree
+
   create_table "pantries", force: true do |t|
     t.string   "name"
     t.integer  "creator_id"
@@ -33,12 +36,17 @@ ActiveRecord::Schema.define(version: 20141016133947) do
     t.datetime "updated_at"
   end
 
+  add_index "pantries", ["creator_id"], name: "index_pantries_on_creator_id", using: :btree
+
   create_table "pantry_participations", force: true do |t|
     t.integer  "user_id"
     t.integer  "pantry_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pantry_participations", ["pantry_id"], name: "index_pantry_participations_on_pantry_id", using: :btree
+  add_index "pantry_participations", ["user_id"], name: "index_pantry_participations_on_user_id", using: :btree
 
   create_table "prototypes", force: true do |t|
     t.string   "name"
