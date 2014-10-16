@@ -553,3 +553,27 @@ Migrating to AddIndexToTable (20141016184559)
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016184559"]]
   [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 18:51:08.828131"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$3hAOPfvpltduuS0dZHSgZezqq/XYDtJMn7SCSS2rfY.dGCVZk.UOO"], ["updated_at", "2014-10-16 18:51:08.828131"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 18:51:08.903041"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$QCqEb5v4JIqe43oYT5M1z.ua4z1j4nQFckSXSG2CepavrpASff65q"], ["updated_at", "2014-10-16 18:51:08.903041"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-16 18:51:43.045418"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$.Fvd0ofbAF0OF..LE.xgs.MlDhMCq2PsFxgM8jMFXN8SdX86iNqLm"], ["updated_at", "2014-10-16 18:51:43.045418"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-16 18:51:43.155830"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$VRGPICdEWIvwnDImm2GoJeiy3GFaI9c9DfBcE5y2Sq88x0YatpK7."], ["updated_at", "2014-10-16 18:51:43.155830"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "pantries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-10-16 18:51:43.171788"], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-16 18:51:43.171788"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantries" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-10-16 18:51:43.175132"], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-16 18:51:43.175132"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m

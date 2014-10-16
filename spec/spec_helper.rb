@@ -40,3 +40,5 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+#RAILS_ENV=test rake db:drop && RAILS_ENV=test rake db:create && RAILS_ENV=test rake db:migrate
