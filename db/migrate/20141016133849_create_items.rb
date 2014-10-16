@@ -3,9 +3,9 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.string :location, :default => "The Cookie Jar"
-      t.date :expiration_date #set default expiration date
-      t.references :pantry_id, index: true
-      t.references :prototype_id, index: true
+      t.date :expiration_date, :default => Time.now
+      t.references :pantry, index: true
+      t.references :prototype, index: true
 
       t.timestamps
     end
