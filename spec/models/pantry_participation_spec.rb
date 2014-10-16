@@ -5,6 +5,7 @@ describe PantryParticipation do
   end
 
   context 'associations' do
-
+    it { should belong_to(:user) }
+    it { should belong_to(:pantry) }
   end
 end

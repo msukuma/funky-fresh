@@ -5,6 +5,6 @@ describe Prototype do
   end
 
   context 'associations' do
-
+    it { should have_many(:items) }
   end
 end

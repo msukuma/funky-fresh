@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Item do
   context 'validations' do
+
   end
 
   context 'associations' do
