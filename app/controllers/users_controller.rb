@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
-		show_door #need to check if the logged-in user owns the profile
+		show_door unless session[:user_id] == params[:id] #reuse this
 		@user = User.find(params[:id])
 	end
 
@@ -19,20 +20,17 @@ class UsersController < ApplicationController
     end
 	end
 
-	def edit
-
-	end
-
 	def update
-		@user = User.find(params[:id])
-		@user.update_attributes(user_params)
-		redirect_to user_path
+		if @user.update_attributes(user_params)
+			redirect_to user_path
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
-		@user = User.find(params[:id])
 		@user.destroy
-		redirect_to
+		redirect_to root_path	#might need to change the path
 	end
 
 	def login_form
@@ -55,10 +53,14 @@ class UsersController < ApplicationController
 		redirect_to root_path
 	end
 
-	private
+		private
 
 	def user_params
 		params.require(:user).permit(:first_name, :last_name, :email, :password)
 	end
+
+	def find_user
+    @user = User.find(params[:id])
+  end
 
 end

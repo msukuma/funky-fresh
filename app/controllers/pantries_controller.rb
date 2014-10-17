@@ -1,53 +1,53 @@
 class PantriesController < ApplicationController
-
-	def index
-		@user = User.find(params[:user_id])
-		render 'index'
-	end
+	before_action :shorten, only: [:new, :create, :edit, :update, :destroy, :show]
 
 	def new
-		@user = User.find(params[:user_id])
+		show_door unless session[:user_id] == params[:user_id]
 		@pantry = Pantry.new
 	end
 
 	def create
-		@user = User.find(params[:user_id])
 		@pantry = Pantry.new(pantry_params)
 		if @pantry.save
 			@pantry_participation = PantryParticipation.create(user_id: @user.id, pantry_id: @pantry.id)
-				redirect_to user_pantries_path
+			redirect_to user_path(@user)
 		else
-			redirect_to new_user_pantry_path
+			render 'new'
 		end
 	end
 
 	def show
+		show_door unless session[:user_id] == params[:user_id]
 		@pantry = Pantry.find(params[:id])
 	end
 
 	def edit
-		@user = User.find(params[:user_id])
+		show_door unless session[:user_id] == params[:user_id]
 		@pantry = Pantry.find(params[:id])
 	end
 
 	def update
-		# raise params
 		@pantry = Pantry.find(params[:id])
-		@pantry.update(pantry_params)
-		redirect_to user_pantries_path
+		if @pantry.update(pantry_params)
+			redirect_to user_path(@user)
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
-		@user = User.find(params[:user_id])
 		@pantry = Pantry.find(params[:id])
 		@pantry.destroy
-		redirect_to user_pantries_path
+		redirect_to user_path(@user)
 	end
 
-	private
+		private
 
 	def pantry_params
 		params.require(:pantry).permit(:name, :creator_id)
 	end
 
+	def shorten
+    @user = User.find(params[:user_id])
+  end
 end

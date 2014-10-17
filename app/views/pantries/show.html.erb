@@ -1,19 +1,24 @@
-<h2><%= @pantry.name %></h2>
+<%= render "layouts/logged_in_header" %>
+
 <table>
-<thead>
-	<tr>
-		<td>Item Name</td>
-		<td>Expiration Date</td>
-		<td>Location</td>
-	</tr>
-</thead>
-<tbody>
-<%= @pantry.items.each do |item| %>
-<tr>
-	<td>item.name</td>
-	<td>item.expiration_date</td>
-	<td>item.location</td>
-</tr>
-<% end %>
-</tbody>
+  <tr>
+    <th>Item Name</th>
+    <th>Expiration Date</th>
+    <th>Location</th>
+  </tr>
+
+  <% if @pantry %>
+    <% @pantry.items.each do |item| %>
+      <tr>
+          <td><%= item.name %></td>
+          <td><%= item.expiration_date %></td>
+          <td><%= item.location %></td>
+          <td><%= link_to 'Edit Item', edit_user_pantry_item_path(@user, @pantry, item) %></td>
+          <td><%= link_to 'Destroy Item', user_pantry_item_path(@user, @pantry, item), method: :delete %></td>
+      </tr>
+    <% end %>
+  <% end %>
 </table>
+
+
+<%= link_to 'New Item', new_user_pantry_item_path(@user, @pantry) %>
