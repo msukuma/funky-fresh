@@ -1,9 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.string :name
-      t.string :location, :default => "The Cookie Jar"
-      t.date :expiration_date, :default => Time.now
+      t.date :expiration_date
       t.integer :pantry_id
       t.integer :prototype_id
 
