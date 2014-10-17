@@ -1,11 +1,9 @@
-<h1>It's Working!</h1>
-
 <h2><%= @user.first_name %> <%= @user.last_name %>'s Pantries</h2>
 <ul>
 	<% @user.pantries.each do |pantry| %>
-	<li><a href="edit_user_pantry_path">pantry.name</a></li>
-	<li><%= button_to 'Edit Pantry', edit_user_pantry_path(@user), class: "button", method: :get %></li>
+	<li><%= link_to pantry.name, user_pantry_path(@user.id, pantry) %></li>
+	<li><%= button_to 'Edit', edit_user_pantry_path(@user.id, pantry), class: "button", method: :get %></li>
 	<% end %>
 </ul>
 
-<%= button_to 'Create New Pantry', new_user_pantry_path(@user), class: "button", method: :get %>
+<%= button_to 'Create New Pantry', new_user_pantry_path(@user.id), class: "button", method: :get %>

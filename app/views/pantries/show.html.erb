@@ -1,0 +1,19 @@
+<h2><%= @pantry.name %></h2>
+<table>
+<thead>
+	<tr>
+		<td>Item Name</td>
+		<td>Expiration Date</td>
+		<td>Location</td>
+	</tr>
+</thead>
+<tbody>
+<%= @pantry.items.each do |item| %>
+<tr>
+	<td>item.name</td>
+	<td>item.expiration_date</td>
+	<td>item.location</td>
+</tr>
+<% end %>
+</tbody>
+</table>
