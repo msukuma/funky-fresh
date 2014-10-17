@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20141016184559) do
   enable_extension "plpgsql"
 
   create_table "items", force: true do |t|
+
     t.date     "expiration_date"
     t.integer  "pantry_id"
     t.integer  "prototype_id"
