@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :user, except: [:index] do 
     resources :pantry do 
+      resources :recipes, only: [:index]
       resources :items, except: [:show] 
     end
   end

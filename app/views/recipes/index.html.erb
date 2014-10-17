@@ -1,0 +1,6 @@
+<% @recipes.each do |r| %>
+	<% url %>
+	<a href="<%=  %>"><p><%= r.recipe_name%></p></a>
+	<a href="<%=  %>"><img src="<%= r.thumbnail %>"></a> 
+	<p> rating: <%= r.rating %></p>
+<% end  %>
