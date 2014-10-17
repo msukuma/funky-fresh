@@ -993,3 +993,388 @@ Migrating to AddIndexToTable (20141016184559)
   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-16 19:32:25.887455"], ["name", "Milk"], ["shelf_life", 10], ["updated_at", "2014-10-16 19:32:25.887455"]]
   [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mItem Load (12.5ms)[0m  [1mSELECT "items".* FROM "items"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (28.2ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+PG::DuplicateTable: ERROR:  relation "users" already exists
+: CREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (3.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (6.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (6.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (20.9ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-17 01:03:57.919236', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (6.5ms)[0m  BEGIN
+  [1m[36m (7.7ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133908"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePrototypes (20141016133929)
+  [1m[35m (6.0ms)[0m  BEGIN
+  [1m[36m (8.6ms)[0m  [1mCREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133929"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[35m (5.8ms)[0m  BEGIN
+  [1m[36m (8.5ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133947"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddIndexToTable (20141016184559)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (7.0ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id" ON "items"  ("pantry_id")[0m
+  [1m[35m (7.3ms)[0m  CREATE  INDEX  "index_items_on_prototype_id" ON "items"  ("prototype_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_pantries_on_creator_id" ON "pantries"  ("creator_id")[0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations"  ("user_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations"  ("pantry_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016184559"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mItem Load (1.4ms)[0m  [1mSELECT "items".* FROM "items"[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (6.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:04:25.555660"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$xb4xVkLCUYj4sZFn/aegw.aKMCsCjX9MSxvP8qTZ7NYWRAdFt227a"], ["updated_at", "2014-10-17 01:04:25.555660"]]
+  [1m[36m (5.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:04:25.649971"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$FQ8pB64upZNWlW7f42Q23eqrbZg7DbkRgs2UIkB8r/XXkJGNRwf5G"], ["updated_at", "2014-10-17 01:04:25.649971"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (12.4ms)[0m  [1mINSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:04:25.663169"], ["creator_id", 1], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-17 01:04:25.663169"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:04:25.677795"], ["creator_id", 2], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-17 01:04:25.677795"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (18.4ms)[0m  [1mINSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:04:25.686530"], ["pantry_id", 2], ["updated_at", "2014-10-17 01:04:25.686530"], ["user_id", 1]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:04:25.707295"], ["pantry_id", 1], ["updated_at", "2014-10-17 01:04:25.707295"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.4ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Cheese' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141016133800)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133800"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateItems (20141016133849)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-17 01:05:54.265032', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133849"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantries (20141016133908)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133908"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePrototypes (20141016133929)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.6ms)[0m  [1mCREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133929"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePantryParticipations (20141016133947)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016133947"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddIndexToTable (20141016184559)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id" ON "items"  ("pantry_id")[0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_items_on_prototype_id" ON "items"  ("prototype_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX  "index_pantries_on_creator_id" ON "pantries"  ("creator_id")[0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations"  ("user_id")
+  [1m[36m (0.7ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations"  ("pantry_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141016184559"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.019027"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$dH9Ss5rMcJHlgUoBYZcTn.5ijxN2TlqBB.WKm2psEyRHXPVGgPScS"], ["updated_at", "2014-10-17 01:05:57.019027"]]
+  [1m[36m (7.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.106941"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$pja8oD0hQgqf7REtKyDJ5u.Wdd8dIKImcjR.SDrkS34o0fjyQyWg2"], ["updated_at", "2014-10-17 01:05:57.106941"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:05:57.119268"], ["creator_id", 1], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-17 01:05:57.119268"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.121837"], ["creator_id", 2], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-17 01:05:57.121837"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:05:57.129461"], ["pantry_id", 2], ["updated_at", "2014-10-17 01:05:57.129461"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.131720"], ["pantry_id", 1], ["updated_at", "2014-10-17 01:05:57.131720"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:05:57.139639"], ["name", "Cheese"], ["shelf_life", 5], ["updated_at", "2014-10-17 01:05:57.139639"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.141815"], ["name", "Milk"], ["shelf_life", 10], ["updated_at", "2014-10-17 01:05:57.141815"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.3ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Cheese' LIMIT 1[0m
+  [1m[35mSQL (18.4ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.155111"], ["expiration_date", "2014-10-21"], ["name", "Cheese"], ["pantry_id", 1], ["prototype_id", 1], ["updated_at", "2014-10-17 01:05:57.155111"]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.4ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Milk' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:05:57.224612"], ["expiration_date", "2014-10-26"], ["name", "Milk"], ["pantry_id", 2], ["prototype_id", 2], ["updated_at", "2014-10-17 01:05:57.224612"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mItem Load (0.7ms)[0m  [1mSELECT  "items".* FROM "items"   ORDER BY "items"."id" ASC LIMIT 1[0m
+  [1m[35mItem Load (0.3ms)[0m  SELECT "items".* FROM "items"
+  [1m[36m (121.3ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[35m (120.1ms)[0m  DROP DATABASE IF EXISTS "refrigeratory_test"
+  [1m[36m (249.8ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[35m (232.6ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.8ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-17', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id" ON "items" USING btree ("pantry_id")[0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_items_on_prototype_id" ON "items" USING btree ("prototype_id")
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id" ON "pantries" USING btree ("creator_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations" USING btree ("pantry_id")
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations" USING btree ("user_id")[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.6ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016184559')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133947')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:09:45.901948"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$7FIA4YE4JcjIbg0GtyNNqezG4HicC3I6s21NCUsnHhr2BpeXUGcsa"], ["updated_at", "2014-10-17 01:09:45.901948"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:09:45.979148"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$g/AL3xYjOrxbYt/K3bO93eOEZkHRwwO78Y7LiQLGn8DGm.zwvfHpi"], ["updated_at", "2014-10-17 01:09:45.979148"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:09:45.994059"], ["creator_id", 1], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-17 01:09:45.994059"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:09:45.996471"], ["creator_id", 2], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-17 01:09:45.996471"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:09:46.004118"], ["pantry_id", 2], ["updated_at", "2014-10-17 01:09:46.004118"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:09:46.006370"], ["pantry_id", 1], ["updated_at", "2014-10-17 01:09:46.006370"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:09:46.050557"], ["name", "Cheese"], ["shelf_life", 5], ["updated_at", "2014-10-17 01:09:46.050557"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:09:46.052760"], ["name", "Milk"], ["shelf_life", 10], ["updated_at", "2014-10-17 01:09:46.052760"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.3ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Cheese' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:09:46.066509"], ["expiration_date", "2014-10-21"], ["name", "Cheese"], ["pantry_id", 1], ["prototype_id", 1], ["updated_at", "2014-10-17 01:09:46.066509"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.2ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Milk' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:09:46.069744"], ["expiration_date", "2014-10-26"], ["name", "Milk"], ["pantry_id", 2], ["prototype_id", 2], ["updated_at", "2014-10-17 01:09:46.069744"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[36mItem Load (0.6ms)[0m  [1mSELECT "items".* FROM "items"[0m
+  [1m[36mItem Load (0.9ms)[0m  [1mSELECT "items".* FROM "items"[0m
+  [1m[35mItem Load (0.6ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."name" = 'Green' LIMIT 1
+  [1m[36m (111.9ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[35m (109.8ms)[0m  DROP DATABASE IF EXISTS "refrigeratory_test"
+  [1m[36m (383.6ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[35m (236.2ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.6ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-17', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id" ON "items" USING btree ("pantry_id")[0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX  "index_items_on_prototype_id" ON "items" USING btree ("prototype_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id" ON "pantries" USING btree ("creator_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.2ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations" USING btree ("pantry_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations" USING btree ("user_id")[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (7.0ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (11.9ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.7ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016184559')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133947')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (6.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:57:04.017130"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$ylzYxNnasTXM2I5503va4.QN729oTut0miMsE5jw5dXhx1bOtneXa"], ["updated_at", "2014-10-17 01:57:04.017130"]]
+  [1m[36m (6.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:57:04.112413"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$GNKqU0ykPt1zf9wWvPInneYlz6CECK5OpKVi8lODBPSFjpF392/5u"], ["updated_at", "2014-10-17 01:57:04.112413"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (12.1ms)[0m  [1mINSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:57:04.126453"], ["creator_id", 1], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-17 01:57:04.126453"]]
+  [1m[35m (5.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:57:04.145921"], ["creator_id", 2], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-17 01:57:04.145921"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (20.9ms)[0m  [1mINSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:57:04.156706"], ["pantry_id", 2], ["updated_at", "2014-10-17 01:57:04.156706"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:57:04.179670"], ["pantry_id", 1], ["updated_at", "2014-10-17 01:57:04.179670"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:57:04.222997"], ["name", "Cheese"], ["shelf_life", 5], ["updated_at", "2014-10-17 01:57:04.222997"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:57:04.225561"], ["name", "Milk"], ["shelf_life", 10], ["updated_at", "2014-10-17 01:57:04.225561"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.3ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Cheese' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (121.5ms)[0m  [1mDROP DATABASE IF EXISTS "refrigeratory_development"[0m
+  [1m[35m (117.3ms)[0m  DROP DATABASE IF EXISTS "refrigeratory_test"
+  [1m[36m (229.2ms)[0m  [1mCREATE DATABASE "refrigeratory_development" ENCODING = 'unicode'[0m
+  [1m[35m (234.9ms)[0m  CREATE DATABASE "refrigeratory_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.7ms)[0m  CREATE TABLE "items" ("id" serial primary key, "name" character varying(255), "location" character varying(255) DEFAULT 'The Cookie Jar', "expiration_date" date DEFAULT '2014-10-17', "pantry_id" integer, "prototype_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX  "index_items_on_pantry_id" ON "items" USING btree ("pantry_id")[0m
+  [1m[35m (1.6ms)[0m  CREATE  INDEX  "index_items_on_prototype_id" ON "items" USING btree ("prototype_id")
+  [1m[36m (3.3ms)[0m  [1mCREATE TABLE "pantries" ("id" serial primary key, "name" character varying(255), "creator_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX  "index_pantries_on_creator_id" ON "pantries" USING btree ("creator_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "pantry_participations" ("id" serial primary key, "user_id" integer, "pantry_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE  INDEX  "index_pantry_participations_on_pantry_id" ON "pantry_participations" USING btree ("pantry_id")
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX  "index_pantry_participations_on_user_id" ON "pantry_participations" USING btree ("user_id")[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "prototypes" ("id" serial primary key, "name" character varying(255), "shelf_life" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (4.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016184559')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133800')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133849')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133908')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141016133929')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141016133947')
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jmontana@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.132816"], ["email", "jmontana@gmail.com"], ["first_name", "Joe"], ["last_name", "Montana"], ["password_digest", "$2a$10$iI0.0yxgA47oTNjjbhEeQOj9yrNHmlWlYS2affqazBi8NNZL42L0S"], ["updated_at", "2014-10-17 01:58:49.132816"]]
+  [1m[36m (8.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'burlacher@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "first_name", "last_name", "password_digest", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.220585"], ["email", "burlacher@gmail.com"], ["first_name", "Brian"], ["last_name", "Urlacher"], ["password_digest", "$2a$10$FPuuRAGW/jwjr9cExpLblOD.NoKGHuLSlK7g9ggpHhzRxDeU0862G"], ["updated_at", "2014-10-17 01:58:49.220585"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:58:49.232976"], ["creator_id", 1], ["name", "Joe's Kitchen"], ["updated_at", "2014-10-17 01:58:49.232976"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantries" ("created_at", "creator_id", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.235289"], ["creator_id", 2], ["name", "Brian's Kitchen"], ["updated_at", "2014-10-17 01:58:49.235289"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:58:49.243794"], ["pantry_id", 2], ["updated_at", "2014-10-17 01:58:49.243794"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pantry_participations" ("created_at", "pantry_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.246223"], ["pantry_id", 1], ["updated_at", "2014-10-17 01:58:49.246223"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 01:58:49.291876"], ["name", "Cheese"], ["shelf_life", 5], ["updated_at", "2014-10-17 01:58:49.291876"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.294105"], ["name", "Milk"], ["shelf_life", 10], ["updated_at", "2014-10-17 01:58:49.294105"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.3ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Cheese' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.307381"], ["expiration_date", "2014-10-21"], ["name", "Cheese"], ["pantry_id", 1], ["prototype_id", 1], ["updated_at", "2014-10-17 01:58:49.307381"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.2ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'Milk' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 01:58:49.310727"], ["expiration_date", "2014-10-26"], ["name", "Milk"], ["pantry_id", 2], ["prototype_id", 2], ["updated_at", "2014-10-17 01:58:49.310727"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mItem Load (0.8ms)[0m  [1mSELECT "items".* FROM "items"[0m
+  [1m[35mItem Load (0.3ms)[0m  SELECT "items".* FROM "items"
+  [1m[36mPrototype Load (0.7ms)[0m  [1mSELECT "prototypes".* FROM "prototypes"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35mItem Load (0.7ms)[0m  SELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mPrototype Load (0.5ms)[0m  SELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item' LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "prototypes" ("created_at", "name", "shelf_life", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2014-10-17 02:09:36.810354"], ["name", "my custom item"], ["shelf_life", 10], ["updated_at", "2014-10-17 02:09:36.810354"]]
+  [1m[35mSQL (8.4ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["created_at", "2014-10-17 02:09:36.816728"], ["expiration_date", 10], ["location", "drawer"], ["name", "my custom item"], ["pantry_id", 1], ["prototype_id", 3], ["updated_at", "2014-10-17 02:09:36.816728"]]
+PG::InvalidDatetimeFormat: ERROR:  invalid input syntax for type date: "10"
+: INSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "prototype_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.4ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 02:10:28.025149"], ["expiration_date", "2014-10-25"], ["location", "drawer"], ["name", "my custom item"], ["pantry_id", 1], ["updated_at", "2014-10-17 02:10:28.025149"]]
+  [1m[36m (8.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mPrototype Load (0.3ms)[0m  SELECT  "prototypes".* FROM "prototypes"   ORDER BY "prototypes"."id" DESC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mPrototype Load (0.5ms)[0m  SELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-17 02:11:21.269770"], ["expiration_date", "2014-10-25"], ["location", "drawer"], ["name", "my custom item"], ["pantry_id", 1], ["updated_at", "2014-10-17 02:11:21.269770"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mPrototype Load (0.5ms)[0m  SELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item3' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-17 02:11:40.374711"], ["expiration_date", "2014-10-25"], ["location", "drawer"], ["name", "my custom item3"], ["pantry_id", 1], ["updated_at", "2014-10-17 02:11:40.374711"]]
+  [1m[35m (8.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mPrototype Load (0.5ms)[0m  SELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item44' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-10-17 02:12:26.723892"], ["expiration_date", "2014-10-25"], ["location", "drawer"], ["name", "my custom item44"], ["pantry_id", 1], ["updated_at", "2014-10-17 02:12:26.723892"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mPrototype Load (0.3ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"   ORDER BY "prototypes"."id" DESC LIMIT 1[0m
+  [1m[35mItem Load (0.5ms)[0m  SELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1
+  [1m[36mItem Load (0.4ms)[0m  [1mSELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "items" WHERE "items"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mItem Load (0.6ms)[0m  [1mSELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "items" WHERE "items"."id" = $1[0m  [["id", 5]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mItem Load (0.3ms)[0m  [1mSELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "items" WHERE "items"."id" = $1[0m  [["id", 4]]
+  [1m[35m (8.4ms)[0m  COMMIT
+  [1m[36mItem Load (0.4ms)[0m  [1mSELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1[0m
+  [1m[35mItem Load (0.5ms)[0m  SELECT  "items".* FROM "items"   ORDER BY "items"."id" DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "items" WHERE "items"."id" = $1  [["id", 3]]
+  [1m[36m (8.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPrototype Load (0.5ms)[0m  [1mSELECT  "prototypes".* FROM "prototypes"  WHERE "prototypes"."name" = 'my custom item44' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "items" ("created_at", "expiration_date", "location", "name", "pantry_id", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-10-17 02:16:23.314129"], ["expiration_date", "2014-10-25"], ["location", "drawer"], ["name", "my custom item44"], ["pantry_id", 1], ["updated_at", "2014-10-17 02:16:23.314129"]]
+  [1m[36m (8.3ms)[0m  [1mCOMMIT[0m

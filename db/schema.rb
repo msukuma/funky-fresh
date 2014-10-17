@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141016184559) do
   create_table "items", force: true do |t|
     t.string   "name"
     t.string   "location",        default: "The Cookie Jar"
-    t.date     "expiration_date", default: '2014-10-16'
+    t.date     "expiration_date", default: '2014-10-17'
     t.integer  "pantry_id"
     t.integer  "prototype_id"
     t.datetime "created_at"
