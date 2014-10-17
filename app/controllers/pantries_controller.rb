@@ -1,20 +1,17 @@
 class PantriesController < ApplicationController
 
 	def index
-		# show all of the pantries for user
-		# @user = User.find(params[current_user.id])
-		@user
-		# @pantries = @user.pantries
+		@user = User.find(params[:user_id])
 		render 'index'
 	end
 
 	def new
-		@user
+		@user = User.find(params[:user_id])
 		@pantry = Pantry.new
 	end
 
 	def create
-		@user
+		@user = User.find(params[:user_id])
 		@pantry = Pantry.new(pantry_params)
 		if @pantry.save
 			@pantry_participation = PantryParticipation.create(user_id: @user.id, pantry_id: @pantry.id)
@@ -29,16 +26,19 @@ class PantriesController < ApplicationController
 	end
 
 	def edit
+		@user = User.find(params[:user_id])
 		@pantry = Pantry.find(params[:id])
 	end
 
 	def update
+		# raise params
 		@pantry = Pantry.find(params[:id])
 		@pantry.update(pantry_params)
 		redirect_to user_pantries_path
 	end
 
 	def destroy
+		@user = User.find(params[:user_id])
 		@pantry = Pantry.find(params[:id])
 		@pantry.destroy
 		redirect_to user_pantries_path
