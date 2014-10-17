@@ -17,9 +17,7 @@ ActiveRecord::Schema.define(version: 20141016184559) do
   enable_extension "plpgsql"
 
   create_table "items", force: true do |t|
-    t.string   "name"
-    t.string   "location",        default: "The Cookie Jar"
-    t.date     "expiration_date", default: '2014-10-17'
+    t.date     "expiration_date"
     t.integer  "pantry_id"
     t.integer  "prototype_id"
     t.datetime "created_at"

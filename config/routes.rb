@@ -4,14 +4,16 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root to: 'home#index'
+  root 'home#index'
 
-  resources :login, only: [:index] 
+  get "/login",                       to: "users#login_form",                 as: "login_form"
+  post "/login",                      to: "users#login",                      as: "login"
+  get "/logout",                      to: "users#logout",                     as: "logout"
 
   resources :user, except: [:index] do 
-    resources :pantry do 
+    resources :pantries, except: [:index] do 
       resources :recipes, only: [:index]
-      resources :items, except: [:show] 
+      resources :items, except: [:index, :show] 
     end
   end
   # get '/register' => 'users#new', as: 'new_user'
