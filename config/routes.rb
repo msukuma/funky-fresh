@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do
+      get :autocomplete_prototype_name, :on => :collection
       resources :items, except: [:index, :show]
     end
   end

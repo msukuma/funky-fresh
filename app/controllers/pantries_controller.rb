@@ -1,7 +1,7 @@
 class PantriesController < ApplicationController
 	before_action :shorten, only: [:new, :create, :edit, :update, :destroy, :show]
 
-	autocomplete :prototype, :name
+	autocomplete :prototype, :name, full: true
 
 	def new
 		show_door unless session[:user_id] == params[:user_id]
