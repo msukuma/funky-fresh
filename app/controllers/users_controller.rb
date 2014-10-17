@@ -10,6 +10,10 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+  def edit
+    show_door unless session[:user_id] == params[:id]
+  end
+
 	def create
 		@user = User.create!(user_params)
     if @user

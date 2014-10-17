@@ -1,6 +1,25 @@
-<%= form_for [@user, @pantry] do |p| %>
-<%= p.text_field :name, placeholder: "Pantry Name" %>
-<%= p.hidden_field 'creator_id', value: @user.id %>
-<br>
-<%= p.submit :Save %>
+<%= form_for [@user, @pantry] do |f| %>
+  <% if @pantry.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@pantry.errors.count, "error") %> prohibited
+      this pantry from being saved:</h2>
+    <ul>
+    <% @pantry.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.hidden_field 'creator_id', value: @user.id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>

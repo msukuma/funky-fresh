@@ -7,8 +7,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @prototype = Prototype.find(params[:item][:name])
-    @item = Item.create!(item_params)
+    @pantry = Pantry.find(params[:pantry_id])
+    @item = @pantry.items.create(item_params)
     if @item
       redirect_to user_pantry_path(@user, @pantry)
     else
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
     private
 
   def item_params
-    params.require(:item).permit(:name, :location, :expiration_date)
+    params.require(:item).permit(:prototype_name, :expiration_date)
   end
 
   def shorten
