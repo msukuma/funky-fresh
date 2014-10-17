@@ -1,6 +1,14 @@
 <% @recipes.each do |r| %>
-	<% url %>
-	<a href="<%=  %>"><p><%= r.recipe_name%></p></a>
-	<a href="<%=  %>"><img src="<%= r.thumbnail %>"></a> 
-	<p> rating: <%= r.rating %></p>
+	<% url = Yummly.find(r['id'])%>
+	<a href="<%= url.attribution.url %>"><p><%= r['recipeName']%></p></a>
+	<a href="<%= url.attribution.url %>"><img src="<%= r['imageUrlsBySize']['90'] %>"></a> <br>
+	ingredients: <%= r['ingredients'] %> <br>
+	Rating: <%= r['rating'] %><br>
+	Source: <%= r['sourceDisplayName'] %> 
 <% end  %>
+<br>
+<br>
+
+<!-- <%= @search_results.attribution.html %> -->
+<%= @search_results.attribution.text %>
+<img src="<%= @search_results.attribution.logo %>">

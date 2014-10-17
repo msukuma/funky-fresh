@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post "/login",                      to: "users#login",                      as: "login"
   get "/logout",                      to: "users#logout",                     as: "logout"
 
-  resources :user, except: [:index] do 
+  resources :users, except: [:index] do 
     resources :pantries, except: [:index] do 
       resources :recipes, only: [:index]
       resources :items, except: [:index, :show] 
