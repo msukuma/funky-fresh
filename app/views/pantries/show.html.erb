@@ -1,23 +1,26 @@
 <%= render "layouts/logged_in_header" %>
 
 <table>
-  <tr>
-    <th>Item Name</th>
-    <th>Expiration Date</th>
-    <th>Location</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Expiration Date</th>
+    </tr>
+  </thead>
 
+ <tbody id="item-block">
+   
   <% if @pantry %>
-    <div class="item-block">    
       <%= render '/items/item' %>
-    </div>
   <% end %>
+ </tbody>
 </table>
 
 
 <div class="new-item-create">
 <%= render '/items/new_item' %>
-  
 </div>
+
+
 
 
