@@ -6,9 +6,10 @@ $(function(){
       item.remove();
    });
 
-  $(".item-new").on("ajax:complete", function(event, data, status, xhr){
-      alert("ajax successfull!")
-      $("a.item-new").html(data.responseText);
+  $("form").on("ajax:complete", function(event, data, status, xhr){
+      console.log(data.responseText);
+      $(".item-partial").empty();
+      // $(".item-block").html(data.responseText);
    });
 
 

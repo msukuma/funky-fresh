@@ -1,6 +1,5 @@
-<%= render "layouts/logged_in_header" %>
 
-<%= form_for [@user, @pantry, @item = Item.new], :html => {:autocomplete => "off"}, method: :new do |f| %>
+<%= form_for [@user, @pantry, @item = Item.new], :html => {:autocomplete => "off"}, method: :new, remote: true do |f| %>
   <% if @item.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@item.errors.count, "error") %> prohibited
