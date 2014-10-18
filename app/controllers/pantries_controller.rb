@@ -6,9 +6,6 @@ class PantriesController < ApplicationController
 	def new
 		show_door unless session[:user_id] == params[:user_id]
 		@pantry = Pantry.new
-    respond_to do |format|
-        format.js
-    end
   end
 
 	def create
