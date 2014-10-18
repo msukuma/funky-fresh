@@ -1,8 +1,7 @@
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited
-      this user from being saved:</h2>
+    <h2><%= pluralize(@user.errors.count, "error") %> Process failed because:</h2>
     <ul>
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -30,7 +29,21 @@
     <%= f.password_field :password %>
   </p>
 
+   <p>
+    <%= f.label :Confirm_password %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
   <p>
     <%= f.submit %>
   </p>
+
+  <% if @user.id %>
+    <p>
+      <button><%= link_to 'Cancel', user_path(@user.id) %></button>
+    </p>
+  <% else %>
+    <%= link_to "Home", root_path %>
+  <% end %>
+
 <% end %>
