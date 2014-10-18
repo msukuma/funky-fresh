@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   def show_door
     redirect_to login_path if current_user == nil
   end
+
+  def find_user
+    @user = params[:user_id] ? User.find(params[:user_id]) : User.find(params[:id])
+  end
 end
