@@ -12,6 +12,13 @@
 </head>
 
 <body>
+<nav>
+	<% if session[:user_id] %>
+  <%= render "layouts/logged_in_header" %>
+<% else %>
+  <%= render "layouts/logged_out_header" %>
+<% end %>
+</nav>
 
 <%= yield %>
 
