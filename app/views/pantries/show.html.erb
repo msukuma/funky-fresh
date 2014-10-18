@@ -8,14 +8,7 @@
   </tr>
 
   <% if @pantry %>
-    <% @pantry.items.each do |item| %>
-      <tr>
-          <td><%= item.prototype.name %></td>
-          <td><%= item.expiration_date %></td>
-          <td><%= link_to 'Edit Item', edit_user_pantry_item_path(@user, @pantry, item) %></td>
-          <td><%= link_to 'Destroy Item', user_pantry_item_path(@user, @pantry, item), remote: true, method: :delete, :class => "item-delete" %></td>
-      </tr>
-    <% end %>
+    <%= render '/items/item' %>
   <% end %>
 </table>
 
@@ -24,4 +17,3 @@
 <%= render '/items/new_item' %>
 
 
-<%= link_to 'New Item', new_user_pantry_item_path(@user, @pantry, Item.new), remote: true, :format => :js, :class => "item-new" %>
