@@ -6,10 +6,11 @@ $(function(){
       item.remove();
    });
 
-  $(".form").on("ajax:complete", function(event, data, status, xhr){
-      alert("ajax successfull!")
+  $("form").on("ajax:complete", function(event, data, status, xhr){
+      console.log(data.responseText);
+      $(".item-partial").empty();
+      // $(".item-block").html(data.responseText);
    });
 
 
  });
-      // $("a.it").html(data.responseText);

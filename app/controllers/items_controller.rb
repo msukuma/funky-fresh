@@ -20,22 +20,22 @@ class ItemsController < ApplicationController
   end
 
   def create
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    p params
     @pantry = Pantry.find(params[:pantry_id])
     @item = @pantry.items.create(item_params)
-    if @item
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts @item
+    # if @item
       respond_to do |format|
-        format.js do
-          render user_pantry_path(@user, @pantry)
-        end
-        format.any do
-          redirect_to user_pantry_path(@user, @pantry)
-        end
+        # format.html {redirect_to user_pantry_path(@user, @pantry)}
+        format.json {render json: {pantry: @pantry}}        
+        format.js
       end
-    end
+    # end
     #   redirect_to user_pantry_path(@user, @pantry)
     # else
     #   render 'new'
-    end
   end
 
   def edit

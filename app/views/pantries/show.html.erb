@@ -8,12 +8,16 @@
   </tr>
 
   <% if @pantry %>
-    <%= render '/items/item' %>
+    <div class="item-block">    
+      <%= render '/items/item' %>
+    </div>
   <% end %>
 </table>
 
 
-
+<div class="new-item-create">
 <%= render '/items/new_item' %>
+  
+</div>
 
 

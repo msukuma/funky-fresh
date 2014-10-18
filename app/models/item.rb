@@ -24,7 +24,7 @@ class Item < ActiveRecord::Base
 
   def set_expiration_date
     # self.expiration_date = self.prototype.expiration_date.days_from_now
-    self.expiration_date = Time.now + self.prototype.shelf_life.days
+    self.expiration_date = Time.now + (self.prototype.shelf_life).days
   end
 
   def days_remaining
