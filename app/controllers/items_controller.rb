@@ -31,9 +31,21 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    puts "________________________________________"
+    puts "I am here in destroy"
     @item = Item.find(params[:id])
+    @user = current_user
+    @pantry = @item.pantry
     @item.destroy
-    redirect_to user_pantry_path(@user, @pantry)
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_pantry_path(@user, @pantry)
+      end
+    end
+    
   end
 
     private
