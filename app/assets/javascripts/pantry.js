@@ -6,4 +6,15 @@ $(function(){
       console.log(item);
       item.remove();
    });
+
+    $(".new-pantry").on("ajax:beforeSend", function(event, data, status, xhr){
+      alert("creating new pantry")
+      $("").html(data.responseText);
+        $(this).show();
+   
+   });
+
+
+
  });
+
