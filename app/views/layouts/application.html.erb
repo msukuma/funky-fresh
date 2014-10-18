@@ -12,8 +12,20 @@
 </head>
 
 <body>
+<header>
+	<nav>
+		<% if session[:user_id] %>
+	  	<%= render "layouts/logged_in_header" %>
+		<% else %>
+	  	<%= render "layouts/logged_out_header" %>
+		<% end %>
+	</nav>
+</header>
 
+<div class="body_container">
+		
 <%= yield %>
 
+</div>
 </body>
 </html>
