@@ -5,23 +5,19 @@
 <%= link_to 'Edit User', edit_user_path(@user) %>
 <%= link_to 'Destroy User', user_path(@user), method: :delete %>
 
-<table>
-  <tr>
-    <th>Pantry Name (Owner)</th>
-  </tr>
 
   <% if @user %>
+  <div id="accordion">
     <% @user.original_pantries.each do |pantry| %>
-      <tr>
-          <td><%= link_to pantry.name, user_pantry_path(@user, pantry) %></td>
+          <h4 class="accordion-toggle"><%= pantry.name %></h4>
+          <%= link_to pantry.name, user_pantry_path(@user, pantry) %>
           <% if session[:user_id] == @user.id %>
-          <td><%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></td>
-          <td><%= link_to "Delete Pantry", user_pantry_path(@user, pantry), method: :delete, remote: true, :class => "pantry-delete" %></td>
+          <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %>
+          <%= link_to "Delete Pantry", user_pantry_path(@user, pantry), method: :delete, remote: true, :class => "pantry-delete" %>
           <% end %>
-      </tr>
     <% end %>
   <% end %>
-</table>
+
 
 <table>
   <tr>
@@ -39,3 +35,5 @@
 <br>
 
 <%= link_to 'New Pantry', new_user_pantry_path(@user), :class => "new-pantry" %>
+
+
