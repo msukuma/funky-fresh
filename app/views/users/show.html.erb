@@ -16,7 +16,7 @@
           <td><%= link_to pantry.name, user_pantry_path(@user, pantry) %></td>
           <% if session[:user_id] == @user.id %>
           <td><%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></td>
-          <td><%= link_to "Delete Pantry", user_pantry_path(@user, pantry), method: :delete %></td>
+          <td><%= link_to "Delete Pantry", user_pantry_path(@user, pantry), method: :delete, remote: true, :class => "pantry-delete" %></td>
           <% end %>
       </tr>
     <% end %>

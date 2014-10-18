@@ -31,8 +31,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    puts "________________________________________"
-    puts "I am here in destroy"
     @item = Item.find(params[:id])
     @user = current_user
     @pantry = @item.pantry
