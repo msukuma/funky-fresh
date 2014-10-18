@@ -9,7 +9,7 @@
     <% @user.original_pantries.each do |pantry| %>
           <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></h4>
           <div class="accordion-content">
-            <%= render "pantries/show", locals: { pantry: pantry } %>
+            <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
     <% end %>
   <% end %>

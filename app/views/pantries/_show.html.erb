@@ -5,14 +5,15 @@
     <th>Location</th>
   </tr>
 
+ <tbody id="item-block">
+
   <% if @pantry %>
-    <div class="item-block">
       <%= render '/items/item' %>
-    </div>
   <% end %>
+ </tbody>
 </table>
 
 <div class="new-item-create">
-<%= render '/items/new_item' %>
+<%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
 
 </div>

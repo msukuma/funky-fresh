@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     puts @item
     # if @item
       respond_to do |format|
-        # format.html {redirect_to user_pantry_path(@user, @pantry)}
+        format.html {redirect_to user_pantry_path(@user, @pantry)}
         format.json {render json: {pantry: @pantry}}        
         format.js
       end
