@@ -4,16 +4,38 @@ class ItemsController < ApplicationController
   def new
     show_door unless session[:user_id] == params[:user_id]
     @item = Item.new
+    @user = current_user
+    @pantry = params[:pantry_id]
+    puts params
+    p @pantry
+    respond_to do |format|
+      format.js do
+        render new_user_pantry_item_path(@user, @pantry)
+      end
+      format.any do
+        redirect_to user_pantry_path(@user, @pantry)
+      end
+    end
+
   end
 
   def create
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    p params
     @pantry = Pantry.find(params[:pantry_id])
     @item = @pantry.items.create(item_params)
-    if @item
-      redirect_to user_pantry_path(@user, @pantry)
-    else
-      render 'new'
-    end
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts @item
+    # if @item
+      respond_to do |format|
+        # format.html {redirect_to user_pantry_path(@user, @pantry)}
+        format.json {render json: {pantry: @pantry}}        
+        format.js
+      end
+    # end
+    #   redirect_to user_pantry_path(@user, @pantry)
+    # else
+    #   render 'new'
   end
 
   def edit
@@ -31,8 +53,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    puts "________________________________________"
-    puts "I am here in destroy"
     @item = Item.find(params[:id])
     @user = current_user
     @pantry = @item.pantry

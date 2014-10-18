@@ -6,7 +6,7 @@ class PantriesController < ApplicationController
 	def new
 		redirect_to user_path(current_user) unless current_user.id.to_s == params[:user_id]
 		@pantry = Pantry.new
-	end
+  end
 
 	def create
 		@pantry = Pantry.new(pantry_params)
@@ -38,9 +38,17 @@ class PantriesController < ApplicationController
 	end
 
 	def destroy
+		# @user = current_user
 		@pantry = Pantry.find(params[:id])
 		@pantry.destroy
-		redirect_to user_path(@user)
+		respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to redirect_to user_path(@user)
+      end
+    end
 	end
 
 		private

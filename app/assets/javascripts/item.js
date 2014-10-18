@@ -1,6 +1,16 @@
 $(function(){
-    console.log("page loaded")
-    $(".item-delete").on("ajax:success", function(event, data, status, xhr){
-      console.log("complete ajax call")
+  $(".item-delete").on("ajax:success", function(event, data, status, xhr){
+      console.log(event.target)
+      var item = $(event.target).closest("tr");
+      console.log(item);
+      item.remove();
    });
+
+  $("form").on("ajax:complete", function(event, data, status, xhr){
+      console.log(data.responseText);
+      $(".item-partial").empty();
+      // $(".item-block").html(data.responseText);
+   });
+
+
  });
