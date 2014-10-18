@@ -1,5 +1,3 @@
-<%= render "layouts/logged_in_header" %>
-
 <h2><%= @user.first_name %> <%= @user.last_name %>'s Pantries</h2>
 <ul>
 	<% @user.pantries.each do |pantry| %>

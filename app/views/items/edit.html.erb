@@ -1,5 +1,3 @@
-<%= render "layouts/logged_in_header" %>
-
 <%= form_for [@user, @pantry, @item] do |f| %>
   <% if @item.errors.any? %>
   <div id="error_explanation">
