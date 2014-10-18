@@ -46,7 +46,7 @@ class PantriesController < ApplicationController
         render nothing: true
       end
       format.any do
-        redirect_to redirect_to user_path(@user)
+        redirect_to user_path(@user)
       end
     end
 	end

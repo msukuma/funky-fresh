@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
 	def show
 		show_door unless session[:user_id] == params[:id] #reuse this
-		@user = User.find(params[:id])
+		# @user = User.find(params[:id])
 	end
 
 	def new
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
 	end
 
 	def find_user
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
 end

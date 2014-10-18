@@ -13,10 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
 header {
-	/*position: fixed;*/
-	/*top: 1em;*/
-	/*left: 0;*/
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
@@ -33,7 +31,7 @@ nav ul li {
 	display: inline;
 	list-style-type: none;
 	padding-right: 35px;
-	font-size: 1.25em;
+	font-size: 1.3em;
 }
 
 nav ul li a:link {
@@ -55,7 +53,7 @@ nav ul li a:hover {
 	width: 70%;
 	background-color: lightblue;
 	border-radius: 30px;
-	padding: 20px;
+	padding: 40px;
 	margin: 50px auto;
 	text-align: left;
 }
