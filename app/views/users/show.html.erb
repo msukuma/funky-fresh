@@ -1,5 +1,3 @@
-<%= render "layouts/logged_in_header" %>
-
 <h3><%= @user.first_name %> <%= @user.last_name %>'s Profile Page</h3>
 
 <%= link_to 'Edit User', edit_user_path(@user) %>
@@ -16,7 +14,6 @@
           <td><%= link_to pantry.name, user_pantry_path(@user, pantry) %></td>
           <% if session[:user_id] == @user.id %>
           <td><%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></td>
-          <td><%= link_to "Delete Pantry", user_pantry_path(@user, pantry), method: :delete, remote: true, :class => "pantry-delete" %></td>
           <% end %>
       </tr>
     <% end %>
