@@ -3,6 +3,27 @@ class PantriesController < ApplicationController
 	before_action :show_door
 	autocomplete :prototype, :name, full: true
 
+	def index
+		puts "WHWHWHWHWHWHWHWHWHWHWHWHHWHHWHHWHWHWHHW"
+		puts params
+		@pantry = Pantry.find(params[:pantry_id])
+		@query = params[:query]
+		puts @pantry
+		@items = @pantry.items
+		p @pantry.search(@query)
+		
+		respond_to do |format|
+	    format.js do
+	    	puts "IN THE INDEX"
+	        render 'index'
+	     end
+	    format.any do
+	    	puts "IN THE ANY"
+	        redirect_to user_path(current_user)
+	    end
+    end
+	end
+
 	def new
 		redirect_to user_path(current_user) unless current_user.id.to_s == params[:user_id]
 		@pantry = Pantry.new

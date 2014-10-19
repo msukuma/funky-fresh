@@ -1,0 +1,5 @@
+<%= form_tag search_path(@pantry), method: "get", remote: true, :class => "search" do %>
+  <%= label_tag(:query, "Search for:") %>
+  <%= text_field_tag 'query', params[:query], id: 'search-field' %>
+  <%= submit_tag 'Search', :class => 'search-button'%>
+<% end %>

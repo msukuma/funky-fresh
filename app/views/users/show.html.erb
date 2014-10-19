@@ -1,7 +1,12 @@
 <h3><%= @user.first_name %> <%= @user.last_name %>'s Profile Page</h3>
 
+
+
+
 <%= link_to 'Edit User', edit_user_path(@user) %>
 <%= link_to 'Destroy User', user_path(@user), method: :delete %>
+
+
 
 
   <% if @user %>
@@ -11,6 +16,7 @@
           <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, pantry), remote: true, method: :delete, :class => "pantry-delete" %></h4>
           <div class="accordion-content">
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
+            <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
           </div>
       </div>
     <% end %>
