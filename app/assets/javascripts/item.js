@@ -2,32 +2,21 @@ $(function(){
   console.log("loaded");
   $(document).on("ajax:complete", "a.item-delete", function(event){
     var item = $(event.target);
+    console.log(item);
     var row = item.closest("tr");
     row.remove();
   });
 
+  $(document).on("ajax:complete", "a.pantry-delete", function(event){
+    var item = $(event.target);
+    console.log(item);
+    var row = item.closest("div");
+    row.remove();
+  });
+
   $(document).on("ajax:complete", "div.new-item-create form", function(event, data){
-    console.log("I am in the create")
-    console.log("adding items");
-    console.log(data.responseText);
-    $("#item-block").html(data.responseText);
-  })
- });
-
-
-
-
-
-  // $(".item-delete").on("ajax:complete", ".enable-delete", function(event, data, status, xhr){
-  //     console.log(event.target)
-  //     var item = $(event.target).closest("tr");
-  //     console.log(item);
-  //     item.remove();
-  //  });
-
-  // $("div.new-item-create form").on("ajax:complete", function(event, data, status, xhr){
-  //     console.log(event.target);
-  //     console.log(data.responseText)
-  //     $(".item-row").hide();
-  //     $("#item-block").append(data.responseText);
-  //  });
+    // console.log($(event.target))
+    var semiTarget = $(this).parent().prev()[0].children[1];
+    $(semiTarget).html(data.responseText);
+  });
+});
