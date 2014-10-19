@@ -41,7 +41,11 @@ class UsersController < ApplicationController
 	end
 
 	def login_form
-
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    respond_to do |format|
+      format.js
+    end
 	end
 
 	def login
