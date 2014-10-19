@@ -1,0 +1,31 @@
+<%= form_for [@user, @pantry, @item], method: :update, remote: true do |f| %>
+  <% if @item.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@item.errors.count, "error") %> prohibited
+      this item from being saved:</h2>
+    <ul>
+    <% @item.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true, :autofocus => true %>
+  </p>
+
+  <p>
+    <%= f.label :expiration_date %><br>
+    <%= f.text_field :expiration_date, :data => {:provide =>'datepicker'}, :class =>"form-control" %>
+  </p>
+
+  <p>
+    <%= f.hidden_field 'pantry_id', value: @pantry.id %>
+  </p>
+
+  <p>
+    <%= f.submit "Edit" %>
+  </p>
+<% end %>

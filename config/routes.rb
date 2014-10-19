@@ -1,9 +1,24 @@
-Refrigeratory::Application.routes.draw do
+Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'home#index'
+
+  get "/login",                       to: "users#login_form",                 as: "login_form"
+  post "/login",                      to: "users#login",                      as: "login"
+  get "/logout",                      to: "users#logout",                     as: "logout"
+
+  resources :users, except: [:index] do
+    resources :pantries, except: [:index] do
+      get :autocomplete_prototype_name, :on => :collection
+      resources :recipes, only: [:index]
+      resources :items, except: [:index, :show]
+    end
+  end
+  # get '/register' => 'users#new', as: 'new_user'
+  # post '/register' => 'users#create' as: 'create_user'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

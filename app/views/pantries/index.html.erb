@@ -1,0 +1,10 @@
+<h2><%= @user.first_name %> <%= @user.last_name %>'s Pantries</h2>
+<ul>
+	<% @user.pantries.each do |pantry| %>
+	 <li><%= link_to pantry.name, user_pantry_path(@user, pantry) %></li>
+	 <li><%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></li>
+    <li><%= link_to "Delete Pantry", user_pantry_path(@user, @pantry), method: :delete %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'New ', new_user_pantry_path(@user) %>
