@@ -21,15 +21,11 @@ class ItemsController < ApplicationController
     @pantry = Pantry.find(params[:pantry_id])
     @item = @pantry.items.create(item_params)
     # if @item
-      respond_to do |format|
-        format.html {redirect_to user_pantry_path(@user, @pantry)}
-        format.json {render json: {pantry: @pantry}}
-        format.js
-      end
-    # end
-    #   redirect_to user_pantry_path(@user, @pantry)
-    # else
-    #   render 'new'
+    respond_to do |format|
+      format.html {redirect_to user_pantry_path(@user, @pantry)}
+      format.json {render json: {pantry: @pantry}}
+      format.js
+    end
   end
 
   # def edit
