@@ -36,6 +36,8 @@ gem 'bcrypt'
 
 gem 'yummly'
 
+gem 'bootstrap-datepicker-rails'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'capybara', '~> 2.2.1'

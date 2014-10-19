@@ -1,22 +1,24 @@
 class UsersController < ApplicationController
+	before_action :show_door, except: [:login_form, :login, :new, :create]
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
-		show_door unless session[:user_id] == params[:id] #reuse this
-		# @user = User.find(params[:id])
+    redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
+		@user = User.find(params[:id])
 	end
 
 	def new
+		redirect_to user_path(current_user) if current_user
 		@user = User.new
 	end
 
   def edit
-    show_door unless session[:user_id] == params[:id]
+    redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
   end
 
 	def create
-		@user = User.create!(user_params)
-    if @user
+		@user = User.new(user_params)
+    if @user.save
     	session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
@@ -34,10 +36,12 @@ class UsersController < ApplicationController
 
 	def destroy
 		@user.destroy
+		session.clear
 		redirect_to root_path	#might need to change the path
 	end
 
 	def login_form
+
 	end
 
 	def login
@@ -62,11 +66,11 @@ class UsersController < ApplicationController
 		private
 
 	def user_params
-		params.require(:user).permit(:first_name, :last_name, :email, :password)
+		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
 	end
 
-	def find_user
-    @user = User.find(session[:user_id])
-  end
+	# def find_user
+ #    @user = User.find(params[:id])
+ #  end
 
 end

@@ -1,24 +1,4 @@
-<table>
-  <thead>
-    <tr>
-      <th>Item Name</th>
-      <th>Expiration Date</th>
-    </tr>
-  </thead>
-
- <tbody id="item-block">
-   
-  <% if @pantry %>
-      <%= render '/items/item' %>
-  <% end %>
- </tbody>
-</table>
-
-
-<div class="new-item-create">
-<%= render '/items/new_item' %>
-</div>
-
+<%= render 'show' %>
 
 
 

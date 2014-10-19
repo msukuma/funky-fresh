@@ -3,36 +3,27 @@
 <%= link_to 'Edit User', edit_user_path(@user) %>
 <%= link_to 'Destroy User', user_path(@user), method: :delete %>
 
-<table>
-  <tr>
-    <th>Pantry Name (Owner)</th>
-  </tr>
 
   <% if @user %>
+  <div id="accordion">
     <% @user.original_pantries.each do |pantry| %>
-      <tr>
-          <td><%= link_to pantry.name, user_pantry_path(@user, pantry) %></td>
-          <% if session[:user_id] == @user.id %>
-          <td><%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></td>
-          <% end %>
-      </tr>
+          <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %></h4>
+          <div class="accordion-content">
+            <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
+          </div>
     <% end %>
   <% end %>
-</table>
-
-<table>
-  <tr>
-    <th>Pantry Name (Participant)</th>
-  </tr>
 
   <% if @user %>
     <% @user.pantries.each do |pantry| %>
-      <tr>
-          <td><%= link_to pantry.name, user_pantry_path(@user, pantry) %></td>
-      </tr>
+          <h4 class="accordion-toggle"><%= pantry.name %></h4>
+          <div class="accordion-content">
+            <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
+          </div>
     <% end %>
   <% end %>
-</table>
-<br>
+  </div>
 
 <%= link_to 'New Pantry', new_user_pantry_path(@user), :class => "new-pantry" %>
+
+
