@@ -6,9 +6,6 @@ $(document).ready(function() {
     $("div#frontpage").html(data.responseText);
   });
 
-  $("div.frontpage").on("ajax:complete", function(event, data){
-    
-  });
 
   $("header li a.register").on("ajax:complete", function(event,data){
     console.log($(this));
