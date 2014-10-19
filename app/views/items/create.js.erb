@@ -2,7 +2,6 @@
     <tr class="item-row">
         <td><%= item.prototype.name %></td>
         <td><%= item.expiration_date %></td>
-        <td><%= link_to 'Edit Item', edit_user_pantry_item_path(@user, @pantry, item) %></td>
         <td><%= link_to 'Destroy Item', user_pantry_item_path(@user, @pantry, item), remote: true, method: :delete, :class => "item-delete" %></td>
     </tr>
   <% end %>
