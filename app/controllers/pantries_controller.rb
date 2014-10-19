@@ -5,23 +5,27 @@ class PantriesController < ApplicationController
 
 	def index
 		puts "WHWHWHWHWHWHWHWHWHWHWHWHHWHHWHHWHWHWHHW"
-		puts params
 		@pantry = Pantry.find(params[:pantry_id])
 		@query = params[:query]
-		puts @pantry
 		@items = @pantry.items
-		p @pantry.search(@query)
 		
-		respond_to do |format|
-	    format.js do
-	    	puts "IN THE INDEX"
-	        render 'index'
-	     end
-	    format.any do
-	    	puts "IN THE ANY"
-	        redirect_to user_path(current_user)
+		if @pantry.search(@query)
+			flash[:notice] = "Eureka! You have #{@query}!"
+		else
+			flash[:notice] = "No #{@query} here. Better put it on the list."
+		end
+		
+		
+			respond_to do |format|
+		    format.js do
+		    	puts "IN THE INDEX"
+		        render 'index'
+		     end
+		    format.any do
+		    	puts "IN THE ANY"
+		        redirect_to user_path(current_user)
+		    end
 	    end
-    end
 	end
 
 	def new
