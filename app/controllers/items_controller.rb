@@ -6,8 +6,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @user = current_user
     @pantry = params[:pantry_id]
-    puts params
-    p @pantry
     respond_to do |format|
       format.js do
         render new_user_pantry_item_path(@user, @pantry)
@@ -20,16 +18,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    p params
     @pantry = Pantry.find(params[:pantry_id])
     @item = @pantry.items.create(item_params)
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts @item
     # if @item
       respond_to do |format|
         format.html {redirect_to user_pantry_path(@user, @pantry)}
-        format.json {render json: {pantry: @pantry}}        
+        format.json {render json: {pantry: @pantry}}
         format.js
       end
     # end
@@ -38,19 +32,25 @@ class ItemsController < ApplicationController
     #   render 'new'
   end
 
-  def edit
-    show_door unless session[:user_id] == params[:user_id]
-    @item = Item.find(params[:id])
-  end
+  # def edit
+  #   show_door unless session[:user_id] == params[:user_id]
+  #   @item = Item.find(params[:id])
+  # end
 
-  def update
-    @item = Item.find(params[:id])
-    if @item.update_attributes(item_params)
-      redirect_to user_pantry_path(@user, @pantry)
-    else
-      render 'edit'
-    end
-  end
+  # def update
+  #   @item = Item.find(params[:id])
+  #   @item.update_attributes(item_params)
+  #   respond_to do |format|
+  #     format.html {redirect_to user_pantry_path(@user, @pantry)}
+  #     format.json {render json: {pantry: @pantry}}
+  #     format.js
+  #   end
+  #   # if @item.update_attributes(item_params)
+  #   #   redirect_to user_pantry_path(@user, @pantry)
+  #   # else
+  #   #   render 'edit'
+  #   # end
+  # end
 
   def destroy
     @item = Item.find(params[:id])
@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
         redirect_to user_pantry_path(@user, @pantry)
       end
     end
-    
+
   end
 
     private
