@@ -40,4 +40,10 @@ class Item < ActiveRecord::Base
   def downcase_prototype_name
     self.prototype.name.downcase!
   end
+
+  def funky_or_fresh?(threshold)
+    min = Time.now
+    max = Time.now + threshold.days
+    self.expiration_date.between?(min, max)
+  end
 end

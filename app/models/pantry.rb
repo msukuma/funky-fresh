@@ -6,4 +6,14 @@ class Pantry < ActiveRecord::Base
   has_many :items
 
   validates :creator_id, :name, presence: true
+
+  def item_checker(threshold)
+  	funky_items = []
+  	self.items.each do |item|
+  		if item.funky_or_fresh?(threshold)
+  			funky_items << item
+  		end
+  	end
+  	funky_items
+  end
 end

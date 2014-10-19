@@ -74,4 +74,6 @@ class ItemsController < ApplicationController
     @user = User.find(params[:user_id])
     @pantry = Pantry.find(params[:pantry_id])
   end
+
+  
 end
