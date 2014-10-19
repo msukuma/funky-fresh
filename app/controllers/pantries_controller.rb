@@ -4,28 +4,24 @@ class PantriesController < ApplicationController
 	autocomplete :prototype, :name, full: true
 
 	def index
-		puts "WHWHWHWHWHWHWHWHWHWHWHWHHWHHWHHWHWHWHHW"
 		@pantry = Pantry.find(params[:pantry_id])
 		@query = params[:query]
 		@items = @pantry.items
-		
+
 		if @pantry.search(@query)
 			flash[:notice] = "Eureka! You have #{@query}!"
 		else
 			flash[:notice] = "No #{@query} here. Better put it on the list."
 		end
 		
-		
-			respond_to do |format|
+		respond_to do |format|
 		    format.js do
-		    	puts "IN THE INDEX"
 		        render 'index'
 		     end
 		    format.any do
-		    	puts "IN THE ANY"
 		        redirect_to user_path(current_user)
 		    end
-	    end
+	   end
 	end
 
 	def new

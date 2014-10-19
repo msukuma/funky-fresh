@@ -8,8 +8,6 @@ class Pantry < ActiveRecord::Base
   validates :creator_id, :name, presence: true
 
   def search(query)
-    # given all the items in a pantry
-    # does it include the query
     item_names = self.items.map {|item| item.prototype.name}
     item_names.include?(query)
   end
