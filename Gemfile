@@ -38,6 +38,8 @@ gem 'yummly'
 
 gem 'bootstrap-datepicker-rails'
 
+gem 'nokogiri'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'capybara', '~> 2.2.1'
