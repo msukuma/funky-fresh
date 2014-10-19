@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post "/login",                      to: "users#login",                      as: "login"
   get "/logout",                      to: "users#logout",                     as: "logout"
 
+  get "/search/:pantry_id",                      to: "pantries#index",                     as: "search"
+
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do
       get :autocomplete_prototype_name, :on => :collection

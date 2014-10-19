@@ -53,6 +53,10 @@ class ItemsController < ApplicationController
   #   #   render 'edit'
   #   # end
   # end
+  def search
+    @grants = Grant.search params[:search]
+  end
+
 
   def destroy
     @item = Item.find(params[:id])

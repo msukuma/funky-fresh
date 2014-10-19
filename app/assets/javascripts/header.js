@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
-  $("header li a.login").on("ajax:complete", function(event,data){
+  $(document).on("ajax:complete", "header li a.login", function(event,data){
     console.log($(this));
     console.log(data.responseText);
     $("div#frontpage").html(data.responseText);
   });
 
 
-  $("header li a.register").on("ajax:complete", function(event,data){
+  $(document).on("ajax:complete", "header li a.register", function(event,data){
     console.log($(this));
     console.log(data.responseText);
     $("div#frontpage").html(data.responseText);
