@@ -15,8 +15,8 @@ $(function(){
   });
 
   $(document).on("ajax:complete", "div.new-item-create form", function(event, data){
-    // console.log($(event.target))
     var semiTarget = $(this).parent().prev()[0].children[1];
+    $(this).parent().find("input:text").val("")
     $(semiTarget).html(data.responseText);
   });
 });
