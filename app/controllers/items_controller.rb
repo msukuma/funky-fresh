@@ -20,22 +20,19 @@ class ItemsController < ApplicationController
   end
 
   def create
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    p params
     @pantry = Pantry.find(params[:pantry_id])
-    @item = @pantry.items.create(item_params)
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts @item
-    # if @item
-      respond_to do |format|
+    @item = @pantry.items.new(item_params)
+    
+    respond_to do |format|
+      if @item.save
         format.html {redirect_to user_pantry_path(@user, @pantry)}
         format.json {render json: {pantry: @pantry}}        
         format.js
+      else
+        format.html { render :new }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
-    # end
-    #   redirect_to user_pantry_path(@user, @pantry)
-    # else
-    #   render 'new'
+    end
   end
 
   def edit

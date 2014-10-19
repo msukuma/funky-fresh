@@ -6,9 +6,16 @@ class Item < ActiveRecord::Base
 
   validates :pantry_id, :prototype_id, presence: true
 
-  before_create :set_expiration_date, if: -> { self.expiration_date.blank? }
-  after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
-  before_update :set_expiration_date, if: -> {self.expiration_date.blank? }
+    before_create do 
+      if self.prototype
+        set_expiration_date if self.expiration_date.blank? 
+      else
+        prototype_name = prototype_name
+      end
+    end
+    after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
+    before_update :set_expiration_date, if: -> {self.expiration_date.blank? }
+    before_save :downcase_prototype_name
 
   def prototype_name=(prototype_name)
     self.prototype = Prototype.find_or_create_by(name: prototype_name)
@@ -28,5 +35,9 @@ class Item < ActiveRecord::Base
 
   def days_remaining
     return (self.prototype.shelf_life - (((Time.now - self.created_at)/3600)/24) ).round
+  end
+
+  def downcase_prototype_name
+    self.prototype.name.downcase!
   end
 end
