@@ -13,3 +13,4 @@ Item.create!(pantry_id: 1, prototype_id: 3)
 Item.create!(pantry_id: 2, prototype_id: 4)
 Item.create!(pantry_id: 1, prototype_id: 5)
 Item.create!(pantry_id: 2, prototype_id: 6)
+
