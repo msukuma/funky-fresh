@@ -1,13 +1,21 @@
 $(document).ready(function() {
 
   $("header li a.login").on("ajax:complete", function(event,data){
-    alert("I am in the header")
-    console.log($(this))
-    console.log(data.responseText)
-    $("div#frontpage").append(data.responseText)
-  })
+    console.log($(this));
+    console.log(data.responseText);
+    $("div#frontpage").html(data.responseText);
+  });
 
-  $("div.frontpage").on("ajax:complete")
+  $("div.frontpage").on("ajax:complete", function(event, data){
+    
+  });
+
+  $("header li a.register").on("ajax:complete", function(event,data){
+    console.log($(this));
+    console.log(data.responseText);
+    $("div#frontpage").html(data.responseText);
+
+  })
 
 
 });
