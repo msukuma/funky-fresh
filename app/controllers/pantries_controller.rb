@@ -11,7 +11,6 @@ class PantriesController < ApplicationController
 	def create
 		@pantry = Pantry.new(pantry_params)
 		if @pantry.save
-			@pantry_participation = PantryParticipation.create(user_id: @user.id, pantry_id: @pantry.id)
 			redirect_to user_path(@user)
 		else
 			render 'new'

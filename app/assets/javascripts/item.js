@@ -6,9 +6,8 @@ $(function(){
     row.remove();
   });
 
-
-
-  $("div.new-item-create form").on("ajax:complete", function(event, data){
+  $(document).on("ajax:complete", "div.new-item-create form", function(event, data){
+    console.log("I am in the create")
     console.log("adding items");
     console.log(data.responseText);
     $("#item-block").html(data.responseText);
