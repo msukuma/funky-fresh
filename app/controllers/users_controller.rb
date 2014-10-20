@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 	end
 
 	def new
-    puts "!~~~~~~~~~~~New PARAMS~~~~~~~~~~~~~~~~!"
     puts params
     @token = params[:invite_token]
     puts "new found the TOKEN: #{@token}"
