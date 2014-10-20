@@ -7,6 +7,18 @@
   .accordion-content {display: none;}
   .accordion-content.default {display: block;}
 
-  .pantry_edit_form {
+  .edit_pantry {
+    display: none;
+  }
+
+  #new_pantry {
+    display: none;
+  }
+
+  .new_invite {
+    display: none;
+  }
+
+  .new_item {
     display: none;
   }

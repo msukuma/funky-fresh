@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
         redirect_to user_pantry_path(@user, @pantry)
       end
     end
-
   end
 
   def create
@@ -86,5 +85,5 @@ class ItemsController < ApplicationController
     @pantry = Pantry.find(params[:pantry_id])
   end
 
-  
+
 end

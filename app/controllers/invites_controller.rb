@@ -1,5 +1,7 @@
 class InvitesController < ApplicationController
-
+  def new
+    @invite = Invite.new
+  end
 
   def create
     @invite = Invite.new(invite_params)
@@ -8,8 +10,8 @@ class InvitesController < ApplicationController
     if @invite.save
       puts "!!!!!!!!!!!!!!!!!!!!!!!!"
       puts @invite
-      if @invite.recipient != nil 
-        InviteMailer.existing_user_invite(@invite).deliver 
+      if @invite.recipient != nil
+        InviteMailer.existing_user_invite(@invite).deliver
         @invite.recipient.pantries.push(@invite.pantry)
       else
         puts "sending new email"
@@ -28,6 +30,5 @@ class InvitesController < ApplicationController
   def invite_params
     params.require(:invite).permit(:email, :pantry_id, :sender_id, :recipient_id, :token)
   end
-
 end
 

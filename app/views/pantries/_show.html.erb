@@ -2,6 +2,8 @@
 
 <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, @pantry), :id => "pantry_edit_button#{@pantry.id}", remote: true %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
 
+  <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
+
 <% end %>
 
 <table>
@@ -22,5 +24,7 @@
 </table>
 
 <div class="new-item-create">
+  <%= link_to 'New Item', new_user_pantry_item_path(@user, @pantry), remote: true, :class => "new_item_button", :id => "new_item_button#{@pantry.id}" %>
+
   <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
 </div>

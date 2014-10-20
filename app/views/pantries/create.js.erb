@@ -4,4 +4,3 @@
       <%= render "pantries/show", locals: { :pantry => @pantry } %>
     </div>
 </div>
-<div id="pantry_edit_form<%= @pantry.id%>" class="pantry_edit_form"><%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %></div>
