@@ -5,7 +5,10 @@ class Pantry < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   has_many :items
 
+  has_many :invites
+
   validates :creator_id, :name, presence: true
+
 
   def recent_item_names_as_hash
   	hash = {}
