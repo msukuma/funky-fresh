@@ -9,7 +9,6 @@ class RecipesController < ApplicationController
 		@search_results = Yummly.search(search_for)
 		
 		@matches = @search_results.matches 
-
 		@best_matches = @matches.map{|r| [r['id'], r['ingredients'], r['sourceDisplayName']]}.sort{|a, b| (a[1] - @items).length <=> (b[1] - @items).length} unless @matches.empty?
 	end
 end

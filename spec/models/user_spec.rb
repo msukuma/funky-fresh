@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { User.new }
+  let(:user) { User.create(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "lovemontana")}
   context 'validations' do
     it "should have first_name, last_name, email and password columns" do
       expect(user).to have_db_column :first_name
