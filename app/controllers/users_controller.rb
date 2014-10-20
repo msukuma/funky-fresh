@@ -11,8 +11,10 @@ class UsersController < ApplicationController
 	end
 
 	def new
+    puts "!~~~~~~~~~~~New PARAMS~~~~~~~~~~~~~~~~!"
+    puts params
     @token = params[:invite_token]
-
+    puts "new found the TOKEN: #{@token}"
 		redirect_to user_path(current_user) if current_user
 		@user = User.new
 	end
@@ -24,14 +26,20 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
     @token = params[:invite_token]
+    puts "I am the TOKEN"
+    puts @token
     if @user
       if @token != nil
-      pantry_id =  Invite.find_by_token(@token).pantry_id
+      puts "TOKEN IS NOT NILL ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      pantry_id = Invite.find_by_token(@token).pantry_id
+      puts "pantry_id #{pantry_id}"
       pantry = Pantry.find_by_id(pantry_id)
+      puts "pantry name: #{pantry.name}"
       @user.pantries.push(pantry)
       puts @user.pantries
       @user.save
       end
+      puts "~~~~~~~~~~~~~~~~~~~TOKEN IS NILL!!!!!!!!!!"
       @user.save
       UserMailer.welcome_email(@user).deliver
     	session[:user_id] = @user.id

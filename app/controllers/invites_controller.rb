@@ -16,7 +16,7 @@ class InvitesController < ApplicationController
       InviteMailer.existing_user_invite(@invite).deliver 
       @invite.recipient.pantries.push(@invite.pantry)
     else
-      InviteMailer.new_user_invite(@invite, new_user_path(:invite_token => @invite.token)).deliver   
+      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver   
     end      
     redirect_to user_path(@user)
   end
