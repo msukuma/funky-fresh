@@ -39,8 +39,6 @@ class InvitesController < ApplicationController
   def invite_params
     params.require(:invite).permit(:email, :pantry_id, :sender_id, :recipient_id, :token)
   end
-<<<<<<< HEAD
-=======
 
   def set_sender_id(invite)
     user = User.find_by_id(session[:user_id])
@@ -53,6 +51,5 @@ class InvitesController < ApplicationController
     return true if recipient
   end
 
->>>>>>> 007d4627bcaa5bcbdc2a2c4286262c8df99ceaa9
 end
 
