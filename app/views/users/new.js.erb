@@ -34,6 +34,10 @@
     <%= f.password_field :password_confirmation %>
   </p>
 
+  <% if @token != nil %>
+    <%= hidden_field_tag :invite_token, @token %>
+  <% end %>
+
   <p>
     <%= f.submit %>
   </p>
