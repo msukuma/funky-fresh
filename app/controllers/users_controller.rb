@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 	end
 
 	def new
+    @token = params[:invite_token]
 		redirect_to user_path(current_user) if current_user
 		@user = User.new
 	end
@@ -21,15 +22,16 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
+    @token = params[:invite_token]
     if @user
+      if @token != nil
+      pantry =  Invite.find_by_token(@token).pantry
+      @user.pantries.push(pantry)
+      @user.save
+      end
       @user.save
       UserMailer.welcome_email(@user).deliver
     	session[:user_id] = @user.id
-      # respond_to do |format|
-      #   format.html { redirect_to user_path(@user)}
-      #   format.json { render json: {user: @user} }
-      #   format.js
-      # end
       redirect_to user_path(@user)
     else
       render 'new'

@@ -5,10 +5,14 @@ class Pantry < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
   has_many :items, dependent: :destroy
 
+  has_many :invites
+
   validates :creator_id, :name, presence: true
 
-  def item_names
-  	items.order(:expiration_date).map{|i| i.prototype.name}
+  def recent_item_names_as_hash
+  	hash = {}
+  	items.order(:expiration_date).map{|i| i.prototype.name}.each{|name| hash[name]= true}
+  	hash
   end
 
   def search(query)

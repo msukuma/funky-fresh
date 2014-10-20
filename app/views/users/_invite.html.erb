@@ -1,0 +1,6 @@
+<%= form_for Invite.new, :url => invites_path, method: :post do |f| %>
+    <%= f.hidden_field :pantry_id, :value => @pantry.id %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.submit 'Send' %>
+<% end %>

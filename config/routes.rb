@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :items, except: [:index, :show]
     end
   end
+
+  resources :invites
   # get '/register' => 'users#new', as: 'new_user'
   # post '/register' => 'users#create' as: 'create_user'
 
