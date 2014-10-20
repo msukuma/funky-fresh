@@ -1,3 +1,9 @@
+<% if @user.id == @pantry.creator_id %>
+
+<%= link_to 'Edit Pantry', edit_user_pantry_path(@user, @pantry), :id => "pantry_edit_button#{@pantry.id}", remote: true %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
+
+<% end %>
+
 <table>
 	 <% if !@pantry.items.empty? %>
 	     <%= link_to "Get Recipes", user_pantry_recipes_path(@user, @pantry) %>
@@ -10,7 +16,7 @@
  <tbody class="item-block">
 
   <% if @pantry %>
-    <%= render '/items/item' %>
+    <%= render '/items/item', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
   <% end %>
  </tbody>
 </table>

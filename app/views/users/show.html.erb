@@ -13,7 +13,7 @@
       <div class="pantry">
           <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, pantry), remote: true, method: :delete, :class => "pantry-delete" %></h4>
           <div class="accordion-content">
-            Invite:
+          Invite:
             <%= render 'invite', locals: { :pantry => @pantry = pantry }  %> <br>
             <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
             <div class="search-results"> </div>
@@ -36,6 +36,3 @@
     <% end %>
   <% end %>
   </div>
-
-
-

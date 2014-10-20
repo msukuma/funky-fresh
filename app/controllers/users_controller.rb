@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
 	def login_form
     respond_to do |format|
-      format.js 
+      format.js
     end
 	end
 
