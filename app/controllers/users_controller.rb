@@ -3,9 +3,6 @@ class UsersController < ApplicationController
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "GO TO THE SHOW"
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
 		@user = User.find(params[:id])
     respond_to do |format|
@@ -26,9 +23,6 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
     if @user
       @user.save
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts @user
     	session[:user_id] = @user.id
       # respond_to do |format|
       #   format.html { redirect_to user_path(@user)}
@@ -37,8 +31,6 @@ class UsersController < ApplicationController
       # end
       redirect_to user_path(@user)
     else
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "else clause"
       render 'new'
     end
 	end

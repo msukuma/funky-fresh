@@ -9,12 +9,19 @@ class PantriesController < ApplicationController
   end
 
 	def create
-		@pantry = Pantry.new(pantry_params)
-		if @pantry.save
-			redirect_to user_path(@user)
-		else
-			render 'new'
+		@pantry = Pantry.create(pantry_params)
+		@user = current_user
+
+		respond_to do |format|
+			format.html {redirect_to user_path(@user)}
+      format.json {render json: {:pantry => @pantry}}
+      format.js { render "create", :locals => {:pantry => @pantry} }
 		end
+		# if @pantry.save
+		# 	redirect_to user_path(@user)
+		# else
+		# 	render 'new'
+		# end
 	end
 
 	def show
@@ -23,8 +30,18 @@ class PantriesController < ApplicationController
 	end
 
 	def edit
-		redirect_to user_path(current_user) unless current_user.id == Pantry.find(params[:id]).creator.id
+		@user = current_user
+		redirect_to user_path(current_user) unless current_user.id == Pantry.find(params[:id]).creator_id
 		@pantry = Pantry.find(params[:id])
+		# you have to update the pantry here
+		respond_to do |format|
+			format.js do
+				render nothing: true
+			end
+			format.any do
+				redirect_to user_path(@user)
+			end
+		end
 	end
 
 	def update
@@ -37,7 +54,7 @@ class PantriesController < ApplicationController
 	end
 
 	def destroy
-		# @user = current_user
+		@user = current_user
 		@pantry = Pantry.find(params[:id])
 		@pantry.destroy
 		respond_to do |format|

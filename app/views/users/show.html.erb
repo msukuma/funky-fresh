@@ -6,14 +6,17 @@
 
   <% if @user %>
   <div id="accordion">
+    <div id="creator_pantries">
     <% @user.original_pantries.each do |pantry| %>
-      <div class="pantry">
-          <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, pantry), remote: true, method: :delete, :class => "pantry-delete" %></h4>
-          <div class="accordion-content">
-            <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
-          </div>
-      </div>
+        <div id="pantry<%= pantry.id%>" class="pantry">
+            <h4 class="accordion-toggle"><%= pantry.name %></h4>
+            <div class="accordion-content">
+              <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
+            </div>
+        </div>
+        <div id="pantry_edit_form<%= pantry.id%>" class="pantry_edit_form"><%= render '/pantries/edit_pantry', locals: { :pantry => @pantry = pantry, :user => @user } %></div>
     <% end %>
+    </div>
   <% end %>
 
   <% if @user %>
@@ -28,6 +31,5 @@
   <% end %>
   </div>
 
-<%= link_to 'New Pantry', new_user_pantry_path(@user), :class => "new-pantry" %>
-
-
+<h5>New Pantry</h5>
+<%= render "/pantries/new_pantry", locals: { :pantry => @pantry = Pantry.new } %>

@@ -1,0 +1,7 @@
+<div id="pantry<%= @pantry.id%>" class="pantry">
+  <h4 class="accordion-toggle"><%= @pantry.name %></h4>
+    <div class="accordion-content">
+      <%= render "pantries/show", locals: { :pantry => @pantry } %>
+    </div>
+</div>
+<div id="pantry_edit_form<%= @pantry.id%>" class="pantry_edit_form"><%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %></div>
