@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20141020032128) do
   end
 
   add_index "pantry_participations", ["pantry_id"], name: "index_pantry_participations_on_pantry_id", using: :btree
+  add_index "pantry_participations", ["user_id", "pantry_id"], name: "index_pantry_participations_on_user_id_and_pantry_id", unique: true, using: :btree
   add_index "pantry_participations", ["user_id"], name: "index_pantry_participations_on_user_id", using: :btree
 
   create_table "prototypes", force: true do |t|

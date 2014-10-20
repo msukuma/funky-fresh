@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     show_door unless session[:user_id] == params[:user_id]
     @item = Item.new
     @user = current_user
-    @pantry = params[:pantry_id]
+    @pantry = Pantry.find(params[:pantry_id])
     respond_to do |format|
       format.js do
         render new_user_pantry_item_path(@user, @pantry)
@@ -14,11 +14,9 @@ class ItemsController < ApplicationController
         redirect_to user_pantry_path(@user, @pantry)
       end
     end
-
   end
 
   def create
-    UserMailer.expiration_alert_email(@user).deliver
     @pantry = Pantry.find(params[:pantry_id])
     item_params['prototype_name'].downcase!
 
@@ -27,6 +25,7 @@ class ItemsController < ApplicationController
     else
       @item = @pantry.items.create(prototype_name: item_params['prototype_name'], expiration_date: Date.strptime(item_params['expiration_date'], '%m/%d/%Y').to_s )
     end
+    # UserMailer.expiration_alert_email(@user).deliver
     # if @item
     respond_to do |format|
       format.html {redirect_to user_pantry_path(@user, @pantry)}
@@ -86,5 +85,5 @@ class ItemsController < ApplicationController
     @pantry = Pantry.find(params[:pantry_id])
   end
 
-  
+
 end

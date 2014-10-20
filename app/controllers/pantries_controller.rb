@@ -13,7 +13,7 @@ class PantriesController < ApplicationController
 		else
 			flash[:notice] = "No #{@query} here. Better put it on the list."
 		end
-		
+
 		respond_to do |format|
 		    format.js do
 		        render 'index'
@@ -67,11 +67,19 @@ class PantriesController < ApplicationController
 
 	def update
 		@pantry = Pantry.find(params[:id])
-		if @pantry.update(pantry_params)
-			redirect_to user_path(@user)
-		else
-			render 'edit'
+		@pantry.update(pantry_params)
+
+		respond_to do |format|
+			format.html {redirect_to user_path(@user)}
+      format.json {render json: {:pantry => @pantry}}
+      format.js { render "update", :locals => {:pantry => @pantry} }
 		end
+
+		# if @pantry.update(pantry_params)
+		# 	redirect_to user_path(@user)
+		# else
+		# 	render 'edit'
+		# end
 	end
 
 	def destroy

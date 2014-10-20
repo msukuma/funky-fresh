@@ -18,5 +18,6 @@ class Invite < ActiveRecord::Base
     end
   end
 
+
 end
 
