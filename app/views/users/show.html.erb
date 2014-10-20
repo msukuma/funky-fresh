@@ -1,8 +1,11 @@
 <h3><%= @user.first_name %> <%= @user.last_name %>'s Profile Page</h3>
 
-<%= link_to 'Edit User', edit_user_path(@user) %>
-<%= link_to 'Destroy User', user_path(@user), method: :delete %>
 
+
+
+<%= link_to 'Edit User', edit_user_path(@user) %> ||
+<%= link_to 'Destroy User', user_path(@user), method: :delete %> ||
+<%= link_to 'New Pantry', new_user_pantry_path(@user), :class => "new-pantry" %>
 
   <% if @user %>
   <div id="accordion">
@@ -11,6 +14,8 @@
         <div id="pantry<%= pantry.id%>" class="pantry">
             <h4 class="accordion-toggle"><%= pantry.name %></h4>
             <div class="accordion-content">
+              <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
+              <div class="search-results"> </div>
               <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
             </div>
         </div>
@@ -24,12 +29,11 @@
       <div class="pantry">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
+            <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
+            <div class="search-results"> </div>
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>
     <% end %>
   <% end %>
   </div>
-
-<h5>New Pantry</h5>
-<%= render "/pantries/new_pantry", locals: { :pantry => @pantry = Pantry.new } %>

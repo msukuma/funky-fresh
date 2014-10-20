@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
     if @user
       @user.save
+      UserMailer.welcome_email(@user).deliver
     	session[:user_id] = @user.id
       # respond_to do |format|
       #   format.html { redirect_to user_path(@user)}

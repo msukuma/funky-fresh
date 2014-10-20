@@ -9,4 +9,22 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  before_save :capitalize_first_n_last_name, :lowercase_email
+
+  def capitalize_first_n_last_name
+  	self.first_name = first_name.downcase.capitalize
+  	self.last_name = last_name.downcase.capitalize
+  end
+
+  def lowercase_email
+  	self.email = email.downcase
+  end
+
+  def all_pantries
+    my_pantries = []
+    my_pantries << self.original_pantries.to_a
+    my_pantries << self.pantries.to_a
+    my_pantries.flatten
+  end
+
 end

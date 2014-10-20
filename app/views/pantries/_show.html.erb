@@ -5,6 +5,9 @@
 <% end %>
 
 <table>
+	 <% if !@pantry.items.empty? %>
+	     <%= link_to "Get Recipes", user_pantry_recipes_path(@user, @pantry) %>
+	 <% end %>
   <tr>
     <th>Item Name</th>
     <th>Expiration Date</th>
