@@ -11,21 +11,21 @@ describe Invite do
       expect(invite).to have_db_column :token
     end
 
-  it 'should validate presence of name' do
-      expect(item).to validate_presence_of :email
+  it 'should validate presence of email' do
+      expect(invite).to validate_presence_of :email
   end
 
-  it 'should validate presence of name' do
-      expect(item).to validate_presence_of :pantry_id
+  it 'should validate presence of pantry id' do
+      expect(invite).to validate_presence_of :pantry
   end
 
-  it 'should validate presence of name' do
-      expect(item).to validate_presence_of :sender_id
+  it 'should validate presence of sender id' do
+      expect(invite).to validate_presence_of :sender
   end
 
 
-  it 'should validate presence of name' do
-      expect(item).to validate_presence_of :token
+  it 'should validate presence of token' do
+      expect(invite).to validate_presence_of :token
   end
 
   context 'associations' do
@@ -33,5 +33,6 @@ describe Invite do
     it { should belong_to(:sender) }
     it { should belong_to(:recipient) }
   end
+end
 
 end

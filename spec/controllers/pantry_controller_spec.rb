@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe PantryController do
+# describe PantryController do
 
-end
+# end
