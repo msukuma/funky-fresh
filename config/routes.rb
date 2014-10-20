@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post "/login",                      to: "users#login",                      as: "login"
   get "/logout",                      to: "users#logout",                     as: "logout"
 
+  get "/search/:pantry_id",                      to: "pantries#index",                     as: "search"
+
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do
       get :autocomplete_prototype_name, :on => :collection
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
       resources :items, except: [:index, :show]
     end
   end
+
+  resources :invites
   # get '/register' => 'users#new', as: 'new_user'
   # post '/register' => 'users#create' as: 'create_user'
 

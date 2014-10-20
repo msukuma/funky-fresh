@@ -17,3 +17,7 @@
 /.DS_Store
 /config/initializers/yummly.rb
 
+
+
+# Ignore application configuration
+/config/application.yml

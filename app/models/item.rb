@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
 
   validates :pantry_id, :prototype_id, presence: true
 
-  before_create :set_expiration_date, if: -> { self.expiration_date.blank? }
+  before_create :set_expiration_date, if: -> {self.expiration_date.blank? && !(self.prototype.shelf_life.blank?)}
   after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
   before_update :set_expiration_date, if: -> {self.expiration_date.blank? }
 
@@ -28,5 +28,15 @@ class Item < ActiveRecord::Base
 
   def days_remaining
     return (self.prototype.shelf_life - (((Time.now - self.created_at)/3600)/24) ).round
+  end
+
+  def downcase_prototype_name
+    self.prototype.name.downcase!
+  end
+
+  def funky_or_fresh?(threshold)
+    min = Time.now
+    max = Time.now + threshold.days
+    self.expiration_date.between?(min, max)
   end
 end

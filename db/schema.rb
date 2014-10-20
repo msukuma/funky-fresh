@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016184559) do
+ActiveRecord::Schema.define(version: 20141020032128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invites", force: true do |t|
+    t.string   "email"
+    t.integer  "pantry_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "items", force: true do |t|
     t.date     "expiration_date"
@@ -44,6 +54,7 @@ ActiveRecord::Schema.define(version: 20141016184559) do
   end
 
   add_index "pantry_participations", ["pantry_id"], name: "index_pantry_participations_on_pantry_id", using: :btree
+  add_index "pantry_participations", ["user_id", "pantry_id"], name: "index_pantry_participations_on_user_id_and_pantry_id", unique: true, using: :btree
   add_index "pantry_participations", ["user_id"], name: "index_pantry_participations_on_user_id", using: :btree
 
   create_table "prototypes", force: true do |t|

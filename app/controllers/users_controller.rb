@@ -3,9 +3,6 @@ class UsersController < ApplicationController
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "GO TO THE SHOW"
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
 		@user = User.find(params[:id])
     respond_to do |format|
@@ -14,6 +11,9 @@ class UsersController < ApplicationController
 	end
 
 	def new
+    puts params
+    @token = params[:invite_token]
+    puts "new found the TOKEN: #{@token}"
 		redirect_to user_path(current_user) if current_user
 		@user = User.new
 	end
@@ -24,21 +24,26 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
+    @token = params[:invite_token]
+    puts "I am the TOKEN"
+    puts @token
     if @user
+      if @token != nil
+      puts "TOKEN IS NOT NILL ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      pantry_id = Invite.find_by_token(@token).pantry_id
+      puts "pantry_id #{pantry_id}"
+      pantry = Pantry.find_by_id(pantry_id)
+      puts "pantry name: #{pantry.name}"
+      @user.pantries.push(pantry)
+      puts @user.pantries
       @user.save
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts @user
+      end
+      puts "~~~~~~~~~~~~~~~~~~~TOKEN IS NILL!!!!!!!!!!"
+      @user.save
+      UserMailer.welcome_email(@user).deliver
     	session[:user_id] = @user.id
-      # respond_to do |format|
-      #   format.html { redirect_to user_path(@user)}
-      #   format.json { render json: {user: @user} }
-      #   format.js
-      # end
       redirect_to user_path(@user)
     else
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "else clause"
       render 'new'
     end
 	end

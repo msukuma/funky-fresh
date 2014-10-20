@@ -3,10 +3,13 @@ class RecipesController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
 		@pantry = Pantry.find(params[:pantry_id])
-		@items = @pantry.items.order(:expiration_date).limit(3)
-		@search_results = Yummly.search("#{@items[0].prototype.name} #{@items[1].prototype.name}")
-		# @recipes = @search_results.matches {|a, b| b.rating <=> a.rating}
-		@recipes = @search_results.matches.sort {|a, b| b['rating'] <=> a['rating']}
-		# raise params
+		@items = @pantry.item_names
+
+		search_for = @items.length > 3 ? @items[0..2].join(' ') : @items.join(' ')
+		@search_results = Yummly.search(search_for)
+		
+		@matches = @search_results.matches 
+
+		@best_matches = @matches.map{|r| [r['id'], r['ingredients'], r['sourceDisplayName']]}.sort{|a, b| (a[1] - @items).length <=> (b[1] - @items).length} unless @matches.empty?
 	end
 end

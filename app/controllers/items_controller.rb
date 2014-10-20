@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     show_door unless session[:user_id] == params[:user_id]
     @item = Item.new
     @user = current_user
-    @pantry = params[:pantry_id]
+    @pantry = Pantry.find(params[:pantry_id])
     respond_to do |format|
       format.js do
         render new_user_pantry_item_path(@user, @pantry)
@@ -14,22 +14,24 @@ class ItemsController < ApplicationController
         redirect_to user_pantry_path(@user, @pantry)
       end
     end
-
   end
 
   def create
     @pantry = Pantry.find(params[:pantry_id])
-    @item = @pantry.items.create(item_params)
+    item_params['prototype_name'].downcase!
+
+    if item_params['expiration_date'].blank?
+      @item = @pantry.items.create(item_params)
+    else
+      @item = @pantry.items.create(prototype_name: item_params['prototype_name'], expiration_date: Date.strptime(item_params['expiration_date'], '%m/%d/%Y').to_s )
+    end
+    # UserMailer.expiration_alert_email(@user).deliver
     # if @item
-      respond_to do |format|
-        format.html {redirect_to user_pantry_path(@user, @pantry)}
-        format.json {render json: {pantry: @pantry}}
-        format.js
-      end
-    # end
-    #   redirect_to user_pantry_path(@user, @pantry)
-    # else
-    #   render 'new'
+    respond_to do |format|
+      format.html {redirect_to user_pantry_path(@user, @pantry)}
+      format.json {render json: {pantry: @pantry}}
+      format.js
+    end
   end
 
   # def edit
@@ -51,6 +53,10 @@ class ItemsController < ApplicationController
   #   #   render 'edit'
   #   # end
   # end
+  def search
+    @grants = Grant.search params[:search]
+  end
+
 
   def destroy
     @item = Item.find(params[:id])
@@ -78,4 +84,6 @@ class ItemsController < ApplicationController
     @user = User.find(params[:user_id])
     @pantry = Pantry.find(params[:pantry_id])
   end
+
+
 end
