@@ -2,11 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
   .accordion-toggle {cursor: pointer;}
   .accordion-content {display: none;}
   .accordion-content.default {display: block;}
 
-  .pantry_edit_form {
+  .edit_pantry {
     display: none;
   }
+
+  #new_pantry {
+    display: none;
+  }
+
+  .new_invite {
+    display: none;
+  }
+
+  .new_item {
+    display: none;
+  }
+
+  .cancel_new_item_button {
+    display: none;
+  }
+
+  .cancel_edit_pantry_button {
+    display: none;
+  }
+
