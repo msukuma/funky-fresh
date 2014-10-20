@@ -3,8 +3,12 @@ class InvitesController < ApplicationController
 
   def create
     @invite = Invite.new(invite_params)
-    user = User.find_by_id(session[:user_id])
-    @invite.sender_id = User.find_by_id(session[:user_id])
+    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    puts @invite
+    puts "SESSION #{session[:user_id]}"
+    @user = User.find_by_id(session[:user_id])
+    @invite.sender_id = @user.id
+    puts @invite.sender_id
     if @invite.save
       puts "!!!!!!!!!!!!!!!!!!!!!!!!"
       puts @invite
@@ -19,7 +23,7 @@ class InvitesController < ApplicationController
       flash[:notice] = "We are unable to send the email at this time."
     end
 
-    redirect_to user_path(user)
+    redirect_to user_path(@user)
   end
 
 
