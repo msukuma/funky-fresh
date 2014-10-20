@@ -15,6 +15,14 @@ $(function(){
   //   $("#pantry" + index).show();
   // });
 
+  $("[id^='pantry_edit_button']").click(function (e) {
+    e.preventDefault();
+    console.log(this);
+    var index = this.id.replace("pantry_edit_button", "");
+    $("#pantry" + index).hide();
+    $("#pantry_edit_form" + index).show();
+  });
+
   $(document).on("ajax:complete", "#new_pantry", function(event, data, status, xhr) {
     console.log(event.target);
     console.log(data.responseText);

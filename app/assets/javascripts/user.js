@@ -1,6 +1,6 @@
 $(document).ready(function($) {
     $('#accordion').find('.accordion-toggle').click(function(){
-      alert("YO");
+      // alert("YO");
       //Expand or collapse this panel
       $(this).next().slideToggle('fast');
 
