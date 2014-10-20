@@ -25,4 +25,18 @@ class Item < ActiveRecord::Base
   def set_expiration_date
     self.expiration_date = Time.now + (self.prototype.shelf_life).days
   end
+
+  def days_remaining
+    return (self.prototype.shelf_life - (((Time.now - self.created_at)/3600)/24) ).round
+  end
+
+  def downcase_prototype_name
+    self.prototype.name.downcase!
+  end
+
+  def funky_or_fresh?(threshold)
+    min = Time.now
+    max = Time.now + threshold.days
+    self.expiration_date.between?(min, max)
+  end
 end
