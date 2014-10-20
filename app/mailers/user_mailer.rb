@@ -8,14 +8,15 @@ class UserMailer < ActionMailer::Base
   end
 
 
-
   def expiration_alert_email(user)
-  	@user_pantries = {}
-  	@user = user
-  	@user.all_pantries.each do |pantry|
-  		@user_pantries[pantry.name] = pantry.item_checker(5)
-  	end
-  	@user_pantries
-  	mail(to: @user.email, subject: "Food expiration alert from your friends at Funky||Fresh")
+    @user_pantries = {}
+    @user = user
+    @user.all_pantries.each do |pantry|
+      @user_pantries[pantry.name] = pantry.item_checker(5) if pantry.item_checker(5).length != 0
+    end
+    @user_pantries
+    if @user_pantries.length != 0
+      mail(to: @user.email, subject: "Food expiration alert from your friends at Funky||Fresh")
+    end
   end
 end
