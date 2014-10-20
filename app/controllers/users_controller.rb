@@ -3,9 +3,6 @@ class UsersController < ApplicationController
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts "GO TO THE SHOW"
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
 		@user = User.find(params[:id])
     respond_to do |format|
@@ -27,9 +24,6 @@ class UsersController < ApplicationController
     if @user
       @user.save
       UserMailer.welcome_email(@user).deliver
-      # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      # puts @user
     	session[:user_id] = @user.id
       # respond_to do |format|
       #   format.html { redirect_to user_path(@user)}
@@ -38,8 +32,6 @@ class UsersController < ApplicationController
       # end
       redirect_to user_path(@user)
     else
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "else clause"
       render 'new'
     end
 	end
@@ -60,7 +52,7 @@ class UsersController < ApplicationController
 
 	def login_form
     respond_to do |format|
-      format.js 
+      format.js
     end
 	end
 

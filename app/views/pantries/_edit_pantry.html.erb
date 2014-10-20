@@ -1,4 +1,4 @@
-<%= form_for [@user, @pantry] do |f| %>
+<%= form_for [@user, @pantry], remote: true, :id => "edit_pantry#{@pantry.id}" do |f| %>
   <% if @pantry.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@pantry.errors.count, "error") %> prohibited
@@ -20,6 +20,6 @@
   </p>
 
   <p>
-    <%= f.submit %>
+    <%= f.submit "Edit Pantry" %>
   </p>
 <% end %>
