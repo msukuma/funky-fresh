@@ -30,4 +30,9 @@ class User < ActiveRecord::Base
     my_pantries.flatten
   end
 
+  def has_pantry?(pantry)
+    self.all_pantries.include?(pantry)
+  end
+
+
 end

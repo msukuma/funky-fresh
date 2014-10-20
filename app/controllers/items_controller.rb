@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     show_door unless session[:user_id] == params[:user_id]
     @item = Item.new
     @user = current_user
-    @pantry = params[:pantry_id]
+    @pantry = Pantry.find(params[:pantry_id])
     respond_to do |format|
       format.js do
         render new_user_pantry_item_path(@user, @pantry)
@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
         redirect_to user_pantry_path(@user, @pantry)
       end
     end
-
   end
 
   def create
@@ -86,5 +85,5 @@ class ItemsController < ApplicationController
     @pantry = Pantry.find(params[:pantry_id])
   end
 
-  
+
 end

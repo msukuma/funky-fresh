@@ -1,31 +1,33 @@
 <h3><%= @user.first_name %> <%= @user.last_name %>'s Profile Page</h3>
 
+<%= link_to 'Edit User', edit_user_path(@user) %>
+<%= link_to 'Destroy User', user_path(@user), method: :delete %>
+<button class="new_pantry_button" id="new_pantry_button">Create Pantry</button>
+<button class="cancel_new_pantry_button" id="cancel_new_pantry_button">Cancel</button>
 
-
-
-<%= link_to 'Edit User', edit_user_path(@user) %> ||
-<%= link_to 'Destroy User', user_path(@user), method: :delete %> ||
-<%= link_to 'New Pantry', new_user_pantry_path(@user), :class => "new-pantry" %>
+<%= render "pantries/new_pantry", locals: { :pantry => @pantry = Pantry.new } %>
 
   <% if @user %>
   <div id="accordion">
+    <div id="creator_pantries">
     <% @user.original_pantries.each do |pantry| %>
-      <div class="pantry">
-          <h4 class="accordion-toggle"><%= pantry.name %> || <%= link_to 'Edit Pantry', edit_user_pantry_path(@user, pantry) %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, pantry), remote: true, method: :delete, :class => "pantry-delete" %></h4>
+      <div id="pantry<%= pantry.id%>" class="pantry">
+          <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
-          Invite:
-            <%= render 'invite', locals: { :pantry => @pantry = pantry }  %> <br>
+            <%= link_to 'Invite', new_invite_path, remote: true, :class => "new_invite_button", :id => "new_invite_button#{pantry.id}" %>
+            <%= render '/invites/new_invite', locals: { :pantry => @pantry = pantry }  %> <br>
             <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
             <div class="search-results"> </div>
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>
     <% end %>
+    </div>
   <% end %>
 
   <% if @user %>
     <% @user.pantries.each do |pantry| %>
-      <div class="pantry">
+      <div id="pantry<%= pantry.id%>">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
             <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
