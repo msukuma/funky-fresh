@@ -1,6 +1,7 @@
 <% if @user.id == @pantry.creator_id %>
 
-<%= link_to 'Edit Pantry', edit_user_pantry_path(@user, @pantry), :id => "pantry_edit_button#{@pantry.id}", remote: true %> || <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
+<button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit Pantry</button>
+<button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button> <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
 
   <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
 
@@ -24,7 +25,10 @@
 </table>
 
 <div class="new-item-create">
-  <%= link_to 'New Item', new_user_pantry_item_path(@user, @pantry), remote: true, :class => "new_item_button", :id => "new_item_button#{@pantry.id}" %>
+  <button class="new_item_button" id="new_item_button<%= @pantry.id%>">New Item</button>
+  <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">Cancel Form</button>
 
   <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
 </div>
+
+

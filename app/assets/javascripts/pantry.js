@@ -1,10 +1,20 @@
 $(function(){
-  $('#accordion').on("click", "[id^='pantry_edit_button']", function(e){
+  $('#accordion').on("click", "[id^='edit_pantry_button']", function(e){
     e.preventDefault();
     console.log(this);
-    var index = this.id.replace("pantry_edit_button", "");
-    $("#pantry_edit_button" + index).hide();
+    var index = this.id.replace("edit_pantry_button", "");
+    $("#edit_pantry_button" + index).hide();
     $("#edit_pantry" + index).show();
+    $("#cancel_edit_pantry_button" + index).show();
+  });
+
+  $('#accordion').on("click", "[id^='cancel_edit_pantry_button']", function(e){
+    e.preventDefault();
+    console.log(this);
+    var index = this.id.replace("cancel_edit_pantry_button", "");
+    $("#edit_pantry_button" + index).show();
+    $("#edit_pantry" + index).hide();
+    $("#cancel_edit_pantry_button" + index).hide();
   });
 
   $(document).on("ajax:complete", "[id^='edit_pantry']", function(event, data, status, xhr) {
@@ -15,7 +25,8 @@ $(function(){
     $("#pantry" + index).remove();
     $("#creator_pantries").append(data.responseText);
     $("#edit_pantry" + index).hide();
-    $("#pantry_edit_button" + index).show();
+    $("#edit_pantry_button" + index).show();
+    $("#cancel_edit_pantry_button" + index).hide();
   });
 
   $(document).on("click", "#new_pantry_button", function(e){
@@ -38,6 +49,13 @@ $(function(){
     console.log(index);
     $("#pantry" + index).remove();
   });
+
+  // $(document).on("ajax:complete", "a.pantry-delete", function(event){
+  //   var item = $(event.target);
+  //   console.log(item);
+  //   var row = item.closest("div");
+  //   row.remove();
+  // });
 
   $('#accordion').on("click", "[id^='new_invite_button']", function(e){
     e.preventDefault();

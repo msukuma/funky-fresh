@@ -1,10 +1,7 @@
-<div id="pantry<%= pantry.id%>" class="pantry">
-  <h4 class="accordion-toggle"><%= pantry.name %></h4>
-  <div class="accordion-content">
-    <%= link_to 'Invite', new_invite_path, remote: true, :class => "new_invite_button", :id => "new_invite_button#{pantry.id}" %>
-    <%= render '/invites/new_invite', locals: { :pantry => @pantry = pantry }  %> <br>
-    <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
-    <div class="search-results"> </div>
-    <%= render "pantries/show", locals: { :pantry => @pantry } %>
-  </div>
+<div id="pantry<%= @pantry.id%>" class="pantry">
+  <h4 class="accordion-toggle"><%= @pantry.name %></h4>
+    <div class="accordion-content">
+      <%= render "pantries/show", locals: { :pantry => @pantry } %>
+    </div>
 </div>
+<div id="pantry_edit_form<%= @pantry.id%>" class="pantry_edit_form"><%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %></div>
