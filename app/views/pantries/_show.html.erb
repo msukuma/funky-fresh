@@ -3,6 +3,7 @@
 <button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit Pantry</button>
 <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button> <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
 
+
   <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
 
 <% end %>
