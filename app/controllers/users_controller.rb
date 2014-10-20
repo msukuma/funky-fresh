@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
 	def new
     @token = params[:invite_token]
+
 		redirect_to user_path(current_user) if current_user
 		@user = User.new
 	end
@@ -25,8 +26,10 @@ class UsersController < ApplicationController
     @token = params[:invite_token]
     if @user
       if @token != nil
-      pantry =  Invite.find_by_token(@token).pantry
+      pantry_id =  Invite.find_by_token(@token).pantry_id
+      pantry = Pantry.find_by_id(pantry_id)
       @user.pantries.push(pantry)
+      puts @user.pantries
       @user.save
       end
       @user.save
