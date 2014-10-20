@@ -1,6 +1,6 @@
 $(function(){
   console.log("loaded");
-  $("[id^='new_item_button']").click(function (e) {
+  $(document).on("click", "[id^='new_item_button']", function(e){
     e.preventDefault();
     console.log(this);
     var index = this.id.replace("new_item_button", "");
