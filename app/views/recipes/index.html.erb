@@ -7,7 +7,7 @@
 		<% end %><br>
 
 		<strong>ingredients</strong>: <%= recipe.ingredients.join(', ') %> <br>
-		<strong>you have</strong>: <%= (@items - match[1] ).join(', ') %> <br>
+		<strong>you have</strong>: <%= (@items & match[1] ).join(', ') %> <br>
 		<strong>You are missing</strong>: <%= (match[1] - @items).join(', ') %> <br>
 		<strong>Rating</strong>: <%= recipe.rating %><br>
 		<strong>Source</strong>: <%= match.last%>  

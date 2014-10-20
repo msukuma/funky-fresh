@@ -9,10 +9,8 @@ class Pantry < ActiveRecord::Base
 
   validates :creator_id, :name, presence: true
 
-  def tem_names
-  	hash = {}
-  	items.order(:expiration_date).map{|i| i.prototype.name}.each{|name| hash[name]= true}
-  	hash
+  def item_names
+  	items.order(:expiration_date).map{|i| i.prototype.name}
   end
 
   def search(query)
