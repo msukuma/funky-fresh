@@ -34,6 +34,15 @@ $(function(){
     console.log(this);
     $("#new_pantry_button").hide();
     $("#new_pantry").show();
+    $("#cancel_new_pantry_button").show();
+  });
+
+  $(document).on("click", "#cancel_new_pantry_button", function(e){
+    e.preventDefault();
+    console.log(this);
+    $("#new_pantry_button").show();
+    $("#new_pantry").hide();
+    $("#cancel_new_pantry_button").hide();
   });
 
   $(document).on("ajax:complete", "#new_pantry", function(event, data, status, xhr) {
@@ -42,9 +51,11 @@ $(function(){
     $("#creator_pantries").append(data.responseText);
     $("#new_pantry").hide();
     $("#new_pantry_button").show();
+    $("#cancel_new_pantry_button").hide();
   });
 
   $(document).on("ajax:complete", "[id^='pantry_delete_button']", function(event, data, status, xhr){
+
     var index = this.id.replace("pantry_delete_button", "");
     console.log(index);
     $("#pantry" + index).remove();
