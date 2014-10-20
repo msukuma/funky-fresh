@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+
+	<h2>Attention <%= @user.first_name %>!</h2>
+	<h3>The following items in your account will expire soon:</h3>
+	<ul>
+		<% @user_pantries.each do |pantry, item_array| %>
+			<li><h3><%= pantry %></h3></li>
+				<% item_array.each do |item| %>
+					<li><%= item.prototype.name %> expires on <%= item.expiration_date %></li>
+				<% end %>
+		<% end %>
+	</ul>
+
+</body>
+</html>

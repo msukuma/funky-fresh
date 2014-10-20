@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    UserMailer.expiration_alert_email(@user).deliver
     @pantry = Pantry.find(params[:pantry_id])
     item_params['prototype_name'].downcase!
 
@@ -84,4 +85,6 @@ class ItemsController < ApplicationController
     @user = User.find(params[:user_id])
     @pantry = Pantry.find(params[:pantry_id])
   end
+
+  
 end

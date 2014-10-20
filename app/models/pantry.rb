@@ -17,4 +17,14 @@ class Pantry < ActiveRecord::Base
     item_names = self.items.map {|item| item.prototype.name}
     item_names.include?(query)
   end
+
+  def item_checker(threshold)
+    funky_items = []
+    self.items.each do |item|
+      if item.funky_or_fresh?(threshold)
+        funky_items << item
+      end
+    end
+    funky_items
+  end
 end

@@ -20,4 +20,11 @@ class User < ActiveRecord::Base
   	self.email = email.downcase
   end
 
+  def all_pantries
+    my_pantries = []
+    my_pantries << self.original_pantries.to_a
+    my_pantries << self.pantries.to_a
+    my_pantries.flatten
+  end
+
 end
