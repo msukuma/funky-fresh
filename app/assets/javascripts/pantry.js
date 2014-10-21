@@ -85,5 +85,13 @@ $(function(){
     $("#new_invite" + index).hide();
     $("#cancel_new_invite_button" + index).hide();
   });
+
+  $(document).on("ajax:complete", "[id^='new_invite']", function(event, data, status, xhr){
+    var index = this.id.replace("new_invite", "");
+    console.log(index);
+    $("#new_invite_button" + index).show();
+    $("#new_invite" + index).hide();
+    $("#cancel_new_invite_button" + index).hide();
+  });
 });
 

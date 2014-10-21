@@ -7,21 +7,7 @@ class InvitesController < ApplicationController
     @invite = Invite.new(invite_params)
     @user = User.find_by_id(session[:user_id])
     @invite.sender_id = @user.id
-    if User.find_by_email(invite_params[:email])
-      @recipient = User.find_by_email(invite_params[:email])
-      @invite.recipient_id = @recipient.id
-      @invite.save
-    end
-    if @invite.save
-      if @invite.recipient != nil
-        InviteMailer.existing_user_invite(@invite).deliver
-        @invite.recipient.pantries.push(@invite.pantry)
-      else
-        InviteMailer.new_user_invite(@invite, new_user_path(:invite_token => @invite.token)).deliver
-      end
-    else
-      flash[:notice] = "We are unable to send the email at this time."
-    end
+    @recipient = User.find_by_email(invite_params[:email])
 
     if is_a_user?(@invite) && @recipient.has_pantry?(@pantry)
       flash[:notice] = "#{@invite.email} is already a part of your pantry."
@@ -31,7 +17,12 @@ class InvitesController < ApplicationController
     else
       InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver
     end
-    redirect_to user_path(@user)
+
+    respond_to do |format|
+      format.html {redirect_to user_path(@user)}
+      format.json {render json: {:pantry => @pantry}}
+      format.js { render nothing: true   }
+    end
   end
 
   private
