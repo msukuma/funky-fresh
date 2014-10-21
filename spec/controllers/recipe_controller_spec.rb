@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe RecipeController do
+# describe RecipeController do
 
-end
+# end
