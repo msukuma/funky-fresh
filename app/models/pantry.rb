@@ -13,7 +13,7 @@ class Pantry < ActiveRecord::Base
 
   def item_names
     hash = {}
-  	array = items.order(:expiration_date).map{|item| [item.prototype.name, item.prototype.plural]}.flatten
+  array = items.order(:expiration_date).map{|item| [item.prototype.name, item.prototype.plural]}.flatten
     array.each { |name| hash[name] = true }
     hash
   end

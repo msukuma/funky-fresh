@@ -1,5 +1,5 @@
 module RecipeHelper
 
-	
+
 
 end
