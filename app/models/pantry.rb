@@ -1,8 +1,10 @@
 class Pantry < ActiveRecord::Base
   has_many :pantry_participations
+  
   has_many :users, through: :pantry_participations
-  has_many :participants, through: :pantry_participations
+  
   belongs_to :creator, class_name: "User"
+  
   has_many :items, dependent: :destroy
 
   has_many :invites
@@ -10,7 +12,10 @@ class Pantry < ActiveRecord::Base
   validates :creator_id, :name, presence: true
 
   def item_names
-  	items.order(:expiration_date).map{|i| i.prototype.name}
+    hash = {}
+  	array = items.order(:expiration_date).map{|item| [item.prototype.name, item.prototype.plural]}.flatten
+    array.each { |name| hash[name] = true }
+    hash
   end
 
   def search(query)

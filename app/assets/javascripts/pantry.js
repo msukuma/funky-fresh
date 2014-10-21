@@ -55,18 +55,16 @@ $(function(){
   });
 
   $(document).on("ajax:complete", "[id^='pantry_delete_button']", function(event, data, status, xhr){
-
     var index = this.id.replace("pantry_delete_button", "");
     console.log(index);
     $("#pantry" + index).remove();
   });
 
-  // $(document).on("ajax:complete", "a.pantry-delete", function(event){
-  //   var item = $(event.target);
-  //   console.log(item);
-  //   var row = item.closest("div");
-  //   row.remove();
-  // });
+  $(document).on("ajax:complete", "[id^='opt_out_button']", function(event, data, status, xhr){
+    var index = this.id.replace("opt_out_button", "");
+    console.log(index);
+    $("#pantry" + index).remove();
+  });
 
   $('#accordion').on("click", "[id^='new_invite_button']", function(e){
     e.preventDefault();
@@ -75,6 +73,25 @@ $(function(){
     console.log(index);
     $("#new_invite_button" + index).hide();
     $("#new_invite" + index).show();
+    $("#cancel_new_invite_button" + index).show();
+  });
+
+  $('#accordion').on("click", "[id^='cancel_new_invite_button']", function(e){
+    e.preventDefault();
+    console.log(this);
+    var index = this.id.replace("cancel_new_invite_button", "");
+    console.log(index);
+    $("#new_invite_button" + index).show();
+    $("#new_invite" + index).hide();
+    $("#cancel_new_invite_button" + index).hide();
+  });
+
+  $(document).on("ajax:complete", "[id^='new_invite']", function(event, data, status, xhr){
+    var index = this.id.replace("new_invite", "");
+    console.log(index);
+    $("#new_invite_button" + index).show();
+    $("#new_invite" + index).hide();
+    $("#cancel_new_invite_button" + index).hide();
   });
 });
 

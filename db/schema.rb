@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20141020032128) do
 
   create_table "prototypes", force: true do |t|
     t.string   "name"
+    t.string   "plural"
     t.integer  "shelf_life"
     t.datetime "created_at"
     t.datetime "updated_at"
