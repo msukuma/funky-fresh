@@ -1,0 +1,39 @@
+<%= form_for @user do |f| %>
+  <% if flash[:notice]  %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+
+   <p>
+    <%= f.label :Confirm_password %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <% if @token != nil %>
+    <%= hidden_field_tag :invite_token, @token %>
+  <% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
