@@ -75,10 +75,10 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        render 'login_form'
+        redirect_to root_path
       end
     else
-      render 'login_form'
+      redirect_to root_path
     end
 	end
 
