@@ -29,8 +29,8 @@ class InvitesController < ApplicationController
       InviteMailer.existing_user_invite(@invite).deliver
       @invite.recipient.pantries.push(@invite.pantry)
     else
-      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver   
-    end      
+      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver
+    end
     redirect_to user_path(@user)
   end
 
@@ -50,6 +50,5 @@ class InvitesController < ApplicationController
     recipient = User.find_by_email(invite.email)
     return true if recipient
   end
-
 end
 

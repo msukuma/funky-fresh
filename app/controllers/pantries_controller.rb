@@ -96,6 +96,21 @@ class PantriesController < ApplicationController
     end
 	end
 
+	def opt_out
+		@user = User.find(params[:user_id])
+		@pantry = Pantry.find(params[:id])
+		@pantryparticipation = PantryParticipation.find_by(user_id: @user.id, pantry_id: @pantry.id)
+		@pantryparticipation.destroy
+		respond_to do |format|
+			format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(@user)
+      end
+		end
+	end
+
 		private
 
 	def pantry_params

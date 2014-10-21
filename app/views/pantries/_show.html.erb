@@ -1,11 +1,11 @@
 <% if @user.id == @pantry.creator_id %>
-
-<button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit Pantry</button>
-<button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button> <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
-
+  <button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit Pantry</button>
+  <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button>
+  <%= form_for [@user, @pantry], remote: true, method: :delete, :html => { :class => "pantry_delete_button", :id => "pantry_delete_button#{@pantry.id}" } do |f| %>
+    <%= f.submit 'Destroy Pantry' %>
+  <% end %>
 
   <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
-
 <% end %>
 
 <table>
