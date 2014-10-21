@@ -12,18 +12,19 @@ class Pantry < ActiveRecord::Base
   validates :creator_id, :name, presence: true
 
 
-  def item_names
-    items.order(:expiration_date).map{|item| item.prototype.name}
-  end
   def item_names_and_plural
+    array = items.order(:expiration_date).limit(3).map{ |item| [item.prototype.name, item.prototype.plural] }.flatten.uniq!.join(', ')
+  end
+
+  def comparators
     hash = {}
-  	array = items.order(:expiration_date).map{|item| [item.prototype.name, item.prototype.plural]}.flatten
-    array.each { |name| hash[name] = true }
+  	array = items.map{ |item| [item.prototype.name, item.prototype.plural] }.flatten
+    array.each{ |name| hash[name] = true }
     hash
   end
 
   def search(query)
-    item_names = self.items.map {|item| item.prototype.name}
+    item_names = self.items.map{ |item| item.prototype.name }
     item_names.include?(query)
   end
 

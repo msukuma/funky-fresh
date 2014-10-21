@@ -4,6 +4,8 @@
 		<a href="<%= recipe.attribution.url %>"><p><%= recipe.name%></p></a>
 		<% if recipe.thumbnail %>
 	    <a href="<%= recipe.attribution.url %>"><img src="<%= recipe.thumbnail %>"></a>
+    <% else %>
+    	<a href="<%= recipe.attribution.url %>"><img src="<%= recipe.thumbnail %>"></a>
 		<% end %><br>
 
 		<strong>ingredients</strong>: <%= recipe.ingredients.join(', ') %> <br>
@@ -11,7 +13,7 @@
 		<strong>you have</strong>: <%= match[2].join(', ') %> <br>
 		<strong>You are missing</strong>: <%= (match[1] - match[2]).join(', ') %> <br>
 		<strong>Rating</strong>: <%= recipe.rating %><br>
-		<strong>Source</strong>: <%= match.last%>  
+		<strong>Source</strong>: <%= match[-2]%>  
 	<% end  %>
 <% else %>
 	<h5> No recipes found</h5>
