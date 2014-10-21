@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
+    @token = params[:invite_token]
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
 		@user = User.find(params[:id])
     respond_to do |format|
