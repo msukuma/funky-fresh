@@ -11,7 +11,11 @@ class Pantry < ActiveRecord::Base
 
   validates :creator_id, :name, presence: true
 
+
   def item_names
+    items.order(:expiration_date).map{|item| item.prototype.name}
+  end
+  def item_names_and_plural
     hash = {}
   	array = items.order(:expiration_date).map{|item| [item.prototype.name, item.prototype.plural]}.flatten
     array.each { |name| hash[name] = true }
