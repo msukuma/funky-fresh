@@ -14,11 +14,7 @@
       <div id="pantry<%= pantry.id%>" class="pantry">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
-            <button class="new_invite_button" id="new_invite_button<%=pantry.id%>">Invite</button>
-            <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=pantry.id%>">Cancel</button>
-            <%= render '/invites/new_invite', locals: { :pantry => @pantry = pantry }  %> <br>
-            <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
-            <div class="search-results"> </div>
+         
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>
@@ -36,8 +32,7 @@
                   <%= f.submit 'Opt Out' %>
                 <% end %>
             <% end %>
-            <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
-            <div class="search-results"> </div>
+            
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>

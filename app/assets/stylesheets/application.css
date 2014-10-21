@@ -16,14 +16,25 @@
  # Or if using bootstrap v3:
  *= require bootstrap-datepicker3
  */
+
+@import url('http://fonts.googleapis.com/css?family=Oxygen:200,300,400,500,600,700,800,900,400italic,700italic');
+
+* {
+ 	font-family: 'Oxygen';
+}
+
+ body {
+ 	background-color: #AFFF7E;
+ 	color: #362819;
+ }
  
 header {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: lightblue;
+	background-color: #23DB3E;
 	height: 3.5em;
-	border-radius: 20px;
+	border-radius: 8px;
 }
 
 header nav {
@@ -48,14 +59,14 @@ nav ul li a:visited {
 }
 
 nav ul li a:hover {
-	color: #DB3C29;
+	color: #B035B2;
 	text-decoration: underline;
 }
 
 .body_container {
 	width: 70%;
-	background-color: lightblue;
-	border-radius: 30px;
+	background-color: #23DB3E;
+	border-radius: 8px;
 	padding: 40px;
 	margin: 50px auto;
 	text-align: left;
@@ -72,7 +83,14 @@ nav ul li a:hover {
 }
 
 .body_container a:hover {
-	color: #DB3C29;
+	color: #B035B2;
 	text-decoration: underline;
 }
+
+button {
+	padding: 4px 12px 4px 12px;
+}
+
+
+
 
