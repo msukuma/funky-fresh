@@ -14,7 +14,8 @@
       <div id="pantry<%= pantry.id%>" class="pantry">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
-            <%= link_to 'Invite', new_invite_path, remote: true, :class => "new_invite_button", :id => "new_invite_button#{pantry.id}" %>
+            <button class="new_invite_button" id="new_invite_button<%=pantry.id%>">Invite</button>
+            <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=pantry.id%>">Cancel</button>
             <%= render '/invites/new_invite', locals: { :pantry => @pantry = pantry }  %> <br>
             <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
             <div class="search-results"> </div>
@@ -30,6 +31,11 @@
       <div id="pantry<%= pantry.id%>">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
+            <% if @user.id != pantry.creator_id %>
+                <%= form_for [@user, pantry], url: opt_out_path(@user, pantry), method: :delete, remote: true, :html => { :class => "opt_out_button", :id => "opt_out_button#{pantry.id}" } do |f| %>
+                  <%= f.submit 'Opt Out' %>
+                <% end %>
+            <% end %>
             <%= render 'layouts/search', locals: { :pantry => @pantry = pantry }  %>
             <div class="search-results"> </div>
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>

@@ -16,8 +16,6 @@ class RecipesController < ApplicationController
 		# 		you_have << ingredient if ingredient.include?(item)
 		# 	end
 		# end
-
-
 		@best_matches = @matches.map{|r| [r['id'], r['ingredients'], r['sourceDisplayName']]}.sort{|a, b| (a[1] - @items).length <=> (b[1] - @items).length} unless @matches.empty?
 	end
 end

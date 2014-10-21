@@ -38,7 +38,7 @@ gem 'yummly'
 
 gem 'bootstrap-datepicker-rails'
 
-gem 'figaro'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
@@ -56,6 +56,10 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+
+group :production do
+    gem 'rails_12factor'    
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
