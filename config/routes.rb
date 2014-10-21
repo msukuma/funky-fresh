@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'home#index'
 
-  get "/login",                       to: "users#login_form",                 as: "login_form"
-  post "/login",                      to: "users#login",                      as: "login"
-  get "/logout",                      to: "users#logout",                     as: "logout"
+  get "/login",                           to: "users#login_form",                 as: "login_form"
+  post "/login",                          to: "users#login",                      as: "login"
+  get "/logout",                          to: "users#logout",                     as: "logout"
 
-  get "/search/:pantry_id",                      to: "pantries#index",                     as: "search"
+  get "/search/:pantry_id",               to: "pantries#index",                   as: "search"
+  delete "/users/:user_id/pantries/:id",  to: "pantries#opt_out",                 as: "opt_out"
 
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do

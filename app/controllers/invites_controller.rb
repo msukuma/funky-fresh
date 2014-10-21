@@ -29,8 +29,8 @@ class InvitesController < ApplicationController
       InviteMailer.existing_user_invite(@invite).deliver
       @invite.recipient.pantries.push(@invite.pantry)
     else
-      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver   
-    end      
+      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver
+    end
     redirect_to user_path(@user)
   end
 
@@ -39,8 +39,6 @@ class InvitesController < ApplicationController
   def invite_params
     params.require(:invite).permit(:email, :pantry_id, :sender_id, :recipient_id, :token)
   end
-<<<<<<< HEAD
-=======
 
   def set_sender_id(invite)
     user = User.find_by_id(session[:user_id])
@@ -52,7 +50,5 @@ class InvitesController < ApplicationController
     recipient = User.find_by_email(invite.email)
     return true if recipient
   end
-
->>>>>>> 007d4627bcaa5bcbdc2a2c4286262c8df99ceaa9
 end
 
