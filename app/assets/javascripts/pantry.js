@@ -21,8 +21,8 @@ $(function(){
     console.log(event.target);
     var index = this.id.replace("edit_pantry", "");
     console.log(index);
-    console.log(data.responseText);
     $("#pantry" + index).remove();
+    console.log(data.responseText);
     $("#creator_pantries").append(data.responseText);
     $("#edit_pantry" + index).hide();
     $("#edit_pantry_button" + index).show();
