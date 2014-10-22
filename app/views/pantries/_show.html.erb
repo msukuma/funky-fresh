@@ -3,13 +3,13 @@
   <center>
   <table class="pantry-nav">
   <tr>
-    <td><button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit</button>
+    <td><button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>"></button>
     <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button>
 
     <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
   <% end %></td>
     <td><%= link_to image_tag('cookbook.png', :class => "cookbook"), user_pantry_recipes_path(@user, @pantry) %></td>
-    <td><button class="new_invite_button" id="new_invite_button<%=@pantry.id%>">Invite</button>
+    <td><button class="new_invite_button" id="new_invite_button<%=@pantry.id%>"></button>
     <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=@pantry.id%>">Cancel</button>
     <%= render '/invites/new_invite', locals: { :pantry => @pantry }  %> </td>
     </tr>
@@ -22,7 +22,7 @@
     <td><%= render 'layouts/search', locals: { :pantry => @pantry }  %>
     <div class="search-results"> </div></td>
     <td><div class="new-item-create">
-    <button class="new_item_button" id="new_item_button<%= @pantry.id%>">New Item</button>
+    <button class="new_item_button" id="new_item_button<%= @pantry.id%>"></button>
     <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">Cancel Form</button>
 
     <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>

@@ -24,15 +24,20 @@
  }
 
  body {
- 	background-color: #AFFF7E;
+ 	background-image: url('veggies-large-edited.jpg');
+ 	background-position: top center;
+ 	background-repeat: no-repeat;
+ 	background-size: cover;
  	color: #362819;
+
  }
  
  header {
  	width: 90%;
  	margin-left: auto;
  	margin-right: auto;
- 	background-color: #23DB3E;
+ 	background-color: #4CBA19;
+ 	opacity: .85;
  	height: 3.5em;
  	border-radius: 8px;
  }
@@ -73,18 +78,14 @@
  	height: 40px; 
  }
 
-/* .edit_pantry {
- 	width: 40px;
-	height: 40px;
- }
-*/
  .body_container {
  	width: 70%;
- 	background-color: #23DB3E;
+ 	background-color: #4CBA19;
  	border-radius: 8px;
  	padding: 40px;
  	margin: 50px auto;
  	text-align: left;
+ 	opacity: .85;
  }
 
  .body_container a:link {
@@ -106,10 +107,9 @@
  	padding: 4px 12px 4px 12px;
  }
 
- .trash_can {
- 	width: 32px;
- 	height: 32px;
- }
+
+
+
 
 /*.button {
 padding: 4px 12px 4px 12px;
