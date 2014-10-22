@@ -38,7 +38,9 @@ table.pantry-nav td {
 
 input#search-field {
 	font-size: 1.1em;
-	width: 400px;
+	width: 100%;
+	/*min-width: 200px;*/
+	width: 450px;
 	height: 30px;
 	border-radius: 8px;
 }
@@ -48,7 +50,7 @@ input#search-field {
 }
 
 .edit_pantry_button {
-	
+
 }
 
 /*.pantry_table {
