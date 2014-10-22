@@ -2,5 +2,6 @@
 <li>Welcome, <%= @user.first_name %>!</li>
 <li><%= link_to "Home", root_path %></li>
 <li><%= link_to "Profile", user_path(session[:user_id]) %></li>
+<li><%= link_to image_tag('edit_cog.png', id: "edit_cog"), edit_user_path(session[:user_id]) %></li>
 <li><%= link_to "Logout", logout_path %></li>
 </ul>

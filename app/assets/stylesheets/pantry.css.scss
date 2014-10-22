@@ -31,6 +31,25 @@ div.new-item-create {
 	display: inline;
 }
 
+table.pantry-nav td {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+input#search-field {
+	font-size: 1.1em;
+	width: 400px;
+	height: 30px;
+	border-radius: 8px;
+}
+
+.search-button {
+	display: none;
+}
+
+.edit_pantry_button {
+	
+}
 
 /*.pantry_table {
 	margin:0px;padding:0px;

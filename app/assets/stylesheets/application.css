@@ -63,6 +63,21 @@
  	text-decoration: underline;
  }
 
+ #edit_cog {
+ 	width: 20px;
+ 	height: 20px;
+ }
+
+ .cookbook {
+ 	width: 40px;
+ 	height: 40px; 
+ }
+
+/* .edit_pantry {
+ 	width: 40px;
+	height: 40px;
+ }
+*/
  .body_container {
  	width: 70%;
  	background-color: #23DB3E;
@@ -89,6 +104,11 @@
 
  button {
  	padding: 4px 12px 4px 12px;
+ }
+
+ .trash_can {
+ 	width: 32px;
+ 	height: 32px;
  }
 
 /*.button {
