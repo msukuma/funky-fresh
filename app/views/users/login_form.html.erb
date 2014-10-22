@@ -2,12 +2,12 @@
 
   <p>
     <%= label_tag :email %><br>
-    <%= text_field_tag :email %>
+    <%= text_field_tag :email, :required => true %>
   </p>
 
   <p>
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
+    <%= label_tag :password, :required => true %><br>
+    <%= password_field_tag :password, :required => true %>
   </p>
 
   <p>
@@ -20,7 +20,7 @@ $(document).ready(function($) {
 
       var email = false;
       var password = false;
-      
+
       if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
 
       $("input#email").on('keyup', function() {
@@ -29,7 +29,7 @@ $(document).ready(function($) {
         if (emailPattern.test(emailInput)) {email = true;}
         if (email === true && password === true) {$("input[name='commit']").removeAttr("disabled");}
       });
-    
+
       $("input#password").on('keyup', function() {
         var passwordInput = $("input#password").val();
         var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
