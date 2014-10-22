@@ -13,18 +13,18 @@ table.pantry_table {
 	font-size: 1.2em;
 	width: 100%;
 	border-collapse: collapse;
-	border: 1px solid #ABFF7E;
+	border: 1px solid #F0FDA1;
 }
 
 thead.pantry_head th {
-	border-bottom: 1px solid #ABFF7E;
+	border-bottom: 1px solid #F0FDA1;
 	padding: 8px 0px 8px 0px;
 	font-weight: 600;
 }
 
 table.pantry_table td {
 	padding: 8px 0px 8px 0px;
-	border-bottom: 1px solid #ABFF7E;
+	border-bottom: 1px solid #F0FDA1;
 }
 
 div.new-item-create {
@@ -49,9 +49,47 @@ input#search-field {
 	display: none;
 }
 
-.edit_pantry_button {
-
+.new_invite_button {
+	background-image: url('add-user.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0; 
 }
+
+.edit_pantry_button {
+	background-image: url('edit.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0; 
+}
+
+.new_item_button {
+	background-image: url('add_item.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.trash_can {
+ 	width: 32px;
+ 	height: 32px;
+ }
+
 
 /*.pantry_table {
 	margin:0px;padding:0px;
