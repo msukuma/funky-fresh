@@ -28,18 +28,17 @@
  	background-position: top center;
  	background-repeat: no-repeat;
  	background-size: cover;
- 	color: #362819;
-
+ 	background-attachment: fixed;
  }
  
  header {
- 	width: 90%;
- 	margin-left: auto;
- 	margin-right: auto;
- 	background-color: #4CBA19;
+ 	width: 100%;
+ 	top: 0;
+ 	left: 0;
+ 	position: absolute;
+ 	background-color: #78E071;
  	opacity: .85;
  	height: 3.5em;
- 	border-radius: 8px;
  }
 
  header nav {
@@ -68,7 +67,7 @@
  	text-decoration: underline;
  }
 
- #edit_cog {
+ #login, #home, #edit_cog, #kitchen, #logout_button, #sign_up {
  	width: 20px;
  	height: 20px;
  }
@@ -80,10 +79,10 @@
 
  .body_container {
  	width: 70%;
- 	background-color: #4CBA19;
+ 	background-color: #78E071;
  	border-radius: 8px;
  	padding: 40px;
- 	margin: 50px auto;
+ 	margin: 120px auto;
  	text-align: left;
  	opacity: .85;
  }
