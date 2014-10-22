@@ -1,13 +1,13 @@
-<%= form_tag '/login', :class => "login", :id => "login_form" do %>
-  <h1>Login</h1>
+<%= form_tag '/login', :class => "login" do %>
+  
   <p>
-    <%= label_tag :email %>
-    <%= text_field_tag :email, nil, :placeholder => 'Email' %>
+    <%= label_tag :email %><br>
+    <%= text_field_tag :email %>
   </p>
 
   <p>
-    <%= label_tag :password %>
-    <%= password_field_tag :password, nil, :placeholder => 'Password' %>
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %>
   <span class="password-notice"></span>
   </p>
 
@@ -21,11 +21,8 @@
 <script>
 $(document).ready(function($) {
 
-  $("input#password").on("click", function(){$(".password-notice").html("Don't leave me blank!");});
-
- var email = false;
+  var email = false;
   var password = false;
-  if (email === false || password === false) {$("input[name='commit']").attr("disabled", "disabled");}
 
     $("input#email").on('keyup', function() {
       var emailInput = $("form input:text").val();
@@ -35,8 +32,7 @@ $(document).ready(function($) {
         console.log("in the email loop");
       }
     });
-
-
+ 
     $("input#password").on('keyup', function() {
     var passwordInput = $("input#password").val();
     //Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords)
@@ -44,11 +40,13 @@ $(document).ready(function($) {
     console.log("before password");
     if (passwordPattern.test(passwordInput)) {
       password = true;
+      console.log("password:")
       console.log(password);
+      console.log("email:")
       console.log(email);
       console.log("in the password loop");
       if (email === true && password === true) {$("input[name='commit']").removeAttr('disabled');}
-    }
+    }  
   });
 
 });
