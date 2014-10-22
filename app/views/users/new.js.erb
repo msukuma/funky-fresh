@@ -1,4 +1,5 @@
 <%= form_for @user do |f| %>
+  <h1>Register</h1>
   <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> Process failed because:</h2>
@@ -10,28 +11,23 @@
   </div>
   <% end %>
   <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, :placeholder => 'First Name' %>
   </p>
 
   <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, :placeholder => 'Last Name' %>
+  </p>
+
+  <p class="email-input-register">
+    <%= f.text_field :email, :placeholder => 'Email' %> <span class="email-input-notice"> </span>
+  </p>
+
+  <p class="password-input-register">
+    <%= f.password_field :password, :placeholder => 'Password' %> <span class="password-input-notice"> </span>
   </p>
 
   <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-
-   <p>
-    <%= f.label :Confirm_password %><br>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, :placeholder => 'Confirm Password' %>
   </p>
 
   <% if @token != nil %>
@@ -39,16 +35,52 @@
   <% end %>
 
   <p>
-    <%= f.submit %>
+    <%= f.submit "Register" %>
   </p>
 
-  <% if @user.id %>
-    <p>
-      <button><%= link_to 'Cancel', user_path(@user.id) %></button>
-    </p>
-  <% else %>
-    <%= link_to "Home", root_path %>
-  <% end %>
-
 <% end %>
+
+<script>
+$(document).ready(function($) {
+    var email = false;
+    var password = false;
+    var matchingPasswordInput = false;
+    var firstName = true;
+    var lastName = false;
+    
+    $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
+    
+    if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
+
+    $("input#user_email").on('keyup', function() {
+        console.log("eval email:" + email)
+      var emailInput = $("form input#user_email").val();
+      var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+      if (emailPattern.test(emailInput)) {
+        email = true;
+        console.log("in the email loop");
+      }
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
+    });
+  
+    $("input#user_password").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+      if (passwordPattern.test(passwordInput)) {
+        console.log("eval password:" + password)
+        password = true;
+        }
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
+ 
+    });
+
+    $("input#user_password_confirmation").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordConfirmationInput = $("input#user_password_confirmation").val();
+      if (passwordInput === passwordConfirmationInput) {matchingPasswordInput = true;} 
+      console.log("eval conf p:" + matchingPasswordInput )
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
+      });
+  });
+</script>
 

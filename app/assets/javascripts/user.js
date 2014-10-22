@@ -6,6 +6,4 @@ $(document).ready(function($) {
       $(".accordion-content").not($(this).next()).slideUp('fast');
     });
 
-
-
 });
