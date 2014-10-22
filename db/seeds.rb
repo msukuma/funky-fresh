@@ -1,5 +1,5 @@
-User.create!(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "password")
-User.create!(first_name: "Brian", last_name: "Urlacher", email: "burlacher@gmail.com", password: "password")
+User.create!(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "Password")
+User.create!(first_name: "Brian", last_name: "Urlacher", email: "burlacher@gmail.com", password: "Password")
 
 Pantry.create!(name: "Joe's Kitchen", creator_id: 1)
 Pantry.create!(name: "Brian's Kitchen", creator_id: 2)
