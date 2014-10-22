@@ -94,5 +94,6 @@ $(function(){
     $("#new_invite" + index).hide();
     $("#cancel_new_invite_button" + index).hide();
   });
+
 });
 
