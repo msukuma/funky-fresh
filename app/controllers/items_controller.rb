@@ -57,11 +57,12 @@ class ItemsController < ApplicationController
   end
   
   def autocomplete_date
-    @prototype = Prototype.find(params[:term])
+    @prototype = Prototype.find_by_name(params[:term])
     @date = Time.now + @prototype.shelf_life.days
-    
+    @date = @date.strftime("%m/%d/%Y")
+    # binding.pry
     respond_to do |format|
-      format.json {render json: @date}
+      format.json {render json: {date: @date}.to_json}
       # format.js
     end
   end
