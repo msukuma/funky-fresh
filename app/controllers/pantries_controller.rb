@@ -66,15 +66,29 @@ class PantriesController < ApplicationController
 	end
 
 	def update
-		@pantry = Pantry.find(params[:id])
-		@pantry.update(pantry_params)
+		if params[:commit] == 'Submit'
+			@pantry = Pantry.find(params[:id])
+			@pantry.update(pantry_params)
 
-		respond_to do |format|
-			format.html {redirect_to user_path(@user)}
-      format.json {render json: {:pantry => @pantry}}
-      format.js { render "update", :locals => {:pantry => @pantry} }
+			respond_to do |format|
+				format.html {redirect_to user_path(@user)}
+	      format.json {render json: {:pantry => @pantry}}
+	      format.js { render "update", :locals => {:pantry => @pantry} }
+			end
 		end
-
+		if params[:commit] == 'Delete'
+			@user = current_user
+			@pantry = Pantry.find(params[:id])
+			@pantry.destroy
+			respond_to do |format|
+	      format.js do
+	        render nothing: true
+	      end
+	      format.any do
+	        redirect_to user_path(@user)
+	      end
+	    end
+	  end
 		# if @pantry.update(pantry_params)
 		# 	redirect_to user_path(@user)
 		# else
@@ -83,17 +97,18 @@ class PantriesController < ApplicationController
 	end
 
 	def destroy
-		@user = current_user
-		@pantry = Pantry.find(params[:id])
-		@pantry.destroy
-		respond_to do |format|
-      format.js do
-        render nothing: true
-      end
-      format.any do
-        redirect_to user_path(@user)
-      end
-    end
+		#  MOVED UP INTO UPDATE ROUTE, needed for double submit buttons on the same form
+		# @user = current_user
+		# @pantry = Pantry.find(params[:id])
+		# @pantry.destroy
+		# respond_to do |format|
+  #     format.js do
+  #       render nothing: true
+  #     end
+  #     format.any do
+  #       redirect_to user_path(@user)
+  #     end
+  #   end
 	end
 
 	def opt_out
