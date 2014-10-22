@@ -37,7 +37,7 @@ gem 'bcrypt'
 
 gem 'yummly'
 
-gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails'
 
 gem 'nokogiri'
 
