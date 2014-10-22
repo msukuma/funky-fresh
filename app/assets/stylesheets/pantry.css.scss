@@ -13,18 +13,18 @@ table.pantry_table {
 	font-size: 1.2em;
 	width: 100%;
 	border-collapse: collapse;
-	border: 1px solid #ABFF7E;
+	border: 1px solid #F0FDA1;
 }
 
 thead.pantry_head th {
-	border-bottom: 1px solid #ABFF7E;
+	border-bottom: 1px solid #F0FDA1;
 	padding: 8px 0px 8px 0px;
 	font-weight: 600;
 }
 
 table.pantry_table td {
 	padding: 8px 0px 8px 0px;
-	border-bottom: 1px solid #ABFF7E;
+	border-bottom: 1px solid #F0FDA1;
 }
 
 div.new-item-create {
@@ -49,27 +49,65 @@ input#search-field {
 	display: none;
 }
 
-.edit_pantry_button {
-
+.new_invite_button {
+	background-image: url('add-user.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
 }
+
+.edit_pantry_button {
+	background-image: url('edit.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.new_item_button {
+	background-image: url('add_item.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.trash_can {
+ 	width: 32px;
+ 	height: 32px;
+ }
+
 
 /*.pantry_table {
 	margin:0px;padding:0px;
 	width:100%;
 	border:1px solid #afff7e;
-	
+
 	-moz-border-radius-bottomleft:10px;
 	-webkit-border-bottom-left-radius:10px;
 	border-bottom-left-radius:10px;
-	
+
 	-moz-border-radius-bottomright:10px;
 	-webkit-border-bottom-right-radius:10px;
 	border-bottom-right-radius:10px;
-	
+
 	-moz-border-radius-topright:10px;
 	-webkit-border-top-right-radius:10px;
 	border-top-right-radius:10px;
-	
+
 	-moz-border-radius-topleft:10px;
 	-webkit-border-top-left-radius:10px;
 	border-top-left-radius:10px;
@@ -98,13 +136,13 @@ input#search-field {
 	-webkit-border-bottom-left-radius:10px;
 	border-bottom-left-radius:10px;
 }.pantry_table tr:hover td{
-	
+
 }
 .pantry_table tr:nth-child(odd){ background-color:#63db1a; }
 .pantry_table tr:nth-child(even)    { background-color:#afff7e; }.pantry_table td{
 	vertical-align:middle;
-	
-	
+
+
 	border:1px solid #afff7e;
 	border-width:0px 1px 1px 0px;
 	text-align:center;
@@ -147,3 +185,78 @@ input#search-field {
 .pantry_table tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }*/
+
+
+
+/* All the Small Forms */
+
+.cancel_new_pantry_button,
+.new_pantry_button {
+    /* Size and position */
+    width: 15%;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.cancel_new_pantry_button input[type=submit]:hover, .new_pantry_button input[type=submit]:hover {
+  box-shadow:
+  inset 0 1px rgba(255,255,255,0.2),
+  inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow .cancel_new_pantry_button input[type=submit]:hover, .no-boxshadow .new_pantry_button input[type=submit]:hover {
+  background: #594642;
+}
+
+.cancel_edit_pantry_button,
+.cancel_new_invite_button,
+.cancel_new_item_button {
+    /* Size and position */
+    width: 30px;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+
+.cancel_edit_pantry_button input[type=submit]:hover, .cancel_new_invite_button input[type=submit]:hover, .cancel_new_item_button input[type=submit]:hover {
+  box-shadow:
+  inset 0 1px rgba(255,255,255,0.2),
+  inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+.no-boxshadow .cancel_edit_pantry_button input[type=submit]:hover, .no-boxshadow .cancel_new_invite_button input[type=submit]:hover, .no-boxshadow .cancel_new_item_button input[type=submit]:hover {
+  background: #594642;
+}

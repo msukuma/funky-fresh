@@ -10,32 +10,27 @@
   </div>
   <% end %>
   <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, :placeholder => 'First Name' %>
   </p>
 
   <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, :placeholder => 'Last Name' %>
   </p>
 
   <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :placeholder => 'Email' %>
   </p>
 
   <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :placeholder => 'Password' %>
   </p>
 
    <p>
-    <%= f.label :Confirm_password %><br>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, :placeholder => 'Confirm Password' %>
   </p>
 
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update" %><br><br>
     <%= f.submit "Delete" %>
   </p>
 
