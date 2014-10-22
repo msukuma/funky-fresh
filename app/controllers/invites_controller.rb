@@ -1,21 +1,31 @@
 class InvitesController < ApplicationController
   def new
+    puts "what is up this the new method"
     @invite = Invite.new
   end
 
   def create
-    @invite = Invite.new(invite_params)
+    puts "CREATING TOKEN DUDE"
+    @invite = Invite.create!(invite_params)
+    set_sender_id(@invite)
+
+    puts @invite 
+    puts @invite.email
+    puts @invite.sender_id
+    puts "I am the token: #{@invite.token}" 
+
     @user = User.find_by_id(session[:user_id])
-    @invite.sender_id = @user.id
     @recipient = User.find_by_email(invite_params[:email])
 
     if is_a_user?(@invite) && @recipient.has_pantry?(@pantry)
       flash[:notice] = "#{@invite.email} is already a part of your pantry."
     elsif is_a_user?(@invite) && !@recipient.has_pantry?(@pantry)
+      puts "found an existing user"
       InviteMailer.existing_user_invite(@invite).deliver
       @invite.recipient.pantries.push(@invite.pantry)
     else
-      InviteMailer.new_user_invite(@invite, 'http://localhost:3000'+root_path(:invite_token => @invite.token)).deliver
+      puts "found a new user"
+      InviteMailer.new_user_invite(@invite, 'http://localhost:3000' + new_user_path(:invite_token => @invite.token)).deliver
     end
 
     respond_to do |format|
@@ -28,18 +38,17 @@ class InvitesController < ApplicationController
   private
 
   def invite_params
-    params.require(:invite).permit(:email, :pantry_id, :sender_id, :recipient_id, :token)
+    params.require(:invite).permit(:email, :pantry_id)
   end
 
   def set_sender_id(invite)
-    user = User.find_by_id(session[:user_id])
+    user = current_user
     invite.sender_id = user.id
     invite.save
   end
 
   def is_a_user?(invite)
-    recipient = User.find_by_email(invite.email)
-    return true if recipient
+    !!User.find_by_email(invite.email)
   end
 end
 

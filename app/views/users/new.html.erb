@@ -35,5 +35,16 @@
     <%= f.submit %>
   </p>
 
+<<<<<<< HEAD
+=======
+  <% if @user.id %>
+    <p>
+      <button><%= link_to 'Cancel', user_path(@user.id) %></button>
+    </p>
+  <% else %>
+    <%= link_to "Home", root_path %>
+  <% end %>
+
+>>>>>>> ff64255fa645c3839fee9ce68d1a903c71c92b2e
 <% end %>
 
