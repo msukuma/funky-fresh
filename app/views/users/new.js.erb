@@ -46,40 +46,47 @@
 
 <script>
 $(document).ready(function($) {
+    var email = false;
+    var password = false;
+    var matchingPasswordInput = false;
+    var firstName = true;
+    var lastName = false;
+    
+    $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
+    
+    if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
 
-  // $(".email-input-register").on("click", function(){$(".email-input-notice").html("Don't leave me blank. Thanks!");});
-  // $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
+    $("input#user_email").on('keyup', function() {
+        console.log("eval email:" + email)
+      var emailInput = $("form input#user_email").val();
+      var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+      if (emailPattern.test(emailInput)) {
+        email = true;
+        console.log("in the email loop");
+      }
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
 
-  // var email = false;
-  // var password = true;
-  // if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
-
-  //   $("input#user_email").on('keyup', function() {
-  //     var emailInput = $("form input#user_email").val();
-  //     console.log(emailInput);
-  //     var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
-  //     if (emailPattern.test(emailInput)) {
-  //       email = true;
-  //       console.log("in the email loop");
-  //     }
-  //     if (email === true) {$("input[name='commit']").removeAttr('disabled');}
-
+    });
+  
+    $("input#user_password").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+      if (passwordPattern.test(passwordInput)) {
+        console.log("eval password:" + password)
+        password = true;
+        }
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
  
+    });
 
-  //   $(".password-input").on('keyup', function() {
-  //   var passwordInput = $("input#password").val();
-  //   //Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords)
-  //   var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
-  //   console.log("before password");
-  //   if (passwordPattern.test(passwordInput)) {
-  //     password = true;
-  //     console.log(password);
-  //     console.log(email);
-  //     console.log("in the password loop");
-      // if (email === true && password === true) {$("input[name='commit']").removeAttr('disabled');}
-  //   }  
-  // });
 
-});
+    $("input#user_password_confirmation").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordConfirmationInput = $("input#user_password_confirmation").val();
+      if (passwordInput === passwordConfirmationInput) {matchingPasswordInput = true;} 
+      console.log("eval conf p:" + matchingPasswordInput )
+      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
+      });
+  });
 </script>
 
