@@ -85,6 +85,18 @@ input#search-field {
  	outline: 0;
 }
 
+.opt-out {
+ 	background-image: url('opt-out.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
 .trash_can {
  	width: 32px;
  	height: 32px;
