@@ -57,7 +57,6 @@ class ItemsController < ApplicationController
   end
   
   def autocomplete_date
-    raise params.inspect
     @prototype = Prototype.find(params[:term])
     @date = Time.now + @prototype.shelf_life.days
     

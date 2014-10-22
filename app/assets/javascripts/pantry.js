@@ -95,23 +95,5 @@ $(function(){
     $("#cancel_new_invite_button" + index).hide();
   });
 
-  $(function() { 
-    $("#item_expiration_date").autocomplete({
-      source: function(request, response) {
-        debugger
-        $.ajax({
-          url: '/autocomplte_date/:prototype_name',
-          dataType: "json",
-          data: {
-              d: $("#item_prototype_name").val()
-          },
-          success: function(data) {
-            console.log(data)
-              response(data);
-          }
-        });
-      },
-    });
-  });
 });
 
