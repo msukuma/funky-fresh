@@ -2,39 +2,64 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-  .accordion-toggle {cursor: pointer;}
-  .accordion-content {display: none;}
-  .accordion-content.default {display: block;}
+.accordion-toggle {cursor: pointer;}
+.accordion-content {display: none;}
+.accordion-content.default {display: block;}
 
-  .edit_pantry {
-    display: none;
-  }
+.edit_pantry {
+  display: none;
+}
 
-  #new_pantry {
-    display: none;
-  }
+#new_pantry {
+  display: none;
+}
 
-  .new_invite {
-    display: none;
-  }
+.new_invite {
+  display: none;
+}
 
-  .new_item {
-    display: none;
-  }
+.new_item {
+  display: none;
+}
 
-  .cancel_new_item_button {
-    display: none;
-  }
+.cancel_new_item_button {
+  display: none;
+}
 
-  .cancel_edit_pantry_button {
-    display: none;
-  }
+.cancel_edit_pantry_button {
+  display: none;
+}
 
-  .cancel_new_pantry_button {
-    display: none;
-  }
+.cancel_new_pantry_button {
+  display: none;
+}
 
-  .cancel_new_invite_button {
-    display: none;
-  }
+.cancel_new_invite_button {
+  display: none;
+}
+
+.accordion-toggle {
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  font-size: 1.4em;
+  /*width: 100%;*/
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  border: 1px solid #ABFF7E;
+  padding: 15px 0px 15px 0px;
+}
+
+#new_pantry_button {
+  padding: 15px 30px 15px 30px;
+  font-size: 1.05em;
+  border-radius: 8px;
+  background-color: #AFFF7E;
+}
+
+
+
+
+
+
 

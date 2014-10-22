@@ -16,63 +16,105 @@
  # Or if using bootstrap v3:
  *= require bootstrap-datepicker3
  */
+
+ @import url('http://fonts.googleapis.com/css?family=Oxygen:200,300,400,500,600,700,800,900,400italic,700italic');
+
+ * {
+ 	font-family: 'Oxygen';
+ }
+
+ body {
+ 	background-color: #AFFF7E;
+ 	color: #362819;
+ }
  
-header {
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: lightblue;
-	height: 3.5em;
-	border-radius: 20px;
-}
+ header {
+ 	width: 90%;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	background-color: #23DB3E;
+ 	height: 3.5em;
+ 	border-radius: 8px;
+ }
 
-header nav {
-	float: right;
-}
+ header nav {
+ 	float: right;
+ }
 
-nav ul li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 35px;
-	font-size: 1.3em;
-}
+ nav ul li {
+ 	display: inline;
+ 	list-style-type: none;
+ 	padding-right: 35px;
+ 	font-size: 1.3em;
+ }
 
-nav ul li a:link {
-	text-decoration: none;
-	font-weight: 700;
-	color: #0F3F95;
-}
+ nav ul li a:link {
+ 	text-decoration: none;
+ 	font-weight: 700;
+ 	color: #0F3F95;
+ }
 
-nav ul li a:visited {
-	color: #0F3F95;
-}
+ nav ul li a:visited {
+ 	color: #0F3F95;
+ }
 
-nav ul li a:hover {
-	color: #DB3C29;
-	text-decoration: underline;
-}
+ nav ul li a:hover {
+ 	color: #B035B2;
+ 	text-decoration: underline;
+ }
 
-.body_container {
-	width: 70%;
-	background-color: lightblue;
-	border-radius: 30px;
-	padding: 40px;
-	margin: 50px auto;
-	text-align: left;
-}
+ #edit_cog {
+ 	width: 20px;
+ 	height: 20px;
+ }
 
-.body_container a:link {
-	text-decoration: none;
-	font-weight: 700;
-	color: #0F3F95;
-}
+ .cookbook {
+ 	width: 40px;
+ 	height: 40px; 
+ }
 
-.body_container a:visited {
-	color: #0F3F95;
-}
+/* .edit_pantry {
+ 	width: 40px;
+	height: 40px;
+ }
+*/
+ .body_container {
+ 	width: 70%;
+ 	background-color: #23DB3E;
+ 	border-radius: 8px;
+ 	padding: 40px;
+ 	margin: 50px auto;
+ 	text-align: left;
+ }
 
-.body_container a:hover {
-	color: #DB3C29;
-	text-decoration: underline;
-}
+ .body_container a:link {
+ 	text-decoration: none;
+ 	font-weight: 700;
+ 	color: #0F3F95;
+ }
+
+ .body_container a:visited {
+ 	color: #0F3F95;
+ }
+
+ .body_container a:hover {
+ 	color: #B035B2;
+ 	text-decoration: underline;
+ }
+
+ button {
+ 	padding: 4px 12px 4px 12px;
+ }
+
+ .trash_can {
+ 	width: 32px;
+ 	height: 32px;
+ }
+
+/*.button {
+padding: 4px 12px 4px 12px;
+
+}*/
+
+
 
