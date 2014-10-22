@@ -1,3 +1,5 @@
+<div class="edit_pantry_div">
+  
 <%= form_for [@user, @pantry], remote: true, :class => "edit_pantry", :html => { :id => "edit_pantry#{@pantry.id}" } do |f| %>
   <% if @pantry.errors.any? %>
   <div id="error_explanation">
@@ -20,6 +22,8 @@
   </p>
 
   <p>
-    <%= f.submit "Edit Pantry" %>
+    <%= f.submit "Submit" %>
+    <%= f.submit "Delete" %>
   </p>
 <% end %>
+</div>

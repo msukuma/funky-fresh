@@ -40,6 +40,8 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'nokogiri'
 
+gem 'figaro'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'capybara', '~> 2.2.1'
@@ -55,7 +57,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 group :production do
     gem 'rails_12factor'    

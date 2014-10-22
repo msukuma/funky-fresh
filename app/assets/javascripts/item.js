@@ -25,14 +25,13 @@ $(function(){
     row.remove();
   });
 
-  $(document).on("ajax:complete", "div.new-item-create form", function(event, data){
-    var semiTarget = $(this).parent().prev()[0].children[1];
-    $(this).parent().find("input:text").val("");
-    $(semiTarget).html(data.responseText);
-    console.log(this);
+  $(document).on("ajax:complete", "[id^='new_item']", function(event, data, status, xhr){
+    console.log(data.responseText);
     var index = this.id.replace("new_item", "");
+    $("#item-block" + index).html(data.responseText);
     $(this).hide();
     $("#new_item_button" + index).show();
     $("#cancel_new_item_button" + index).hide();
   });
+
 });
