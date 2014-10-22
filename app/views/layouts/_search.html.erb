@@ -1,5 +1,6 @@
-<%= form_tag search_path(@pantry), method: "get", remote: true, :class => "search" do %>
+<%= form_tag search_path(@pantry), :html => {:autocomplete => "off"}, method: "get", remote: true, :class => "search" do %>
   <%= label_tag(:query, "Search for:") %>
   <%= text_field_tag 'query', params[:query], id: 'search-field' %>
+  <%= autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true, autofocus: true %>
   <%= submit_tag 'Search', :class => 'search-button'%>
 <% end %>
