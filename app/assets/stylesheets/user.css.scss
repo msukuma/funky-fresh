@@ -1,4 +1,4 @@
-// Place all the styles related to the user controller here.
+ // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
@@ -46,20 +46,157 @@
   /*width: 100%;*/
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  border: 1px solid #ABFF7E;
+  border: 1px solid #F0FDA1;
   padding: 15px 0px 15px 0px;
 }
 
-#new_pantry_button {
+#new_pantry_button, #login_form, .edit_user {
   padding: 15px 30px 15px 30px;
   font-size: 1.05em;
   border-radius: 8px;
-  background-color: #AFFF7E;
 }
 
+#new_user, #login_form, .edit_user {
+    /* Size and position */
+    width: 200px;
+    margin: 40px auto 15px;
+    padding: 10px;
+    position: relative;
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
 
+#new_user, #login_form, .edit_user {
+    font-size: 0.8em;
+    padding-bottom: 15px;
+}
 
+#new_user input[type=text], #new_user input[type=password], #login_form input[type=text], #login_form input[type=password], .search input[type=text], .edit_user input[type=text], .edit_user input[type=password] {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
 
+    /* Styles */
+    border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
 
+#new_user input::-webkit-input-placeholder, #login_form input::-webkit-input-placeholder, .search input::-webkit-input-placeholder, .edit_user input::-webkit-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_user input:-moz-placeholder, #login_form input:-moz-placeholder, .search input:-moz-placeholder, .edit_user input:-moz-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_user input:-ms-input-placeholder, #login_form input:-ms-input-placeholder, .search input:-ms-input-placeholder, .edit_user input:-ms-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_user input[type=text]:hover,
+#new_user input[type=password]:hover,
+#login_form input[type=text]:hover,
+#login_form input[type=password]:hover,
+.search input[type=text]:hover,
+.edit_user input[type=text]:hover,
+.edit_user input[type=password]:hover {
+    border-color: #333;
+}
+
+#new_user input[type=text]:focus,
+#new_user input[type=password]:focus,
+#new_user input[type=submit]:focus,
+#login_form[type=text]:focus,
+#login_form[type=password]:focus,
+#login_form[type=submit]:focus,
+.search input[type=text]:focus,
+.edit_user input[type=text]:focus,
+.edit_user input[type=password]:focus,
+.edit_user input[type=submit]:focus {
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+/* Fallback */
+.no-boxshadow #new_user input[type=text]:focus,
+.no-boxshadow #new_user input[type=password]:focus,
+.no-boxshadow #login_form input[type=text]:focus,
+.no-boxshadow #login_form input[type=password]:focus,
+.no-boxshadow .search input[type=text]:focus,
+.no-boxshadow .edit_user input[type=text]:focus,
+.no-boxshadow .edit_user input[type=password]:focus {
+    outline: 1px solid white;
+}
+
+#new_user input[type=submit], #login_form input[type=submit], .search input[type=submit], .edit_user input[type=submit] {
+    /* Size and position */
+    width: 107%;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+#new_user input[type=submit]:hover, #login_form input[type=submit]:hover, .search input[type=submit]:hover, .edit_user input[type=submit]:hover {
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow #new_user input[type=submit]:hover, .no-boxshadow #login_form input[type=submit]:hover, .no-boxshadow .search input[type=submit]:hover, .no-boxshadow .edit_user input[type=submit]:hover {
+    background: #594642;
+}
+
+#new_user label, #login_form label, .edit_user label {
+    display: none;
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+#new_user label:hover ~ input, #login_form label:hover ~ input, .edit_user label:hover ~ input {
+    border-color: #333;
+}
+
+.no-placeholder #new_user label, .no-placeholder #login_form label, .no-placeholder .edit_user label {
+    display: block;
+}
 
