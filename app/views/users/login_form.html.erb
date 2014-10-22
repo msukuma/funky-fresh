@@ -13,3 +13,25 @@
     <%= submit_tag "Login" %>
   </p>
 <% end %>
+
+<script>
+$(document).ready(function($) {
+
+  var email = false;
+  if (email === false) {$("input[name='commit']").attr("disabled", "disabled")};
+
+  $("input#email").on('keyup', function() {
+    var email = $("form input:text").val();
+    var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+    if (emailPattern.test(email)) {
+      email = true;
+      console.log("in the email loop")
+      if (email === true) {$("input[name='commit']").removeAttr('disabled')};
+      $(document).css('background-color', 'green');
+    } 
+    console.log(email);
+  });
+});
+
+
+</script>
