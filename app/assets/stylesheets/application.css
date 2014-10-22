@@ -67,22 +67,7 @@
  	text-decoration: underline;
  }
 
- #edit_cog {
- 	width: 20px;
- 	height: 20px;
- }
-
- #home {
- 	width: 20px;
- 	height: 20px;
- }
-
- #kitchen {
- 	width: 20px;
- 	height: 20px;
- }
-
- #logout_button {
+ #login, #home, #edit_cog, #kitchen, #logout_button, #sign_up {
  	width: 20px;
  	height: 20px;
  }
