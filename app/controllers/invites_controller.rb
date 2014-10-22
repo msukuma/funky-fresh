@@ -50,5 +50,6 @@ class InvitesController < ApplicationController
   def is_a_user?(invite)
     !!User.find_by_email(invite.email)
   end
+
 end
 

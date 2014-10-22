@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
     else
       @item = @pantry.items.create(prototype_name: item_params['prototype_name'], expiration_date: Date.strptime(item_params['expiration_date'], '%m/%d/%Y').to_s )
     end
-    # UserMailer.expiration_alert_email(@user).deliver
     # if @item
     respond_to do |format|
       format.html {redirect_to user_pantry_path(@user, @pantry)}
