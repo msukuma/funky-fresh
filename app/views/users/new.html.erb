@@ -1,7 +1,6 @@
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> Process failed because:</h2>
     <ul>
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -19,14 +18,14 @@
     <%= f.text_field :last_name %>
   </p>
 
-  <p>
+  <p class="email-input-register">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email %> <span class="email-input-notice"> </span>
   </p>
 
-  <p>
+  <p class="password-input-register">
     <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password %> <span class="password-input-notice"> </span>
   </p>
 
    <p>
@@ -44,3 +43,70 @@
 
 <% end %>
 
+<script>
+$(document).ready(function($) {
+    var email = false;
+    var password = false;
+    var matchingPasswordInput = false;
+    var firstName = false;
+    var lastName = false;
+    
+    $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
+    
+    if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
+
+    $("input#user_first_name").on('keyup', function() {
+      console.log("eval firstName:" + firstName);
+      var firstNameInput = $("form input#user_first_name").val();
+      var firstNamePattern = /\S+/;
+      if (firstNamePattern.test(firstNameInput)) {
+        firstName = true;
+        console.log("in the first_name loop");
+      }
+      if (email === true && password === true && matchingPasswordInput === true && firstName === true && lastName === false) {$("input[name='commit']").removeAttr("disabled");}
+    });
+
+    $("input#user_last_name").on('keyup', function() {
+      console.log("eval lastName:" + lastName);
+      var lastNameInput = $("form input#user_last_name").val();
+      var lastNamePattern = /\S+/;
+      if (lastNamePattern.test(lastNameInput)) {
+        lastName = true;
+        console.log("in the last_name loop");
+      }
+      if (email === true && password === true && matchingPasswordInput === true && firstName === true && lastName === true) {$("input[name='commit']").removeAttr("disabled");}
+    });
+
+    // checks that email input matches regex
+    $("input#user_email").on('keyup', function() {
+        console.log("eval email:" + email)
+      var emailInput = $("form input#user_email").val();
+      var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+      if (emailPattern.test(emailInput)) {
+        email = true;
+        console.log("in the email loop");
+      }
+      if (email === true && password === true && matchingPasswordInput === true && firstName === true && lastName === true) {$("input[name='commit']").removeAttr("disabled");}
+    });
+  
+    $("input#user_password").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+      if (passwordPattern.test(passwordInput)) {
+        console.log("eval password:" + password)
+        password = true;
+        }
+      if (email === true && password === true && matchingPasswordInput === true && firstName === true && lastName === true) {$("input[name='commit']").removeAttr("disabled");}
+ 
+    });
+
+
+    $("input#user_password_confirmation").on('keyup', function() {
+      var passwordInput = $("input#user_password").val();
+      var passwordConfirmationInput = $("input#user_password_confirmation").val();
+      if (passwordInput === passwordConfirmationInput) {matchingPasswordInput = true;} 
+      console.log("eval conf p:" + matchingPasswordInput )
+      if (email === true && password === true && matchingPasswordInput === true && firstName === true && lastName === true) {$("input[name='commit']").removeAttr("disabled");}
+      });
+  });
+</script>
