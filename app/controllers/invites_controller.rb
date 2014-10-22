@@ -48,8 +48,7 @@ class InvitesController < ApplicationController
   end
 
   def is_a_user?(invite)
-    recipient = User.find_by_email(invite.email)
-    return true if recipient
+    !!User.find_by_email(invite.email)
   end
 end
 

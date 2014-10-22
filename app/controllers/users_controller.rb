@@ -79,7 +79,8 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     else
-      redirect_to root_path
+      flash[:notice]
+      redirect_to new_user_path
     end
 	end
 
