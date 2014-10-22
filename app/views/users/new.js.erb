@@ -19,19 +19,19 @@
     <%= f.text_field :last_name %>
   </p>
 
-  <p>
+  <p class="email-input-register">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email %> <span class="email-input-notice"> </span>
   </p>
 
-  <p>
+  <p class="password-input-register">
     <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password %> <span class="password-input-notice"> </span>
   </p>
 
    <p>
     <%= f.label :Confirm_password %><br>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %> 
   </p>
 
   <% if @token != nil %>
@@ -42,13 +42,44 @@
     <%= f.submit %>
   </p>
 
-  <% if @user.id %>
-    <p>
-      <button><%= link_to 'Cancel', user_path(@user.id) %></button>
-    </p>
-  <% else %>
-    <%= link_to "Home", root_path %>
-  <% end %>
-
 <% end %>
+
+<script>
+$(document).ready(function($) {
+
+  // $(".email-input-register").on("click", function(){$(".email-input-notice").html("Don't leave me blank. Thanks!");});
+  // $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
+
+  // var email = false;
+  // var password = true;
+  // if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
+
+  //   $("input#user_email").on('keyup', function() {
+  //     var emailInput = $("form input#user_email").val();
+  //     console.log(emailInput);
+  //     var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+  //     if (emailPattern.test(emailInput)) {
+  //       email = true;
+  //       console.log("in the email loop");
+  //     }
+  //     if (email === true) {$("input[name='commit']").removeAttr('disabled');}
+
+ 
+
+  //   $(".password-input").on('keyup', function() {
+  //   var passwordInput = $("input#password").val();
+  //   //Match 8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords)
+  //   var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+  //   console.log("before password");
+  //   if (passwordPattern.test(passwordInput)) {
+  //     password = true;
+  //     console.log(password);
+  //     console.log(email);
+  //     console.log("in the password loop");
+      // if (email === true && password === true) {$("input[name='commit']").removeAttr('disabled');}
+  //   }  
+  // });
+
+});
+</script>
 

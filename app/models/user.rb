@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   has_many :send_invitations, :class_name => "Invite", :foreign_key => "sender_id"
 
   validates :first_name, :last_name, :email, :password_digest, presence: true
-  validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/ }
+  validates :email, uniqueness: {:message => "This email has already been taken"}
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/ }
   validates :password, :length => {:minimum => 6}
 
   has_secure_password
