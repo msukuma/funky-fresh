@@ -8,7 +8,6 @@ class Invite < ActiveRecord::Base
   before_save :generate_token, :check_user_existence
 
 def generate_token
-  puts "generating token !~~~~~~~~~~~~~~~~"
    self.token = Digest::SHA1.hexdigest([self.pantry_id, Time.now, rand].join)
 end
 
