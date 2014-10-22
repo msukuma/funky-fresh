@@ -13,7 +13,7 @@ class Pantry < ActiveRecord::Base
 
 
   def item_names_and_plural
-    array = items.order(:expiration_date).limit(3).map{ |item| [item.prototype.name, item.prototype.plural] }.flatten.uniq!.join(', ')
+    array = items.order(:expiration_date).limit(3).map{ |item| [item.prototype.name, item.prototype.plural] }.flatten.uniq.join(', ')
   end
 
   def comparators
