@@ -1,7 +1,7 @@
 module RecipeHelper
 
 	def search_yummly_for(ingredients) 
-		Yummly.search(ingredients)
+		Yummly.search(ingredients, 'maxResult' => 5)
 	end
 
 	def best_matches(search_results, pantry)

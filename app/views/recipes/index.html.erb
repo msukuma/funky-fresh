@@ -7,11 +7,11 @@
     	<a href="<%= match['recipe'].attribution.url %>"><img src="<%= match['recipe'].thumbnail %>"></a>
 		<% end %><br>
 
-		<strong>ingredients</strong>: <%= match['ingredients'] %> <br>
+		<strong>Ingredients</strong>: <%= match['ingredients'] %> <br>
 
-		<strong>Exact Pantry Matches</strong>: <%= match['pantry_has'] %> <br> 
-		<strong>Do you have? </strong>: <%= match['pantry_might_have'] %> <br>
-		<!-- <strong>Might be missing</strong>: <%= match[1] %> <br> -->
+		<strong>Exact pantry matches</strong>: <%= match['pantry_has'] %> <br> 
+		<strong>Pantry might be missing </strong>: <%= match['pantry_might_have'] %> <br>
+		<strong>Missing</strong>: <%= %> <br>
 		<strong>Rating</strong>: <%= match['recipe'].rating %><br>
 		<strong>Source</strong>: <%= match['sourceDisplayName']%>  
 	<% end  %>
