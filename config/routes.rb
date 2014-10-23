@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get "/autocomplte_date/:prototype_name",to: "items#autocomplete_date",          as: 'autocomplte_date'
   get "/search/:pantry_id",               to: "pantries#index",                   as: "search"
-  delete "/users/:user_id/pantries/:id",  to: "pantries#opt_out",                 as: "opt_out"
+  post "/users/:user_id/pantries/:id",  to: "pantries#opt_out",                 as: "opt_out"
 
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do
