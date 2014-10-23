@@ -11,23 +11,23 @@
   </div>
   <% end %>
   <p>
-    <%= f.text_field :first_name, :placeholder => 'First Name' %>
+    <%= f.text_field :first_name, :required => true, :placeholder => 'First Name' %>
   </p>
 
   <p>
-    <%= f.text_field :last_name, :placeholder => 'Last Name' %>
+    <%= f.text_field :last_name, :required => true, :placeholder => 'Last Name' %>
   </p>
 
   <p class="email-input-register">
-    <%= f.text_field :email, :placeholder => 'Email' %> <span class="email-input-notice"> </span>
+    <%= f.text_field :email, :required => true, :pattern => '[\w.]+@\w+(\.\w{2,})+', :placeholder => 'Email' %> <span class="email-input-notice"> </span>
   </p>
 
   <p class="password-input-register">
-    <%= f.password_field :password, :placeholder => 'Password' %> <span class="password-input-notice"> </span>
+    <%= f.password_field :password, :required => true, :pattern => '((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})', :placeholder => 'Password' %> <span class="password-input-notice"> </span>
   </p>
 
   <p>
-    <%= f.password_field :password_confirmation, :placeholder => 'Confirm Password' %>
+    <%= f.password_field :password_confirmation, :required => true, :placeholder => 'Confirm Password' %>
   </p>
 
   <% if @token != nil %>
@@ -42,45 +42,33 @@
 
 <script>
 $(document).ready(function($) {
-    var email = false;
-    var password = false;
-    var matchingPasswordInput = false;
-    var firstName = true;
-    var lastName = false;
-    
-    $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
-    
-    if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
-
-    $("input#user_email").on('keyup', function() {
-        console.log("eval email:" + email)
-      var emailInput = $("form input#user_email").val();
-      var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
-      if (emailPattern.test(emailInput)) {
-        email = true;
-        console.log("in the email loop");
-      }
-      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
-    });
-  
-    $("input#user_password").on('keyup', function() {
-      var passwordInput = $("input#user_password").val();
-      var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
-      if (passwordPattern.test(passwordInput)) {
-        console.log("eval password:" + password)
-        password = true;
-        }
-      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
- 
-    });
-
-    $("input#user_password_confirmation").on('keyup', function() {
-      var passwordInput = $("input#user_password").val();
-      var passwordConfirmationInput = $("input#user_password_confirmation").val();
-      if (passwordInput === passwordConfirmationInput) {matchingPasswordInput = true;} 
-      console.log("eval conf p:" + matchingPasswordInput )
-      if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
-      });
+    $("input#user_password").tipsy({gravity: 'w', fade: true, trigger: 'focus', fallback: "Use at least 6 characters. Include both an upper and a lower case letter."})
   });
+//     $("input#user_email").on('keyup', function() {
+//         console.log("eval email:" + email)
+//       var emailInput = $("form input#user_email").val();
+//       var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+//       if (emailPattern.test(emailInput)) {
+//         email = true;
+//         console.log("in the email loop");
+//       }
+//       if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
+//     });
+
+    // $("input#user_password").on('keyup', function() {
+    //   var passwordInput = $("input#user_password").val();
+    //   var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+    //   if (passwordPattern.test(passwordInput)) {
+    //     }
+    // });
+
+    // $("input#user_password_confirmation").on('keyup', function() {
+    //   var passwordInput = $("input#user_password").val();
+    //   var passwordConfirmationInput = $("input#user_password_confirmation").val();
+    //   if (passwordInput === passwordConfirmationInput) {
+    //     console.log("I am in the confirmation loop");
+    //     $("input#user_password_confirmation").tipsy({gravity: 'w', trigger: 'focus', fade: true, fallback: "Password fields do not match."})
+    //   }
+    // });
 </script>
 

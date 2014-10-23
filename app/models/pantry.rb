@@ -31,13 +31,13 @@ class Pantry < ActiveRecord::Base
   def pantry_might_have(ingredients)
     pantry_items = comparators
     item_names = pantry_items.keys
-    migth_have = []
-    ingredients.each do |ingredient| 
-      item_names.each do |item|
-        migth_have << ingredient if (ingredient.inlcude?(item) || item.include?(ingredient))
+    might_have = []
+    item_names.each do |item| 
+      ingredients.each do |ingredient|
+        might_have << ingredient if ingredient.include?(item) #unless might_have.include?(ingredient)
       end
     end
-    might_have
+    might_have.uniq - pantry_has(ingredients)
   end
 
   def pantry_missing(ingredients)

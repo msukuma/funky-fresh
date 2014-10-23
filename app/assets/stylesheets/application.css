@@ -106,7 +106,33 @@
  	padding: 4px 12px 4px 12px;
  }
 
+ div.notice {
+ 	text-align: center;
+ 	font-size: 1.1em;
+ 	font-weight: 600;
+ 	letter-spacing: .08em;
+ 	margin-bottom: 12px;
 
+ 	animation:search-notice 0.5s 1;
+    -webkit-animation:search-notice 0.5s 1;
+    animation-fill-mode: forwards;
+    
+    animation-delay:5s;
+    -webkit-animation-delay:5s; /* Safari and Chrome */
+    -webkit-animation-fill-mode: forwards;
+    
+} 
+
+@keyframes search-notice{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+
+@-webkit-keyframes search-notice{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+ }
 
 
 

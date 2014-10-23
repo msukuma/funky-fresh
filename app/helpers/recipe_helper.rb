@@ -5,10 +5,9 @@ module RecipeHelper
 	end
 
 	def best_matches(search_results, pantry)
-		matches_array = search_results.matches.map{|r| {'id' => r['id'], 'ingredients' => r['ingredients'], 'pantry_has' => pantry.pantry_has(r['ingredients']) , 'pantry_might_have' => pantry.pantry_might_have(r['ingredients']),'sourceDisplayName' => r['sourceDisplayName']}}
-		raise 
-		sorted_matches_array = matches_array.sort{|a, b| b[2].length <=> a[2].length}
-		final_matches_array = sorted_matches_array.each { |match| match << Yummly.find(match.first) } 
+		matches = search_results.matches.map{|match| {'id' => match['id'], 'ingredients' => match['ingredients'].join(', '), 'pantry_has' => pantry.pantry_has(match['ingredients']).join(', ') , 'pantry_might_have' => pantry.pantry_might_have(match['ingredients']).join(', '),'sourceDisplayName' => match['sourceDisplayName']}}
+		sorted_matches = matches.sort{|a, b| b['pantry_has'].length <=> a['pantry_has'].length}
+		final_matches = sorted_matches.each { |match, values| match['recipe'] = Yummly.find(match['id']) } 
 	end
 
 
