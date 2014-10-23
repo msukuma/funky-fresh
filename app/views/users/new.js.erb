@@ -23,7 +23,7 @@
   </p>
 
   <p class="password-input-register">
-    <%= f.password_field :password, :required => true, :pattern => '((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})', :placeholder => 'Password' %> <span class="password-input-notice"> </span>
+    <%= f.password_field :password, :required => true, :pattern => '^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$', :placeholder => 'Password' %> <span class="password-input-notice"> </span>
   </p>
 
   <p>
