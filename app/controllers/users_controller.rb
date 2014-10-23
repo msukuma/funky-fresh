@@ -80,7 +80,17 @@ def login
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        redirect_to root_path
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts "I am a user w/ bad password"
+        # redirect_to root_path
+
+        respond_to do |format|
+          # format.json {render json: {error: "Incorrect password - please try again."}}
+          # flash[:error] = "Incorrect password - please try again."
+          # format.html {render nothing: true}
+          format.json {render json: "Wrong login or password", status: :unprocessable_entity}
+          format.js {render 'login_form'}
+        end
       end
     else
       flash[:notice]

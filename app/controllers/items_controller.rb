@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   def search
     @grants = Grant.search params[:search]
   end
-  
+
   def autocomplete_date
     @prototype = Prototype.find_by_name(params[:term])
     @date = Time.now + @prototype.shelf_life.days
