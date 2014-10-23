@@ -41,11 +41,11 @@ class Pantry < ActiveRecord::Base
   end
 
   def pantry_missing(ingredients)
-    ingredients - (pantry_might_have(ingredients) - pantry_has(ingredients))
+    ingredients - (pantry_might_have(ingredients) + pantry_has(ingredients))
   end
 
-  
-  
+
+
   def search(query)
     item_names = self.items.map{ |item| item.prototype.name }
     item_names.include?(query)
