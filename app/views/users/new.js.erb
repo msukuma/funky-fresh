@@ -23,7 +23,7 @@
   </p>
 
   <p class="password-input-register">
-    <%= f.password_field :password, :required => true, :pattern => '^(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){6}$', :placeholder => 'Password' %> <span class="password-input-notice"> </span>
+    <%= f.password_field :password, :required => true, :pattern => '((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})', :placeholder => 'Password' %> <span class="password-input-notice"> </span>
   </p>
 
   <p>
@@ -42,19 +42,8 @@
 
 <script>
 $(document).ready(function($) {
-//     var email = false;
-//     var password = false;
-//     var matchingPasswordInput = false;
-//     var firstName = true;
-//     var lastName = false;
-
-    $(".password-input-register").on("click", function(){$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");});
-
-    $(".password-input-register").on('keyup', function(e) {
-        if (e.keyCode === 9) {$(".password-input-notice").html("Use at least 6 characters. Include both an upper and a lower case letter.");}
-      });
-//     if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
-
+    $("input#user_password").tipsy({gravity: 'w', fade: true, trigger: 'focus', fallback: "Use at least 6 characters. Include both an upper and a lower case letter."})
+  });
 //     $("input#user_email").on('keyup', function() {
 //         console.log("eval email:" + email)
 //       var emailInput = $("form input#user_email").val();
@@ -66,18 +55,20 @@ $(document).ready(function($) {
 //       if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
 //     });
 
-    $("input#user_password").on('keyup', function() {
-      var passwordInput = $("input#user_password").val();
-      var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
-      if (passwordPattern.test(passwordInput)) {
-        }
-    });
+    // $("input#user_password").on('keyup', function() {
+    //   var passwordInput = $("input#user_password").val();
+    //   var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+    //   if (passwordPattern.test(passwordInput)) {
+    //     }
+    // });
 
-    $("input#user_password_confirmation").on('keyup', function() {
-      var passwordInput = $("input#user_password").val();
-      var passwordConfirmationInput = $("input#user_password_confirmation").val();
-      if (passwordInput === passwordConfirmationInput) {matchingPasswordInput = true;}
-      });
-  });
+    // $("input#user_password_confirmation").on('keyup', function() {
+    //   var passwordInput = $("input#user_password").val();
+    //   var passwordConfirmationInput = $("input#user_password_confirmation").val();
+    //   if (passwordInput === passwordConfirmationInput) {
+    //     console.log("I am in the confirmation loop");
+    //     $("input#user_password_confirmation").tipsy({gravity: 'w', trigger: 'focus', fade: true, fallback: "Password fields do not match."})
+    //   }
+    // });
 </script>
 
