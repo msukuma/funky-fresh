@@ -12,7 +12,7 @@ var elementFinder = function(){
   // $(".opt-out").tipsy({gravity: "s", fallback: "Leave Pantry"});
 
   $(".cookbook").tipsy({gravity: "s", fallback: "Find Recipes"});
-  $("input.user_password").tipsy({gravity: 'n', fade: true, fallback: "Use at least 6 characters. Include both an upper and a lower case letter."})
+  $("input.user_password").tipsy({gravity: 'n', fade: true, fallback: "Use at least 6 characters. Include an upper and a lower case letter as well as a number."})
 
 }
 
@@ -32,6 +32,4 @@ $(document).ready(function() {
   $('a[rel=tipsy]').tipsy({fade: true, gravity: 'n'});
 
   elementFinder();
-    
-
 });
