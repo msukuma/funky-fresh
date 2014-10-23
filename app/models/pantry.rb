@@ -34,7 +34,7 @@ class Pantry < ActiveRecord::Base
     might_have = []
     item_names.each do |item| 
       ingredients.each do |ingredient|
-        might_have << ingredient if ingredient.include?(item) #unless might_have.include?(ingredient)
+        might_have << ingredient if ingredient.include?(item) || item.include?(ingredient)  #unless might_have.include?(ingredient)
       end
     end
     might_have.uniq - pantry_has(ingredients)

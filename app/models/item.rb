@@ -11,7 +11,11 @@ class Item < ActiveRecord::Base
   before_update :set_expiration_date, if: -> {self.expiration_date.blank? }
 
   def prototype_name=(prototype_name)
-    self.prototype = Prototype.find_or_create_by(name: prototype_name)
+    if prototype_name.pluralize == prototype_name
+      self.prototype = Prototype.find_or_create_by(name: prototype_name.singularize, plural: prototype_name)
+    else
+      self.prototype = Prototype.find_or_create_by(name: prototype_name, plural: prototype_name.pluralize)
+    end
   end
 
   def set_prototype_shelf_life

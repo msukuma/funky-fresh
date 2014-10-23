@@ -19,7 +19,6 @@ $(function(){
 
   $(document).on("ajax:complete", "[id^='edit_pantry']", function(event, data, status, xhr) {
     console.log(event.target);
-    
     var index = this.id.replace("edit_pantry", "");
     console.log(index);
     $("#pantry" + index).remove();

@@ -3,32 +3,34 @@
   <table class="pantry-nav">
   <tr>
     <td><div class="new-item-create">
-    <button class="new_item_button" id="new_item_button<%= @pantry.id%>"></button>
-    <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">X</button>
-
-    <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
+      <button class="new_item_button" id="new_item_button<%= @pantry.id%>"></button>
+      <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">x</button>
     </td>
   </div>
   <% if @user.id == @pantry.creator_id %>
-    <td><button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>"></button>
-    <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">X</button>
-
-    <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
+    <td>
+    <button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>"></button>
+    <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">x</button>
     </td>
   <% end %>
     <td><%= link_to image_tag('cookbook.png', :class => "cookbook"), user_pantry_recipes_path(@user, @pantry), target: "_blank" %></td>
   <% if @user.id == @pantry.creator_id %>
     <td><button class="new_invite_button" id="new_invite_button<%=@pantry.id%>"></button>
-    <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=@pantry.id%>">X</button>
-    <%= render '/invites/new_invite', locals: { :pantry => @pantry }  %> </td>
+    <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=@pantry.id%>">x</button></td>
     <% end %>
   <% if @user.id != @pantry.creator_id %>
-      <td><%= form_for [@user, @pantry], url: opt_out_path(@user, @pantry), method: :delete, remote: true, :html => { :class => "opt_out_button", :id => "opt_out_button#{@pantry.id}" } do |f| %>
+      <td><%= form_for [@user, @pantry], url: opt_out_path(@user, @pantry), method: :post, remote: true, :html => { :class => "opt_out_button", :id => "opt_out_button#{@pantry.id}" } do |f| %>
         <%= f.submit '', :class => "opt-out" %></td>
       <% end %>
   <% end %>
     </tr>
   </table>
+
+<div class="form_pop_up">
+  <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
+  <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
+  <%= render '/invites/new_invite', locals: { :pantry => @pantry }  %>
+</div>
 
 <table>
   <tr>
