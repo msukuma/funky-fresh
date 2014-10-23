@@ -1,7 +1,7 @@
 <% if flash[:error] %>
   <div class="error"><%= flash[:error] %></div>
 <% end %>
-<%= form_tag '/login', :class => "login", remote: true, :id => "login_form" do %>
+<%= form_tag '/login', :class => "login", :id => "login_form" do %>
   <h1>Login</h1>
     <p>
     <%= text_field_tag :email, nil, :placeholder => 'Email', :required => true %>
