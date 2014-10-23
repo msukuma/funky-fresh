@@ -18,7 +18,7 @@ class Pantry < ActiveRecord::Base
 
   def comparators
     hash = {}
-  	array = items.map{ |item| [item.prototype.name, item.prototype.plural] }.flatten
+    array = items.map{ |item| [item.prototype.name, item.prototype.plural] }.flatten
     array.each{ |name| hash[name] = true }
     hash
   end
@@ -34,18 +34,18 @@ class Pantry < ActiveRecord::Base
     might_have = []
     item_names.each do |item| 
       ingredients.each do |ingredient|
-        might_have << ingredient if ingredient.include?(item) #unless might_have.include?(ingredient)
+        might_have << ingredient if ingredient.include?(item) || item.include?(ingredient)  #unless might_have.include?(ingredient)
       end
     end
     might_have.uniq - pantry_has(ingredients)
   end
 
   def pantry_missing(ingredients)
-    ingredients - (pantry_might_have(ingredients) - pantry_has(ingredients))
+    ingredients - (pantry_might_have(ingredients) + pantry_has(ingredients))
   end
 
-  
-  
+
+
   def search(query)
     item_names = self.items.map{ |item| item.prototype.name }
     item_names.include?(query)

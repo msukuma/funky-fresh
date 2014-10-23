@@ -1,3 +1,18 @@
+var dateAuto = function(){
+
+    $("input#item_prototype_name").focusout(function() {
+      if ($(this).val() != "" ) {
+        term = $(this).val();
+        $.post("/autocomplete_date/"+ term, function(response) {
+          console.log(response)
+          $("input#item_expiration_date").val(response['date']);
+        })
+      }
+    })
+  };
+
+
+
 $(function(){
   console.log("loaded");
   $(document).on("click", "[id^='new_item_button']", function(e){
@@ -8,6 +23,7 @@ $(function(){
     $("#new_item_button" + index).hide();
     $("#new_item" + index).show();
     $("#cancel_new_item_button" + index).show();
+    dateAuto();
   });
 
   $(document).on("click", "[id^='cancel_new_item_button']", function(e){
@@ -34,14 +50,5 @@ $(function(){
     $("#cancel_new_item_button" + index).hide();
   });
 
-  $("input#item_prototype_name").focusout(function() {
-    if ($(this).val() != "" ) {
-      term = $(this).val();
-      $.post("/autocomplete_date/"+ term, function(response) {
-        console.log(response)
-        $("input#item_expiration_date").val(response['date']);
-      })
-    }
-  })
 
 });

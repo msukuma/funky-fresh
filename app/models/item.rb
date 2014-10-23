@@ -12,6 +12,7 @@ class Item < ActiveRecord::Base
 
   def prototype_name=(prototype_name)
     self.prototype = Prototype.find_or_create_by(name: prototype_name)
+    self.prototype.plural = prototype_name.pluralize
   end
 
   def set_prototype_shelf_life
