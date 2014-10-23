@@ -1,19 +1,19 @@
 <% if @best_matches %>
 	<% @best_matches.each do |match| %>
-		<% recipe = Yummly.find(match.first)%>
-		<a href="<%= recipe.attribution.url %>"><p><%= recipe.name%></p></a>
-		<% if recipe.thumbnail %>
-	    <a href="<%= recipe.attribution.url %>"><img src="<%= recipe.thumbnail %>"></a>
+		<a href="<%= match['recipe'].attribution.url %>"><p><%= match['recipe'].name%></p></a>
+		<% if match['recipe'].thumbnail %>
+	    <a href="<%= match['recipe'].attribution.url %>"><img src="<%= match['recipe'].thumbnail %>"></a>
     <% else %>
-    	<a href="<%= recipe.attribution.url %>"><img src="<%= recipe.thumbnail %>"></a>
+    	<a href="<%= match['recipe'].attribution.url %>"><img src="<%= match['recipe'].thumbnail %>"></a>
 		<% end %><br>
 
-		<strong>ingredients</strong>: <%= recipe.ingredients.join(', ') %> <br>
+		<strong>ingredients</strong>: <%= match['ingredients'] %> <br>
 
-		<strong>pantry matches</strong>: <%= match[2].join(', ') %> <br> 
-		<strong>might be missing</strong>: <%= (match[1] - match[2]).join(', ') %> <br>
-		<strong>Rating</strong>: <%= recipe.rating %><br>
-		<strong>Source</strong>: <%= match[-2]%>  
+		<strong>Pantry matches</strong>: <%= match['pantry_has'] %> <br> 
+		<strong>Do you have? </strong>: <%= match['pantry_might_have'] %> <br>
+		<!-- <strong>Might be missing</strong>: <%= match[1] %> <br> -->
+		<strong>Rating</strong>: <%= match['recipe'].rating %><br>
+		<strong>Source</strong>: <%= match['sourceDisplayName']%>  
 	<% end  %>
 <% else %>
 <h5> No recipes found</h5>

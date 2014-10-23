@@ -23,6 +23,27 @@ class Pantry < ActiveRecord::Base
     hash
   end
 
+  def pantry_has(ingredients)
+    pantry_items = comparators
+    ingredients.select{|ingredient| pantry_items[ingredient]}
+  end
+
+  def pantry_might_have(ingredients)
+    pantry_items = comparators
+    item_names = pantry_items.keys
+    might_have = []
+    item_names.each do |item| 
+      ingredients.each do |ingredient|
+        might_have << ingredient if ingredient.include?(item) #unless might_have.include?(ingredient)
+      end
+    end
+    might_have.uniq - pantry_has(ingredients)
+  end
+
+  def pantry_missing(ingredients)
+    ingredients - (pantry_might_have(ingredients) - pantry_has(ingredients))
+  end
+
   def search(query)
     item_names = self.items.map{ |item| item.prototype.name }
     item_names.include?(query)
