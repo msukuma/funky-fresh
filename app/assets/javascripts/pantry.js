@@ -53,6 +53,7 @@ $(function(){
     $("#new_pantry").hide();
     $("#new_pantry_button").show();
     $("#cancel_new_pantry_button").hide();
+    elementFinder();
   });
 
   $(document).on("ajax:complete", "[id^='pantry_delete_button']", function(event, data, status, xhr){
