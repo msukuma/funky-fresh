@@ -1,7 +1,5 @@
 <div id="create_pantry"><center><button class="new_pantry_button" id="new_pantry_button">Create Pantry</button>
-<button class="cancel_new_pantry_button" id="cancel_new_pantry_button">Cancel</button>
-
-<%= render "pantries/new_pantry", locals: { :pantry => @pantry = Pantry.new } %>
+<button class="cancel_new_pantry_button" id="cancel_new_pantry_button">Cancel</button><%= render "pantries/new_pantry", locals: { :pantry => @pantry = Pantry.new } %>
 </center></div>
   <% if @user %>
   <div id="accordion">
@@ -10,7 +8,6 @@
       <div id="pantry<%= pantry.id%>" class="pantry">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
-
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>
@@ -23,7 +20,6 @@
       <div id="pantry<%= pantry.id%>">
           <h4 class="accordion-toggle"><%= pantry.name %></h4>
           <div class="accordion-content">
-
             <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
           </div>
       </div>

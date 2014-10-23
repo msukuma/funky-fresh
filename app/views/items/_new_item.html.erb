@@ -1,4 +1,5 @@
-<%= form_for [@user, @pantry, @item = Item.new], :html => {:autocomplete => "off"},  method: :new, remote: true, :class => "new_item", :html => { :id => "new_item#{@pantry.id}" } do |f| %>
+<table class="new_item" id="new_item<%= @pantry.id%>">
+<%= form_for [@user, @pantry, @item = Item.new], :html => {:autocomplete => "off"},  method: :new, remote: true do |f| %>
   <% if @item.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@item.errors.count, "error") %> prohibited
@@ -11,17 +12,22 @@
   </div>
   <% end %>
 
+  <td>
   <p>
-    <%= f.label :name %><br>
-    <%= f.autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true, autofocus: true %>
+    <%= f.autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true, autofocus: true, :placeholder => "Name" %>
   </p>
+  </td>
 
+  <td>
   <p>
-    <%= f.label :expiration_date %><br>
-    <%= f.text_field :expiration_date  %>
+    <%= f.text_field :expiration_date, :placeholder => "Expiration Date" %>
   </p>
+  </td>
 
+  <td>
   <p>
     <%= f.submit "Create" %>
   </p>
+  </td>
 <% end %>
+</table>

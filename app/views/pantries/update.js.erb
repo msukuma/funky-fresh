@@ -1,6 +1,6 @@
 <div id="pantry<%= pantry.id%>" class="pantry">
   <h4 class="accordion-toggle"><%= pantry.name %></h4>
   <div class="accordion-content">
-    <%= render "pantries/show", locals: { :pantry => @pantry } %>
+    <%= render "pantries/show", locals: { :pantry => @pantry = pantry } %>
   </div>
 </div>

@@ -55,11 +55,11 @@ class ItemsController < ApplicationController
   def search
     @grants = Grant.search params[:search]
   end
-  
+
   def autocomplete_date
     @prototype = Prototype.find(params[:term])
     @date = Time.now + @prototype.shelf_life.days
-    
+
     respond_to do |format|
       format.json {render json: @date}
       # format.js
