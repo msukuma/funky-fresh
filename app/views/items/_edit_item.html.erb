@@ -12,12 +12,12 @@
   <% end %>
 
   <p>
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true %>
   </p>
 
   <p>
-    <%= f.label :expiration_date %><br>
+    <%= f.label :expiration_date %>
     <%= f.text_field :expiration_date, :data => {:provide =>'datepicker'}, :class =>"form-control" %>
   </p>
 
