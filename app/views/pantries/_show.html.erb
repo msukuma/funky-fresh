@@ -16,7 +16,7 @@
     <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
     </td>
   <% end %>
-    <td><%= link_to image_tag('cookbook.png', :class => "cookbook"), user_pantry_recipes_path(@user, @pantry) %></td>
+    <td><%= link_to image_tag('cookbook.png', :class => "cookbook"), user_pantry_recipes_path(@user, @pantry), target: "_blank" %></td>
   <% if @user.id == @pantry.creator_id %>
     <td><button class="new_invite_button" id="new_invite_button<%=@pantry.id%>"></button>
     <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=@pantry.id%>">X</button>
