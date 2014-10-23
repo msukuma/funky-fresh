@@ -16,6 +16,10 @@ class RecipesController < ApplicationController
 		@best_matches = best_matches(@search_results ,@pantry.comparators) unless @search_results.matches.empty?
 		# @best_matches = @matches.map{|r| [r['id'], r['ingredients'], what_pantry_has(r['ingredients'], @pantry.comparators) ,  r['sourceDisplayName']]}.sort{|a, b| b[2].length <=> a[2].length} unless @matches.empty?
 		# @best_matches.each { |match| match << Yummly.find(match.first) }
+
+		
+
+
 			
 	end
 end

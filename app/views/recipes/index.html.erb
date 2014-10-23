@@ -10,8 +10,9 @@
 
 		<strong>ingredients</strong>: <%= recipe.ingredients.join(', ') %> <br>
 
-		<strong>pantry matches</strong>: <%= match[2].join(', ') %> <br> 
-		<strong>might be missing</strong>: <%= (match[1] - match[2]).join(', ') %> <br>
+		<strong>Pantry matches</strong>: <%= match[2].join(', ') %> <br> 
+		<strong>Do you have? </strong>: <%= (match[1] - match[2]).join(', ') %> <br>
+		<strong>Might be missing</strong>: <%= (match[1] - match[2]).join(', ') %> <br>
 		<strong>Rating</strong>: <%= recipe.rating %><br>
 		<strong>Source</strong>: <%= match[-2]%>  
 	<% end  %>
