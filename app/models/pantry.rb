@@ -18,7 +18,7 @@ class Pantry < ActiveRecord::Base
 
   def comparators
     hash = {}
-  	array = items.map{ |item| [item.prototype.name, item.prototype.plural] }.flatten
+    array = items.map{ |item| [item.prototype.name, item.prototype.plural] }.flatten
     array.each{ |name| hash[name] = true }
     hash
   end
