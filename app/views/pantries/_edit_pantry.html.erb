@@ -1,5 +1,5 @@
-<table class="edit_pantry" id="edit_pantry<%= @pantry.id%>">
-<%= form_for [@user, @pantry], remote: true, :html => { :id => "nothing" } do |f| %>
+
+<%= form_for [@user, @pantry], remote: true, :html => { :class => "edit_pantry", :id => "edit_pantry#{@pantry.id}" } do |f| %>
   <% if @pantry.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@pantry.errors.count, "error") %> prohibited
@@ -12,23 +12,18 @@
   </div>
   <% end %>
 
-  <td>
   <p>
     <%= f.text_field :name, :placeholder => "Name" %>
   </p>
-  </td>
 
   <p>
     <%= f.hidden_field 'creator_id', value: @user.id %>
   </p>
 
-  <td>
     <%= f.submit "Update" %>
   </td>
 <% end %>
-<td>
+
   <%= form_for [@user, @pantry], remote: true, method: :delete, :html => { :class => "pantry_delete_button", :id => "pantry_delete_button#{@pantry.id}" } do |f| %>
-    <%= f.submit 'Destroy' %>
+    <%= f.submit 'Destroy Pantry' %>
   <% end %>
-</td>
-</table>
