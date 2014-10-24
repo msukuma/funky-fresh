@@ -31,6 +31,18 @@
   background-attachment: fixed;
  }
 
+div.logo_div {
+  width: 20%;
+  float: left;
+}
+
+.logo {
+  height: 50px;
+  position: left;
+  margin-left: 20px;
+  margin-top: 3px;
+}
+
  header {
   width: 100%;
   top: 0;
