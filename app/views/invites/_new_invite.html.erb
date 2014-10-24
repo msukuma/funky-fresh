@@ -1,14 +1,13 @@
-<table class="new_invite" id="new_invite<%= @pantry.id%>">
-  <%= form_for :invite, :url => invites_path, method: :post, remote: true do |f| %>
+
+  <%= form_for :invite, :url => invites_path, method: :post, remote: true, :html => { :class => "new_invite", :id => "new_invite#{@pantry.id}" } do |f| %>
   <%= f.hidden_field :pantry_id, :value => @pantry.id %>
   <%= f.hidden_field :sender_id, :value => session[:user_id] %>
-  <td>
-    <%= f.email_field :email, :placeholder => "Invite Email" %>
-  </td>
-  <td>
+
+    <%= f.email_field :email, :placeholder => "Invite Email" %><br><br>
+
+
     <%= f.submit 'Send' %>
-  </td>
+
   <% end %>
-</table>
 
 

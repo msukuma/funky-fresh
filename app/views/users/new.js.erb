@@ -44,31 +44,4 @@
 $(document).ready(function($) {
     $("input#user_password").tipsy({gravity: 'w', fade: true, trigger: 'focus', fallback: "Use at least 6 characters. Include both an upper and a lower case letter."})
   });
-//     $("input#user_email").on('keyup', function() {
-//         console.log("eval email:" + email)
-//       var emailInput = $("form input#user_email").val();
-//       var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
-//       if (emailPattern.test(emailInput)) {
-//         email = true;
-//         console.log("in the email loop");
-//       }
-//       if (email === true && password === true && matchingPasswordInput === true) {$("input[name='commit']").removeAttr("disabled");}
-//     });
-
-    // $("input#user_password").on('keyup', function() {
-    //   var passwordInput = $("input#user_password").val();
-    //   var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
-    //   if (passwordPattern.test(passwordInput)) {
-    //     }
-    // });
-
-    // $("input#user_password_confirmation").on('keyup', function() {
-    //   var passwordInput = $("input#user_password").val();
-    //   var passwordConfirmationInput = $("input#user_password_confirmation").val();
-    //   if (passwordInput === passwordConfirmationInput) {
-    //     console.log("I am in the confirmation loop");
-    //     $("input#user_password_confirmation").tipsy({gravity: 'w', trigger: 'focus', fade: true, fallback: "Password fields do not match."})
-    //   }
-    // });
 </script>
-

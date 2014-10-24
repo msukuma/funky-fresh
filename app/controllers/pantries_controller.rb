@@ -66,13 +66,28 @@ class PantriesController < ApplicationController
 	end
 
 	def update
-		@user = current_user
-		@pantry = Pantry.find(params[:id])
-		@pantry.update(pantry_params)
-		respond_to do |format|
-			format.html {redirect_to user_path(@user)}
-	    format.json {render json: {:pantry => @pantry}}
-	    format.js {render "update", :locals => {:pantry => @pantry}}
+		if params[:commit] == "Update"
+			@user = current_user
+			@pantry = Pantry.find(params[:id])
+			@pantry.update(pantry_params)
+			respond_to do |format|
+				format.html {redirect_to user_path(@user)}
+		    format.json {render json: {:pantry => @pantry}}
+		    format.js {render "update", :locals => {:pantry => @pantry}}
+			end
+		end
+		if params[:commit] == "Delete"
+			@user = current_user
+			@pantry = Pantry.find(params[:id])
+			@pantry.destroy
+			respond_to do |format|
+	      format.js do
+	        render nothing: true
+	      end
+	      format.any do
+	        redirect_to user_path(@user)
+	      end
+	    end
 		end
 		# if @pantry.update(pantry_params)
 		# 	redirect_to user_path(@user)
@@ -82,17 +97,17 @@ class PantriesController < ApplicationController
 	end
 
 	def destroy
-		@user = current_user
-		@pantry = Pantry.find(params[:id])
-		@pantry.destroy
-		respond_to do |format|
-      format.js do
-        render nothing: true
-      end
-      format.any do
-        redirect_to user_path(@user)
-      end
-    end
+		# @user = current_user
+		# @pantry = Pantry.find(params[:id])
+		# @pantry.destroy
+		# respond_to do |format|
+  #     format.js do
+  #       render nothing: true
+  #     end
+  #     format.any do
+  #       redirect_to user_path(@user)
+  #     end
+  #   end
 	end
 
 	def opt_out

@@ -1,17 +1,14 @@
-var dateAuto = function(){
-
-    $("input#item_prototype_name").focusout(function() {
-      if ($(this).val() != "" ) {
-        term = $(this).val();
-        $.post("/autocomplete_date/"+ term, function(response) {
-          console.log(response)
-          $("input#item_expiration_date").val(response['date']);
-        })
-      }
-    })
-  };
-
-
+var dateAuto = function() {
+  $("input#item_prototype_name").focusout(function() {
+    if ($(this).val() != "" ) {
+      term = $(this).val();
+      $.post("/autocomplete_date/"+ term, function(response) {
+        console.log(response)
+        $("input#item_expiration_date").val(response['date']);
+      })
+    }
+  })
+};
 
 $(function(){
   console.log("loaded");
@@ -48,6 +45,27 @@ $(function(){
     $(this).hide();
     $("#new_item_button" + index).show();
     $("#cancel_new_item_button" + index).hide();
+    $(".new_item")[0].reset();
+    $(".new_item")[1].reset();
+    $(".new_item")[2].reset();
+    $(".new_item")[3].reset();
+    $(".new_item")[4].reset();
+    $(".new_item")[5].reset();
+    $(".new_item")[6].reset();
+    $(".new_item")[7].reset();
+    $(".new_item")[8].reset();
+    $(".new_item")[9].reset();
+    $(".new_item")[10].reset();
+    $(".new_item")[11].reset();
+    $(".new_item")[12].reset();
+    $(".new_item")[13].reset();
+    $(".new_item")[14].reset();
+    $(".new_item")[15].reset();
+    $(".new_item")[16].reset();
+    $(".new_item")[17].reset();
+    $(".new_item")[18].reset();
+    $(".new_item")[19].reset();
+    $(".new_item")[20].reset();
   });
 
 
