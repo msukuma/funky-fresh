@@ -1,7 +1,7 @@
 var dateAuto = function() {
   $("input#item_prototype_name").focusout(function() {
     if ($(this).val() != "" ) {
-      term = $(this).val();
+      term = $(this).val().trim();
       $.post("/autocomplete_date/"+ term, function(response) {
         console.log(response)
         $("input#item_expiration_date").val(response['date']);

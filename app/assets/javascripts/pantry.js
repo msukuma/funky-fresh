@@ -116,5 +116,9 @@ $(function(){
     $(".new_invite")[19].reset();
     $(".new_invite")[20].reset();
   });
+
+  $(".new_pantry_button").click(function (event) {
+    
+  })
 });
 

@@ -1,6 +1,6 @@
 $(function(){
   console.log("in the search js");
-  $("form.search").on("ajax:complete", function(event, data){
+  $(document).on("ajax:complete", "form.search", function(event, data){
     $(this).parent().find("input#search-field").val("");
     $("div.search-results").empty();
     console.log(data.responseText);
