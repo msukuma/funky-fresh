@@ -425,7 +425,6 @@ input#search-field {
 .new_invite, .edit_pantry, .new_item {
     /* Size and position */
     width: 100px;
-    position: relative;
 
     /* Font styles */
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
@@ -519,7 +518,6 @@ input#search-field {
 
 .new_item label,
 .edit_pantry label {
-    display: none;
     padding: 0 0 5px 2px;
     cursor: pointer;
 }
@@ -530,7 +528,8 @@ input#search-field {
     border-color: #333;
 }
 
-.no-placeholder .new_item label,
-.no-placeholder .edit_pantry label {
-    display: block;
+/* MAKING FORMS ONE LINE */
+
+.new_item input {
+
 }

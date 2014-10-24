@@ -1,4 +1,3 @@
-
 <%= form_for [@user, @pantry], remote: true, :html => { :class => "edit_pantry", :id => "edit_pantry#{@pantry.id}" } do |f| %>
   <% if @pantry.errors.any? %>
   <div id="error_explanation">
@@ -13,17 +12,13 @@
   <% end %>
 
   <p>
-    <%= f.text_field :name, :placeholder => "Name" %>
+    <%= f.text_field :name, :placeholder => "Name" %><br>
   </p>
 
   <p>
     <%= f.hidden_field 'creator_id', value: @user.id %>
   </p>
-
-    <%= f.submit "Update" %>
+    <%= f.submit "Update" %><br><br>
+    <%= f.submit "Delete" %>
   </td>
 <% end %>
-
-  <%= form_for [@user, @pantry], remote: true, method: :delete, :html => { :class => "pantry_delete_button", :id => "pantry_delete_button#{@pantry.id}" } do |f| %>
-    <%= f.submit 'Destroy Pantry' %>
-  <% end %>

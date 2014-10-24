@@ -3,7 +3,7 @@
   <%= f.hidden_field :pantry_id, :value => @pantry.id %>
   <%= f.hidden_field :sender_id, :value => session[:user_id] %>
 
-    <%= f.email_field :email, :placeholder => "Invite Email" %>
+    <%= f.email_field :email, :placeholder => "Invite Email" %><br><br>
 
 
     <%= f.submit 'Send' %>

@@ -1,4 +1,3 @@
-
 <%= form_for [@user, @pantry, @item = Item.new], :html => {:autocomplete => "off"},  method: :new, remote: true, :html => { :class => "new_item", :id => "new_item#{@pantry.id}" } do |f| %>
   <% if @item.errors.any? %>
   <div id="error_explanation">
@@ -12,22 +11,15 @@
   </div>
   <% end %>
 
-
   <p>
     <%= f.autocomplete_field :prototype_name, autocomplete_prototype_name_user_pantries_path(@user), 'data-auto-focus' => true, autofocus: true, :placeholder => "Name" %>
   </p>
 
-
-
   <p>
-    <%= f.text_field :expiration_date, :placeholder => "Expiration Date" %>
+    <%= f.text_field :expiration_date, placeholder: "MM/DD/YYYY" %>
   </p>
-
-
 
   <p>
     <%= f.submit "Create" %>
   </p>
-
 <% end %>
-

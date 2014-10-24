@@ -30,7 +30,7 @@
  	background-size: cover;
  	background-attachment: fixed;
  }
- 
+
  header {
  	width: 100%;
  	top: 0;
@@ -74,7 +74,7 @@
 
  .cookbook {
  	width: 40px;
- 	height: 40px; 
+ 	height: 40px;
  }
 
  .body_container {
@@ -106,14 +106,32 @@
  	padding: 4px 12px 4px 12px;
  }
 
+ div.notice {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin-bottom: 12px;
 
+  animation:search-notice 0.5s 1;
+  -webkit-animation:search-notice 0.5s 1;
+  animation-fill-mode: forwards;
 
+  animation-delay:2s;
+  -webkit-animation-delay:2s; /* Safari and Chrome */
+  -webkit-animation-fill-mode: forwards;
 
+}
 
-/*.button {
-padding: 4px 12px 4px 12px;
+@keyframes search-notice{
+  from {opacity :1;}
+  to {opacity :0;}
+}
 
-}*/
+@-webkit-keyframes search-notice{
+  from {opacity :1;}
+  to {opacity :0;}
+}
 
 
 
