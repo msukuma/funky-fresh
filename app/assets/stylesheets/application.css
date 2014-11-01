@@ -43,6 +43,10 @@ div.logo_div {
   margin-top: 3px;
 }
 
+.main-logo{
+  max-width: 80%
+}
+
  header {
   width: 100%;
   top: 0;
