@@ -7,9 +7,9 @@ class Invite < ActiveRecord::Base
 
   before_save :generate_token, :check_user_existence
 
-def generate_token
-   self.token = Digest::SHA1.hexdigest([self.pantry_id, Time.now, rand].join)
-end
+  def generate_token
+     self.token = Digest::SHA1.hexdigest([self.pantry_id, Time.now, rand].join)
+  end
 
   def check_user_existence
     recipient = User.find_by_email(email)
