@@ -25,17 +25,13 @@ class Invite < ActiveRecord::Base
   def invite_sort_n_send(recipient)
     pantry = Pantry.find_by_id(self.pantry_id)
     if self.is_a_user? && recipient.has_pantry?(pantry)
-      return email_type = "already a member"
     elsif self.is_a_user? && !recipient.has_pantry?(@pantry)
       InviteMailer.existing_user_invite(self).deliver
       self.recipient.pantries.push(self.pantry)
-      return email_type = "invited existing member"
     else
       InviteMailer.new_user_invite(self, 'http://localhost:3000' + Rails.application.routes.url_helpers.new_user_path(:invite_token => self.token)).deliver
     end
-
   end
-
 
 end
 
