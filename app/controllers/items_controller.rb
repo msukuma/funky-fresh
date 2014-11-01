@@ -33,25 +33,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  #   show_door unless session[:user_id] == params[:user_id]
-  #   @item = Item.find(params[:id])
-  # end
-
-  # def update
-  #   @item = Item.find(params[:id])
-  #   @item.update_attributes(item_params)
-  #   respond_to do |format|
-  #     format.html {redirect_to user_pantry_path(@user, @pantry)}
-  #     format.json {render json: {pantry: @pantry}}
-  #     format.js
-  #   end
-  #   # if @item.update_attributes(item_params)
-  #   #   redirect_to user_pantry_path(@user, @pantry)
-  #   # else
-  #   #   render 'edit'
-  #   # end
-  # end
   def search
     @grants = Grant.search params[:search]
   end
@@ -60,7 +41,6 @@ class ItemsController < ApplicationController
     @prototype = Prototype.find_by_name(params[:term])
     @date = Time.now + @prototype.shelf_life.days
     @date = @date.strftime("%m/%d/%Y")
-    # binding.pry
     respond_to do |format|
       format.json {render json: {date: @date}.to_json}
       # format.js

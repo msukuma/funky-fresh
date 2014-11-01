@@ -38,11 +38,6 @@ class PantriesController < ApplicationController
       format.json {render json: {:pantry => @pantry}}
       format.js { render "create", :locals => {:pantry => @pantry} }
 		end
-		# if @pantry.save
-		# 	redirect_to user_path(@user)
-		# else
-		# 	render 'new'
-		# end
 	end
 
 	def show
