@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
   before_save :capitalize_first_n_last_name, :lowercase_email
 
   def capitalize_first_n_last_name
-  self.first_name = first_name.downcase.capitalize
-  self.last_name = last_name.downcase.capitalize
+    self.first_name = first_name.downcase.capitalize
+    self.last_name = last_name.downcase.capitalize
   end
 
   def lowercase_email
-  self.email = email.downcase
+    self.email = email.downcase
   end
 
   def all_pantries
