@@ -3,7 +3,10 @@ class Invite < ActiveRecord::Base
   belongs_to :sender, :class_name => "User"
   belongs_to :recipient, :class_name => "User"
 
-  validates :email, :pantry, presence: true
+  validates :email, presence: true
+  validates :pantry, presence: true
+  validates :sender, presence: true
+  validates :token, presence: true
 
   before_save :generate_token, :check_user_existence
 
