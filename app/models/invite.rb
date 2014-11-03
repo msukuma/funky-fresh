@@ -3,15 +3,18 @@ class Invite < ActiveRecord::Base
   belongs_to :sender, :class_name => "User"
   belongs_to :recipient, :class_name => "User"
 
-  validates :email, :pantry, presence: true
+  validates :email, presence: true
+  validates :pantry, presence: true
+  validates :sender, presence: true
+  validates :token, presence: true
 
-  before_save :generate_token, :check_user_existence
+  before_save :generate_token, :set_recipient_id
 
   def generate_token
      self.token = Digest::SHA1.hexdigest([self.pantry_id, Time.now, rand].join)
   end
 
-  def check_user_existence
+  def set_recipient_id
     recipient = User.find_by_email(email)
     if recipient
       self.recipient_id = recipient.id
@@ -22,10 +25,11 @@ class Invite < ActiveRecord::Base
     !!User.find_by_email(self.email)
   end
 
-  def invite_sort_n_send(recipient)
-    pantry = Pantry.find_by_id(self.pantry_id)
-    if self.is_a_user? && recipient.has_pantry?(pantry)
-    elsif self.is_a_user? && !recipient.has_pantry?(@pantry)
+  def sort_n_send
+    recipient = User.find_by_id(self.recipient_id)
+    pantry_object = Pantry.find_by_id(self.pantry_id)
+    if self.is_a_user? && recipient.has_pantry?(pantry_object)
+    elsif self.is_a_user? && !recipient.has_pantry?(pantry_object)
       InviteMailer.existing_user_invite(self).deliver
       self.recipient.pantries.push(self.pantry)
     else
