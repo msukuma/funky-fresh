@@ -26,5 +26,6 @@ describe Item do
     it { should belong_to(:prototype) }
     it { should belong_to(:pantry) }
   end
+  
 
 end
