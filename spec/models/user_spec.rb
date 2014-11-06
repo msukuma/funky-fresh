@@ -6,36 +6,28 @@ describe User do
   let(:temp_user2) { User.create(first_name: "Bob", last_name: "Marley", email: "bmarley@gmail.com", password: "password")}
   let(:pantry3) { Pantry.create(name: "Bob's Kitchen", creator_id: temp_user2.id) }
 
+   context 'schema' do 
+    it { should have_db_column(:first_name).of_type :string }
+    it { should have_db_column(:last_name).of_type :string }
+    it { should have_db_column(:email).of_type :string }
+    it { should have_db_column(:password_digest).of_type :string }
+   end
+
   context 'validations' do
-    it "should have first_name, last_name, email and password columns" do
-      expect(user).to have_db_column :first_name
-      expect(user).to have_db_column :last_name
-      expect(user).to have_db_column :email
-      user.save
-      expect(user).to have_db_column :password_digest
-    end
-
-    it 'should validate the presence of name' do
-      expect(user).to validate_presence_of :first_name
-      expect(user).to validate_presence_of :last_name
-    end
-
-    it 'should validate presence of email' do
-      expect(user).to validate_presence_of :email
-    end
-
+    it { should validate_presence_of :first_name }
+    it { should validate_presence_of :last_name }
+    it { should validate_presence_of :email }
+    it { should validate_presence_of :password_digest }
+    
     it 'should have a unique email address' do
       expect(user).to validate_uniqueness_of :email
     end
-
+  
     it "should require a valid email" do
       test_user = User.create(:email => "susan@")
       expect(test_user.errors[:email][0]).to eq("is invalid")
     end
 
-    it 'should validate presence of password' do
-      expect(user).to validate_presence_of :password_digest
-    end
 
     it "should require a valid password" do
       test_user = User.create(:password => "susa")
