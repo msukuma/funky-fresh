@@ -49,7 +49,6 @@ class PantriesController < ApplicationController
 		@user = current_user
 		redirect_to user_path(current_user) unless current_user.id == Pantry.find(params[:id]).creator_id
 		@pantry = Pantry.find(params[:id])
-		# you have to update the pantry here
 		respond_to do |format|
 			format.js do
 				render nothing: true
@@ -84,25 +83,6 @@ class PantriesController < ApplicationController
 	      end
 	    end
 		end
-		# if @pantry.update(pantry_params)
-		# 	redirect_to user_path(@user)
-		# else
-		# 	render 'edit'
-		# end
-	end
-
-	def destroy
-		# @user = current_user
-		# @pantry = Pantry.find(params[:id])
-		# @pantry.destroy
-		# respond_to do |format|
-  #     format.js do
-  #       render nothing: true
-  #     end
-  #     format.any do
-  #       redirect_to user_path(@user)
-  #     end
-  #   end
 	end
 
 	def opt_out

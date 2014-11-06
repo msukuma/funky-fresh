@@ -84,7 +84,6 @@ before_action :find_user, only: [:show, :edit, :update, :destroy]
           end
         end
       else
-        flash[:notice]
         redirect_to new_user_path
       end
   end
