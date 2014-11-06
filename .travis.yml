@@ -7,4 +7,8 @@ rvm:
   - jruby-19mode # JRuby in 1.9 mode
   - rbx
 # uncomment this line if your project needs to run something other than `rake`:
-script: bundle exec rspec spec
+script: 
+  - RAILS_ENV=test bundle exec rake --trace db:create test
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake --trace proto test
+  - bundle exec rspec spec
