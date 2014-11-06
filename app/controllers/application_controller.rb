@@ -15,9 +15,4 @@ class ApplicationController < ActionController::Base
     redirect_to login_path if current_user == nil
   end
 
-  # we should talk about setting a standard for finding the user
-  # what is this used for?
-  def find_user
-    @user = params[:user_id] ? User.find(params[:user_id]) : User.find(params[:id])
-  end
 end
