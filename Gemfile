@@ -49,7 +49,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'pry'
   gem 'better_errors'
-  gem "binding_of_caller"
+  # gem "binding_of_caller"
   gem 'launchy'
   gem 'shoulda-matchers'
 end
