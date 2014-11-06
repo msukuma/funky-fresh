@@ -4,8 +4,6 @@ describe User do
   let(:user) { User.create(first_name: "ada", last_name: "lovelace", email: "ADA@GMAIL.COM", password: "programingrocks1")}
   let(:temp_user1) { User.create(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "lovemontana")}
   let(:temp_user2) { User.create(first_name: "Bob", last_name: "Marley", email: "bmarley@gmail.com", password: "password")}
-  let(:pantry1) { Pantry.create(name: "Joe's First Kitchen", creator_id: temp_user1.id) }
-  let(:pantry2) { Pantry.create(name: "Joe's Second Kitchen", creator_id: temp_user1.id) }
   let(:pantry3) { Pantry.create(name: "Bob's Kitchen", creator_id: temp_user2.id) }
 
   context 'validations' do
@@ -69,13 +67,20 @@ describe User do
 
     describe 'all_pantries' do
       it "should combine all of user's pantries into one array" do
-        p temp_user1
-        p temp_user1.pantries
-        p temp_user1.original_pantries
-        p pantry1
-        p pantry2
-        p pantry3
-        expect(user.all_pantries).to eq []
+        pantry1 = Pantry.new(name: "Joe's First Kitchen", creator_id: temp_user1.id)
+        pantry2 = Pantry.new(name: "Joe's Second Kitchen", creator_id: temp_user1.id)
+  
+        PantryParticipation.create(user_id: temp_user1.id, pantry_id: pantry3.id)
+  
+        temp_user1.original_pantries << pantry1
+        temp_user1.original_pantries << pantry2
+        expect(temp_user1.all_pantries.count).to eq 3
+      end
+    end
+
+    describe 'has_pantry?' do 
+      it 'should check whether a user has a given pantry' do 
+        expect(temp_user2.has_pantry?(pantry3)).to eq true
       end
     end
   end
