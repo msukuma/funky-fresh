@@ -61,7 +61,7 @@ end
 gem 'unicorn'
 
 group :production do
-    gem 'rails_12factor'    
+  gem 'rails_12factor'    
 end
 
 # Use Capistrano for deployment
