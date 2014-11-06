@@ -1,3 +1,535 @@
 // Place all the styles related to the pantry controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.pantry_table {
+	text-align: center;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	font-size: 1.2em;
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #ddf7c0;
+	box-shadow: 0px 5px 8px #504F4D;
+}
+
+thead.pantry_head th {
+	border-bottom: 1px solid #ddf7c0;
+	padding: 8px 0px 8px 0px;
+	font-weight: 600;
+}
+
+table.pantry_table td {
+	padding: 8px 0px 8px 0px;
+	border-bottom: 1px solid #ddf7c0;
+}
+
+div.new-item-create {
+	display: inline;
+}
+
+table.pantry-nav td {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+input#search-field {
+	font-size: 1.1em;
+	width: 100%;
+	/*min-width: 200px;*/
+	width: 450px;
+	height: 30px;
+	border-radius: 8px;
+}
+
+.search-button {
+	display: none;
+}
+
+.new_invite_button {
+	background-image: url('add-user.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.edit_pantry_button {
+	background-image: url('edit_cog.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.new_item_button {
+	background-image: url('add_item.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.opt-out {
+ 	background-image: url('opt-out.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+ 	height: 40px;
+ 	border: 0px;
+ 	background-color: transparent;
+ 	cursor: pointer;
+ 	outline: 0;
+}
+
+.trash_can {
+ 	width: 32px;
+ 	height: 32px;
+ }
+
+
+/*.pantry_table {
+	margin:0px;padding:0px;
+	width:100%;
+	border:1px solid #afff7e;
+
+	-moz-border-radius-bottomleft:10px;
+	-webkit-border-bottom-left-radius:10px;
+	border-bottom-left-radius:10px;
+
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius:10px;
+	border-bottom-right-radius:10px;
+
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-right-radius:10px;
+	border-top-right-radius:10px;
+
+	-moz-border-radius-topleft:10px;
+	-webkit-border-top-left-radius:10px;
+	border-top-left-radius:10px;
+}.pantry_table table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.pantry_table tr:last-child td:last-child {
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.pantry_table table tr:first-child td:first-child {
+	-moz-border-radius-topleft:10px;
+	-webkit-border-top-left-radius:10px;
+	border-top-left-radius:10px;
+}
+.pantry_table table tr:first-child td:last-child {
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-right-radius:10px;
+	border-top-right-radius:10px;
+}.pantry_table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:10px;
+	-webkit-border-bottom-left-radius:10px;
+	border-bottom-left-radius:10px;
+}.pantry_table tr:hover td{
+
+}
+.pantry_table tr:nth-child(odd){ background-color:#63db1a; }
+.pantry_table tr:nth-child(even)    { background-color:#afff7e; }.pantry_table td{
+	vertical-align:middle;
+
+
+	border:1px solid #afff7e;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:10px;
+	font-size:10px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#362819;
+}.pantry_table tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.pantry_table tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.pantry_table tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.pantry_table tr:first-child td{
+		background:-o-linear-gradient(bottom, #afff7e 5%, #63db1a 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #afff7e), color-stop(1, #63db1a) );
+	background:-moz-linear-gradient( center top, #afff7e 5%, #63db1a 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#afff7e", endColorstr="#63db1a");	background: -o-linear-gradient(top,#afff7e,63db1a);
+
+	background-color:#afff7e;
+	border:0px solid #afff7e;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#362819;
+}
+.pantry_table tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #afff7e 5%, #63db1a 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #afff7e), color-stop(1, #63db1a) );
+	background:-moz-linear-gradient( center top, #afff7e 5%, #63db1a 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#afff7e", endColorstr="#63db1a");	background: -o-linear-gradient(top,#afff7e,63db1a);
+
+	background-color:#afff7e;
+}
+.pantry_table tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.pantry_table tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}*/
+
+
+
+                                                    /* New Pantry Button */
+
+.cancel_new_pantry_button,
+.new_pantry_button {
+    /* Size and position */
+    width: 15%;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.cancel_new_pantry_button input[type=submit]:hover, .new_pantry_button input[type=submit]:hover {
+  box-shadow:
+  inset 0 1px rgba(255,255,255,0.2),
+  inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow .cancel_new_pantry_button input[type=submit]:hover, .no-boxshadow .new_pantry_button input[type=submit]:hover {
+  background: #594642;
+}
+
+
+                                                      /* New Pantry Form */
+
+#new_pantry {
+    /* Size and position */
+    width: 200px;
+    margin: 40px auto 15px;
+    padding: 10px;
+    position: relative;
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
+
+#new_pantry {
+    font-size: 0.8em;
+    padding-bottom: 15px;
+}
+
+#new_pantry input[type=text] {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+
+    /* Styles */
+    border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+#new_pantry input::-webkit-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_pantry input:-moz-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_pantry input:-ms-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+#new_pantry input[type=text]:hover {
+    border-color: #333;
+}
+
+#new_pantry input[type=text]:focus {
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+/* Fallback */
+.no-boxshadow #new_pantry input[type=text]:focus {
+    outline: 1px solid white;
+}
+
+#new_pantry input[type=submit] {
+    /* Size and position */
+    width: 107%;
+    padding: 8px 5px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+#new_pantry input[type=submit]:hover {
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow #new_pantry input[type=submit]:hover {
+    background: #594642;
+}
+
+#new_pantry {
+    display: none;
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+#new_pantry label:hover ~ input {
+    border-color: #333;
+}
+
+.no-placeholder #new_pantry label {
+    display: block;
+}
+
+                                        /* The Other Form Buttons */
+
+.cancel_edit_pantry_button,
+.cancel_new_item_button {
+    /* Size and position */
+    width: 25px;
+    padding: 1px 1px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.cancel_new_invite_button {
+    /* Size and position */
+    width: 25px;
+    padding: 1px 1px;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+
+.cancel_edit_pantry_button input[type=submit]:hover, .cancel_new_invite_button input[type=submit]:hover, .cancel_new_item_button input[type=submit]:hover {
+  box-shadow:
+  inset 0 1px rgba(255,255,255,0.2),
+  inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+.no-boxshadow .cancel_edit_pantry_button input[type=submit]:hover, .no-boxshadow .cancel_new_invite_button input[type=submit]:hover, .no-boxshadow .cancel_new_item_button input[type=submit]:hover {
+  background: #594642;
+}
+
+                                      /* The Other Form Buttons */
+
+.new_invite, .edit_pantry, .new_item {
+    /* Size and position */
+    width: 100px;
+
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
+
+.new_invite input[type=email],
+.edit_pantry input[type=text],
+.new_item input[type=text],
+.new_item input[type=autocomplete] {
+    /* Styles */
+    border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.2),
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+.new_item input::-webkit-input-placeholder,
+.edit_pantry input::-webkit-input-placeholder,
+.new_invite input::-webkit-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.new_item input:-moz-placeholder,
+.edit_pantry input:-moz-placeholder,
+.new_invite input:-moz-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.new_item input:-ms-input-placeholder,
+.edit_pantry input:-ms-input-placeholder,
+.new_invite input:-ms-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.new_item input[type=submit],
+.edit_pantry input[type=submit],
+.new_invite input[type=submit] {
+    /* Size and position */
+    width: 100%;
+
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    border-radius: 3px;
+    border: 1px solid #4e3043;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.4),
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.new_item input[type=submit]:hover,
+.edit_pantry input[type=submit]:hover,
+.new_invite input[type=submit]:hover {
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+/* Fallback */
+.no-boxshadow .new_item input[type=submit]:hover,
+.no-boxshadow .edit_pantry input[type=submit]:hover,
+.no-boxshadow .new_invite input[type=submit]:hover {
+    background: #594642;
+}
+
+.new_item label,
+.edit_pantry label {
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+.new_item label:hover ~ input,
+.edit_pantry label:hover ~ input,
+.new_invite label:hover ~ input {
+    border-color: #333;
+}
+
+/* MAKING FORMS ONE LINE */
+
+.new_item input {
+
+}

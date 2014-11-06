@@ -1,15 +1,41 @@
 <%= form_tag '/login' do %>
+
   <p>
     <%= label_tag :email %><br>
-    <%= text_field_tag :email %>
+    <%= text_field_tag :email, :required => true %>
   </p>
 
   <p>
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
+    <%= label_tag :password, :required => true %><br>
+    <%= password_field_tag :password, :required => true %>
   </p>
 
   <p>
     <%= submit_tag "Login" %>
   </p>
 <% end %>
+
+<script>
+$(document).ready(function($) {
+
+      var email = false;
+      var password = false;
+
+      if (email === false || password === true) {$("input[name='commit']").attr("disabled", "disabled");}
+
+      $("input#email").on('keyup', function() {
+        var emailInput = $("form input#email").val();
+        var emailPattern = /[\w.]+@\w+(\.\w{2,})+/;
+        if (emailPattern.test(emailInput)) {email = true;}
+        if (email === true && password === true) {$("input[name='commit']").removeAttr("disabled");}
+      });
+
+      $("input#password").on('keyup', function() {
+        var passwordInput = $("input#password").val();
+        var passwordPattern = /((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{6})/gm;
+        if (passwordPattern.test(passwordInput)) {password = true;}
+        if (email === true && password === true) {$("input[name='commit']").removeAttr("disabled");}
+      });
+
+  });
+</script>

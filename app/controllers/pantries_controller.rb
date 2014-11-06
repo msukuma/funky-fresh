@@ -1,5 +1,4 @@
 class PantriesController < ApplicationController
-	before_action :find_user, only: [:new, :create, :edit, :update, :destroy, :show]
 	before_action :show_door
 	autocomplete :prototype, :name, full: true
 
@@ -16,10 +15,10 @@ class PantriesController < ApplicationController
 
 		respond_to do |format|
 		    format.js do
-		        render 'index'
-		     end
+		      render 'index'
+		    end
 		    format.any do
-		        redirect_to user_path(current_user)
+		      redirect_to user_path(current_user)
 		    end
 	   end
 	end
@@ -38,11 +37,6 @@ class PantriesController < ApplicationController
       format.json {render json: {:pantry => @pantry}}
       format.js { render "create", :locals => {:pantry => @pantry} }
 		end
-		# if @pantry.save
-		# 	redirect_to user_path(@user)
-		# else
-		# 	render 'new'
-		# end
 	end
 
 	def show
@@ -66,15 +60,29 @@ class PantriesController < ApplicationController
 	end
 
 	def update
-		@pantry = Pantry.find(params[:id])
-		@pantry.update(pantry_params)
-
-		respond_to do |format|
-			format.html {redirect_to user_path(@user)}
-      format.json {render json: {:pantry => @pantry}}
-      format.js { render "update", :locals => {:pantry => @pantry} }
+		if params[:commit] == "Update"
+			@user = current_user
+			@pantry = Pantry.find(params[:id])
+			@pantry.update(pantry_params)
+			respond_to do |format|
+				format.html {redirect_to user_path(@user)}
+		    format.json {render json: {:pantry => @pantry}}
+		    format.js {render "update", :locals => {:pantry => @pantry}}
+			end
 		end
-
+		if params[:commit] == "Delete"
+			@user = current_user
+			@pantry = Pantry.find(params[:id])
+			@pantry.destroy
+			respond_to do |format|
+	      format.js do
+	        render nothing: true
+	      end
+	      format.any do
+	        redirect_to user_path(@user)
+	      end
+	    end
+		end
 		# if @pantry.update(pantry_params)
 		# 	redirect_to user_path(@user)
 		# else
@@ -83,17 +91,32 @@ class PantriesController < ApplicationController
 	end
 
 	def destroy
-		@user = current_user
+		# @user = current_user
+		# @pantry = Pantry.find(params[:id])
+		# @pantry.destroy
+		# respond_to do |format|
+  #     format.js do
+  #       render nothing: true
+  #     end
+  #     format.any do
+  #       redirect_to user_path(@user)
+  #     end
+  #   end
+	end
+
+	def opt_out
+		@user = User.find(params[:user_id])
 		@pantry = Pantry.find(params[:id])
-		@pantry.destroy
+		@pantryparticipation = PantryParticipation.find_by(user_id: @user.id, pantry_id: @pantry.id)
+		@pantryparticipation.destroy
 		respond_to do |format|
-      format.js do
+			format.js do
         render nothing: true
       end
       format.any do
         redirect_to user_path(@user)
       end
-    end
+		end
 	end
 
 		private

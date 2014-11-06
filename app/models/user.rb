@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   has_many :send_invitations, :class_name => "Invite", :foreign_key => "sender_id"
 
   validates :first_name, :last_name, :email, :password_digest, presence: true
-  validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/, on: :create }
+  validates :email, uniqueness: :true
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/ }
   validates :password, :length => {:minimum => 6}
 
   has_secure_password
@@ -15,12 +16,12 @@ class User < ActiveRecord::Base
   before_save :capitalize_first_n_last_name, :lowercase_email
 
   def capitalize_first_n_last_name
-  	self.first_name = first_name.downcase.capitalize
-  	self.last_name = last_name.downcase.capitalize
+    self.first_name = first_name.downcase.capitalize
+    self.last_name = last_name.downcase.capitalize
   end
 
   def lowercase_email
-  	self.email = email.downcase
+    self.email = email.downcase
   end
 
   def all_pantries

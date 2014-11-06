@@ -5,4 +5,5 @@ $(document).ready(function($) {
       //Hide the other panels
       $(".accordion-content").not($(this).next()).slideUp('fast');
     });
-  });
+
+});

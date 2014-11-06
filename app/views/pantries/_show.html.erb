@@ -1,23 +1,54 @@
-<% if @user.id == @pantry.creator_id %>
 
-<button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>">Edit Pantry</button>
-<button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">Cancel Form</button> <%= link_to 'Destroy Pantry', user_pantry_path(@user, @pantry), remote: true, method: :delete, :class => "pantry-delete", :id => "pantry_delete_button#{@pantry.id}" %>
+  <center>
+  <table class="pantry-nav">
+  <tr>
+    <td><div class="new-item-create">
+      <button class="new_item_button" id="new_item_button<%= @pantry.id%>"></button>
+      <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">x</button>
+    </td>
+  </div>
+  <% if @user.id == @pantry.creator_id %>
+    <td>
+    <button class="edit_pantry_button" id="edit_pantry_button<%= @pantry.id%>"></button>
+    <button class="cancel_edit_pantry_button" id="cancel_edit_pantry_button<%= @pantry.id%>">x</button>
+    </td>
+  <% end %>
+    <td><%= link_to image_tag('cookbook.png', :class => "cookbook"), user_pantry_recipes_path(@user, @pantry), target: "_blank" %></td>
+  <% if @user.id == @pantry.creator_id %>
+    <td><button class="new_invite_button" id="new_invite_button<%=@pantry.id%>"></button>
+    <button class="cancel_new_invite_button" id="cancel_new_invite_button<%=@pantry.id%>">x</button></td>
+    <% end %>
+  <% if @user.id != @pantry.creator_id %>
+      <td><%= form_for [@user, @pantry], url: opt_out_path(@user, @pantry), method: :post, remote: true, :html => { :class => "opt_out_button", :id => "opt_out_button#{@pantry.id}" } do |f| %>
+        <%= f.submit '', :class => "opt-out" %></td>
+      <% end %>
+  <% end %>
+    </tr>
+  </table>
 
-
+<div class="form_pop_up">
+  <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
   <%= render '/pantries/edit_pantry', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
-
-<% end %>
+  <%= render '/invites/new_invite', locals: { :pantry => @pantry }  %>
+</div>
 
 <table>
-	 <% if !@pantry.items.empty? %>
-	     <%= link_to "Get Recipes", user_pantry_recipes_path(@user, @pantry) %>
-	 <% end %>
   <tr>
-    <th>Item Name</th>
-    <th>Expiration Date</th>
+    <td><%= render 'layouts/search', locals: { :pantry => @pantry }  %>
+    <div class="search-results"> </div></td>
   </tr>
+</table>
+</center>
+<table class="pantry_table">
+  <thead class="pantry_head">
+    <tr>
+      <th>Item Name</th>
+      <th>Expiration Date</th>
+      <th>Remove Item</th>
+    </tr>
+  </thead>
 
- <tbody class="item-block">
+ <tbody id="item-block<%= @pantry.id %>">
 
   <% if @pantry %>
     <%= render '/items/item', locals: { :pantry => @pantry, :user => User.find(session[:user_id])} %>
@@ -25,11 +56,5 @@
  </tbody>
 </table>
 
-<div class="new-item-create">
-  <button class="new_item_button" id="new_item_button<%= @pantry.id%>">New Item</button>
-  <button class="cancel_new_item_button" id="cancel_new_item_button<%= @pantry.id%>">Cancel Form</button>
-
-  <%= render '/items/new_item', locals: { :pantry => @pantry, :user => User.find(session[:user_id]) } %>
-</div>
 
 

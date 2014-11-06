@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'home#index'
 
-  get "/login",                       to: "users#login_form",                 as: "login_form"
-  post "/login",                      to: "users#login",                      as: "login"
-  get "/logout",                      to: "users#logout",                     as: "logout"
+  get "/login",                           to: "users#login_form",                 as: "login_form"
+  post "/login",                          to: "users#login",                      as: "login"
+  get "/logout",                          to: "users#logout",                     as: "logout"
 
-  get "/search/:pantry_id",                      to: "pantries#index",                     as: "search"
+  post "/autocomplete_date/:term",        to: "items#autocomplete_date",          as: 'autocomplte_date'
+  get "/search/:pantry_id",               to: "pantries#index",                   as: "search"
+  post "/users/:user_id/pantries/:id",  to: "pantries#opt_out",                 as: "opt_out"
 
   resources :users, except: [:index] do
     resources :pantries, except: [:index] do
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
       resources :items, except: [:index, :show]
     end
   end
+
 
   resources :invites
   # get '/register' => 'users#new', as: 'new_user'

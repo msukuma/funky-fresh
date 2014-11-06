@@ -19,7 +19,7 @@ describe Pantry do
 
   context 'associations' do
     it { should have_many(:pantry_participations) }
-    it { should have_many(:participants) }
+    it { should have_many(:users) }
     it { should belong_to(:creator) }
     it { should have_many(:items) }
   end

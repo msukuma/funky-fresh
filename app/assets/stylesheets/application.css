@@ -16,63 +16,135 @@
  # Or if using bootstrap v3:
  *= require bootstrap-datepicker3
  */
- 
-header {
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: lightblue;
-	height: 3.5em;
-	border-radius: 20px;
+
+ @import url('http://fonts.googleapis.com/css?family=Oxygen:200,300,400,500,600,700,800,900,400italic,700italic');
+
+ * {
+  font-family: 'Oxygen';
+ }
+
+ body {
+  background-image: url('veggies-large-edited.jpg');
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+ }
+
+div.logo_div {
+  width: 20%;
+  float: left;
 }
 
-header nav {
-	float: right;
+.logo {
+  height: 50px;
+  position: left;
+  margin-left: 20px;
+  margin-top: 3px;
 }
 
-nav ul li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 35px;
-	font-size: 1.3em;
+.main-logo{
+  max-width: 80%
 }
 
-nav ul li a:link {
-	text-decoration: none;
-	font-weight: 700;
-	color: #0F3F95;
+ header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: #78E071;
+  opacity: .85;
+  height: 3.5em;
+ }
+
+ header nav {
+  float: right;
+ }
+
+ nav ul li {
+  display: inline;
+  list-style-type: none;
+  padding-right: 35px;
+  font-size: 1.3em;
+ }
+
+ nav ul li a:link {
+  text-decoration: none;
+  font-weight: 700;
+  color: #0F3F95;
+ }
+
+ nav ul li a:visited {
+  color: #0F3F95;
+ }
+
+ nav ul li a:hover {
+  color: #B035B2;
+  text-decoration: underline;
+ }
+
+ #login, #home, #edit_cog, #kitchen, #logout_button, #sign_up {
+  width: 20px;
+  height: 20px;
+ }
+
+ .cookbook {
+  width: 40px;
+  height: 40px;
+ }
+
+ .body_container {
+  width: 70%;
+  background-color: #78E071;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 120px auto;
+  text-align: left;
+  opacity: .85;
+ }
+
+ .body_container a:link {
+  text-decoration: none;
+  font-weight: 700;
+  color: #0F3F95;
+ }
+
+ .body_container a:visited {
+  color: #0F3F95;
+ }
+
+ .body_container a:hover {
+  color: #B035B2;
+  text-decoration: underline;
+ }
+
+ button {
+  padding: 4px 12px 4px 12px;
+ }
+
+ div.notice {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin-bottom: 12px;
+
+  animation:search-notice 0.5s 1;
+  -webkit-animation:search-notice 0.5s 1;
+  animation-fill-mode: forwards;
+
+  animation-delay:2s;
+  -webkit-animation-delay:2s; /* Safari and Chrome */
+  -webkit-animation-fill-mode: forwards;
+
 }
 
-nav ul li a:visited {
-	color: #0F3F95;
+@keyframes search-notice{
+  from {opacity :1;}
+  to {opacity :0;}
 }
 
-nav ul li a:hover {
-	color: #DB3C29;
-	text-decoration: underline;
+@-webkit-keyframes search-notice{
+  from {opacity :1;}
+  to {opacity :0;}
 }
-
-.body_container {
-	width: 70%;
-	background-color: lightblue;
-	border-radius: 30px;
-	padding: 40px;
-	margin: 50px auto;
-	text-align: left;
-}
-
-.body_container a:link {
-	text-decoration: none;
-	font-weight: 700;
-	color: #0F3F95;
-}
-
-.body_container a:visited {
-	color: #0F3F95;
-}
-
-.body_container a:hover {
-	color: #DB3C29;
-	text-decoration: underline;
-}
-

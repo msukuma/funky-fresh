@@ -3,27 +3,29 @@
 <head>
   <title>Funky||Fresh</title>
 
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag "application" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  
 
   <%= csrf_meta_tags %>
 </head>
 
 <body>
 <header>
-	<nav>
-		<% if session[:user_id] %>
-	  	<%= render "layouts/logged_in_header" %>
-		<% else %>
-	  	<%= render "layouts/logged_out_header" %>
-		<% end %>
-	</nav>
+	<div class="logo_div"><%= image_tag("funky-fresh.png", :class => "logo") %></div>
+<nav>
+<% if session[:user_id] %>
+  <%= render "layouts/logged_in_header" %>
+<% else %>
+  <%= render "layouts/logged_out_header" %>
+<% end %>
+</nav>
 </header>
 
 <div class="body_container">
-		
+
 <%= yield %>
 
 </div>

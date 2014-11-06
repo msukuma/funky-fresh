@@ -1,100 +1,102 @@
 class UsersController < ApplicationController
-	before_action :show_door, except: [:login_form, :login, :new, :create]
-	before_action :find_user, only: [:show, :edit, :update, :destroy]
+before_action :show_door, except: [:login_form, :login, :new, :create]
 
 	def show
+    @token = params[:invite_token]
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
-		@user = User.find(params[:id])
+    @user = User.find(params[:id])
     respond_to do |format|
       format.html
     end
-	end
+  end
 
-	def new
+  def new
     puts params
     @token = params[:invite_token]
-    puts "new found the TOKEN: #{@token}"
-		redirect_to user_path(current_user) if current_user
-		@user = User.new
-	end
+    redirect_to user_path(current_user) if current_user
+    @user = User.new
+  end
 
   def edit
     redirect_to user_path(current_user) unless current_user.id.to_s == params[:id]
   end
 
-	def create
-		@user = User.new(user_params)
-    @token = params[:invite_token]
-    puts "I am the TOKEN"
-    puts @token
-    if @user
-      if @token != nil
-      puts "TOKEN IS NOT NILL ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-      pantry_id = Invite.find_by_token(@token).pantry_id
-      puts "pantry_id #{pantry_id}"
-      pantry = Pantry.find_by_id(pantry_id)
-      puts "pantry name: #{pantry.name}"
-      @user.pantries.push(pantry)
-      puts @user.pantries
-      @user.save
-      end
-      puts "~~~~~~~~~~~~~~~~~~~TOKEN IS NILL!!!!!!!!!!"
-      @user.save
-      UserMailer.welcome_email(@user).deliver
-    	session[:user_id] = @user.id
-      redirect_to user_path(@user)
-    else
-      render 'new'
-    end
-	end
-
-	def update
-		if @user.update_attributes(user_params)
-			redirect_to user_path
-		else
-			render 'edit'
-		end
-	end
-
-	def destroy
-		@user.destroy
-		session.clear
-		redirect_to root_path	#might need to change the path
-	end
-
-	def login_form
-    respond_to do |format|
-      format.js
-    end
-	end
-
-	def login
-		@user = User.find_by_email(params[:email])
-    if @user
-      if @user.authenticate(params[:password])
+  def create
+      @user = User.new(user_params)
+      @token = params[:invite_token]
+      puts @token
+      if @user.save
+        if @token != nil
+        pantry_id = Invite.find_by_token(@token).pantry_id
+        pantry = Pantry.find_by_id(pantry_id)
+        @user.pantries.push(pantry)
+        end
+        UserMailer.welcome_email(@user).deliver
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        render 'login_form'
+        respond_to do |format|
+          format.html {render 'new'}
+          format.js {render 'new'}
+        end
       end
-    else
-      render 'login_form'
+  end
+
+  def update
+    if params[:commit] == "Update"
+      if @user.update_attributes(user_params)
+      redirect_to user_path
+      else
+      render 'edit'
+      end
     end
-	end
 
-	def logout
-		session.clear
-		redirect_to root_path
-	end
+    if params[:commit] == "Delete"
+      @user.destroy
+      session.clear
+      redirect_to root_path
+    end
+  end
 
-		private
+  # def destroy
+  #   @user.destroy
+  #   session.clear
+  #   redirect_to root_path#might need to change the path
+  # end
 
-	def user_params
-		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-	end
+  def login_form
+      respond_to do |format|
+        format.html {render 'login_form'}
+        format.js {render 'login_form'}
+      end
+  end
 
-	# def find_user
- #    @user = User.find(params[:id])
- #  end
+  def login
+    @user = User.find_by_email(params[:email])
+      if @user
+        if @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          redirect_to user_path(@user)
+        else
+          respond_to do |format|
+            format.js {render 'login_form'}
+          end
+        end
+      else
+        flash[:notice]
+        redirect_to new_user_path
+      end
+  end
+
+  def logout
+    session.clear
+    redirect_to root_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
 
 end
