@@ -6,17 +6,13 @@ class Item < ActiveRecord::Base
 
   validates :pantry_id, :prototype_id, presence: true
 
-  before_create :set_expiration_date, if: -> {self.expiration_date.blank? && !(self.prototype.shelf_life.blank?)}
+  before_create :set_expiration_date, if: -> { self.expiration_date.blank? && self.prototype.shelf_life.blank? == false }
   after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
-  before_update :set_expiration_date, if: -> {self.expiration_date.blank? }
+  before_update :set_expiration_date, if: -> { self.expiration_date.blank? }
 
   def prototype_name=(prototype_name)
     self.prototype = Prototype.find_or_create_by(name: prototype_name)
     self.prototype.plural = prototype_name.pluralize
-  end
-
-  def set_prototype_shelf_life
-    self.prototype.update_attributes(shelf_life: (((self.expiration_date.to_time - Time.now)/3600)/24).round )
   end
 
   def prototype_name
@@ -24,20 +20,17 @@ class Item < ActiveRecord::Base
   end
 
   def set_expiration_date
-    self.expiration_date = Time.now + (self.prototype.shelf_life).days
+      self.expiration_date = Date.today + (self.prototype.shelf_life).days
   end
 
-  def days_remaining
-    return (self.prototype.shelf_life - (((Time.now - self.created_at)/3600)/24) ).round
-  end
-
-  def downcase_prototype_name
-    self.prototype.name.downcase!
+  def set_prototype_shelf_life
+    # self.prototype.update_attributes(shelf_life: (((self.expiration_date.to_time - Time.now)/3600)/24).ceil )
+    self.prototype.update_attributes( shelf_life: self.expiration_date - Date.today )
   end
 
   def funky_or_fresh?(threshold)
-    min = Time.now
-    max = Time.now + threshold.days
+    min = Date.today #Time.now
+    max = min + threshold.days #Time.now + threshold.days 
     self.expiration_date.between?(min, max)
   end
 end
