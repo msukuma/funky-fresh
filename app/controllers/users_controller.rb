@@ -58,11 +58,11 @@ before_action :show_door, except: [:login_form, :login, :new, :create]
     end
   end
 
-  def destroy
-    @user.destroy
-    session.clear
-    redirect_to root_path#might need to change the path
-  end
+  # def destroy
+  #   @user.destroy
+  #   session.clear
+  #   redirect_to root_path#might need to change the path
+  # end
 
   def login_form
       respond_to do |format|

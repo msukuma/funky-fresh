@@ -57,8 +57,5 @@ describe Item do
         expect(item.funky_or_fresh?(2)).to eq false
       end
     end
-
   end
-  
-
 end
