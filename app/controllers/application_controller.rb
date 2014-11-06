@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
     @user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
 
-  # def logged_in
-  #   current_user != nil
-  # end
-
   def show_door
     redirect_to login_path if current_user == nil
   end
