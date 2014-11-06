@@ -16,10 +16,10 @@ class PantriesController < ApplicationController
 
 		respond_to do |format|
 		    format.js do
-		        render 'index'
+		      render 'index'
 		    end
 		    format.any do
-		        redirect_to user_path(current_user)
+		      redirect_to user_path(current_user)
 		    end
 	   end
 	end

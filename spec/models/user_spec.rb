@@ -42,6 +42,6 @@ describe User do
   context 'associations' do
     it { should have_many(:pantry_participations) }
     it { should have_many(:pantries) }
-
+    it { should have_many(:original_pantries) }
   end
 end
