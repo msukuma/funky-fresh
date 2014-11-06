@@ -1,5 +1,4 @@
 class PantriesController < ApplicationController
-	before_action :find_user, only: [:new, :create, :edit, :update, :destroy, :show]
 	before_action :show_door
 	autocomplete :prototype, :name, full: true
 

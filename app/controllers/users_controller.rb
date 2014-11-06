@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 before_action :show_door, except: [:login_form, :login, :new, :create]
-before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def show
     @token = params[:invite_token]
