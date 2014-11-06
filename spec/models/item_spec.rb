@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Item do
   let(:user) { User.create(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "lovemontana")}
-  let(:pantry) { Pantry.create(name: "Joe's Kitchen", creator_id: user.id)  }
+  let(:pantry) { Pantry.create(name: "Joe's Kitchen", creator_id: user.id) }
   let(:prototype) { Prototype.create(name: "milk", shelf_life: 7) }
   let(:item) { Item.create(pantry_id: pantry.id, prototype_id: prototype.id) }
   
