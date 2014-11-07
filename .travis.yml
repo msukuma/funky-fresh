@@ -7,7 +7,7 @@ before_script:
   - bundle exec rake db:drop
   - bundle exec rake db:create
   - bundle exec rake db:migrate
-  - bundle exec rake proto
+  # - bundle exec rake proto
 
 # uncomment this line if your project needs to run something other than `rake`:
 script: bundle exec rspec spec

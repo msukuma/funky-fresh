@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Item do
-  # let(:user) { User.create(first_name: "Joe", last_name: "Montana", email: "jmontana@gmail.com", password: "lovemontana")}
-  # let(:pantry) { Pantry.create(name: "Joe's Kitchen", creator_id: user.id) }
-  # let(:prototype) { Prototype.create(name: "milk", shelf_life: 7) }
-  # let(:item) { Item.create(pantry_id: pantry.id, prototype_id: prototype.id) }
   
   context 'schema' do 
     it { should have_db_column(:pantry_id).of_type(:integer)}
@@ -51,15 +47,10 @@ describe Item do
     describe 'set_prototype_shelf_life' do 
       it 'should calculate the shelf life of a custom item' do 
         FactoryGirl.reload
-        # proto = FactoryGirl.create(:prototype, name: 'ice cream cake', plural: 'ice cream cake' )
-        # item = FactoryGirl.create(prototype_name: proto.name, pantry_id: @pantry.id, expiration_date: (Date.today + 15))
-        # item.prototype.shelf_life.should == 15
-
         ice_cream_cake = Item.create(prototype_name: 'ice cream cake', expiration_date: Date.today + 15.days, pantry_id: @pantry.id)
         ice_cream_cake.prototype.shelf_life.should == 15
       end
     end
-
 
     describe 'funky_or_fresh?' do 
       it "should return true if an item's expiration date is within the threshold" do
