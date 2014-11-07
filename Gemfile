@@ -28,7 +28,7 @@ gem 'rails4-autocomplete'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring'
@@ -49,7 +49,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'pry'
   gem 'better_errors'
-  gem "binding_of_caller"
+  # gem "binding_of_caller"
   gem 'launchy'
   gem 'shoulda-matchers'
 end
