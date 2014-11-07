@@ -10,9 +10,10 @@ class Item < ActiveRecord::Base
   after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
   before_update :set_expiration_date, if: -> { self.expiration_date.blank? }
 
+
   def prototype_name=(prototype_name)
-    self.prototype = Prototype.find_or_create_by(name: prototype_name)
-    self.prototype.plural = prototype_name.pluralize
+    self.prototype = Prototype.find_or_create_by(name: prototype_name.downcase)
+    self.prototype.plural = prototype_name.pluralize if self.prototype.plural.blank?
   end
 
   def prototype_name
@@ -29,8 +30,8 @@ class Item < ActiveRecord::Base
   end
 
   def funky_or_fresh?(threshold)
-    min = Date.today #Time.now
-    max = min + threshold.days #Time.now + threshold.days 
+    min = Time.now  #Date.today
+    max = Time.now + threshold.days #min + threshold.days 
     self.expiration_date.between?(min, max)
   end
 end
