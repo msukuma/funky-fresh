@@ -30,8 +30,8 @@ class Item < ActiveRecord::Base
   end
 
   def funky_or_fresh?(threshold)
-    min = Date.today #Time.now
-    max = min + threshold.days #Time.now + threshold.days 
+    min = Time.now  #Date.today
+    max = Time.now + threshold.days #min + threshold.days 
     self.expiration_date.between?(min, max)
   end
 end
