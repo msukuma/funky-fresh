@@ -10,9 +10,10 @@ class Item < ActiveRecord::Base
   after_create :set_prototype_shelf_life, if: -> { self.prototype.shelf_life.blank? }
   before_update :set_expiration_date, if: -> { self.expiration_date.blank? }
 
+
   def prototype_name=(prototype_name)
-    self.prototype = Prototype.find_or_create_by(name: prototype_name)
-    self.prototype.plural = prototype_name.pluralize
+    self.prototype = Prototype.find_or_create_by(name: prototype_name.downcase)
+    self.prototype.plural = prototype_name.pluralize if self.prototype.plural.blank?
   end
 
   def prototype_name

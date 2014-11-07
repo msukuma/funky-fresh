@@ -29,6 +29,7 @@ class Pantry < ActiveRecord::Base
   end
 
   def pantry_might_have(ingredients)
+    # refactor so we call the previous methods within this method and return a hash 
     pantry_items = comparators
     item_names = pantry_items.keys
     might_have = []
@@ -44,14 +45,13 @@ class Pantry < ActiveRecord::Base
     ingredients - (pantry_might_have(ingredients) + pantry_has(ingredients))
   end
 
-
-
   def search(query)
     item_names = self.items.map{ |item| item.prototype.name }
     item_names.include?(query)
   end
 
   def item_checker(threshold)
+    # could be refactored => items.select { |item| item.funky_or_fresh?(threshold) }
     funky_items = []
     self.items.each do |item|
       if item.funky_or_fresh?(threshold)

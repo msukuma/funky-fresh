@@ -20,49 +20,54 @@ describe Pantry do
   end
 
   context 'methods' do 
-    before(:each) do 
-      @user = User.create(first_name: "ada", last_name: "lovelace", email: "ADA@GMAIL.COM", password: "programingrocks1")
-      # @pantry = Pantry.create(name: "kitchen", creator_id: @user.id) 
-      @proto1 = Prototype.create(name: "milk", plural: "milk", shelf_life: 7) 
-      @proto2 = Prototype.create(name: "orange", plural: "oranges", shelf_life: 7) 
-      @proto3 = Prototype.create(name: "sugar", plural: "sugar", shelf_life: 547) 
-      @proto4 = Prototype.create(name: "kidney", plural: "kidneys", shelf_life: 3) 
+    
+    before(:each) do     
+        @pantry = FactoryGirl.create(:pantry)
+        @proto1 = FactoryGirl.create(:prototype) 
+        @proto2 = FactoryGirl.create(:prototype, name: "milk", plural: "milk", shelf_life: 7) 
+        @proto3 = FactoryGirl.create(:prototype, name: "sugar", plural: "sugar", shelf_life: 547) 
+        @proto4 = FactoryGirl.create(:prototype, name: "kidney", plural: "kidneys", shelf_life: 3) 
+        @item1  = FactoryGirl.create(:item, prototype_id: @proto1.id, pantry_id: @pantry.id)
+        @item2  = FactoryGirl.create(:item, prototype_id: @proto2.id, pantry_id: @pantry.id)
+        @item3  = FactoryGirl.create(:item, prototype_id: @proto3.id, pantry_id: @pantry.id)
+        @item4  = FactoryGirl.create(:item, prototype_id: @proto4.id, pantry_id: @pantry.id)
     end
+
     describe 'item_names_and_plural' do 
-      it 'should return an array containing the names and plurals of the top (1..3) items about to expire' do 
-        item1 = Item.new(prototype_name: "milk") 
-        item2 = Item.new(prototype_name: "orange") 
-        item3 = Item.new(prototype_name: "sugar") 
-        item4 = Item.new(prototype_name: "kidney") 
-        # item1 = double("item", prototype_id: @proto1.id, pantry_id: @pantry.id)
-        # item2 = double("item", prototype_id: @proto2.id, pantry_id: @pantry.id) 
-        # item3 = double("item", prototype_id: @proto3.id, pantry_id: @pantry.id)
-        # item4 = double("item", prototype_id: @proto4.id, pantry_id: @pantry.id)
-        pantry = double("pantry"), name: "kitchen", creator_id: @user.id )
-        pantry.items << [item1,item2,item3,item4]
-        puts pantry.item_names_and_plural
-        expect(pantry.item_names_and_plural).to eq "kidney kidneys milk orange oranges"
+      it 'should return a string containing the names and plurals of the top (1..3) items about to expire' do 
+        @pantry.item_names_and_plural.should == "kidney, kidneys, milk, apple, apples"
+      end
+    end
+    
+    describe 'comparators' do 
+      it "should return a hash with pantry item names and plurals as the keys and 'true' as their values" do 
+        @pantry.comparators.should == {"apple"=>true, "apples"=>true, "milk"=>true, "sugar"=>true, "kidney"=>true, "kidneys"=>true}
       end
     end
 
-    describe 'comparators' do 
-
-    end
-
     describe 'pantry_has' do 
-
+      it 'should do return what the pantry has from the ingredients passed to the method' do
+        @pantry.pantry_has(['jasmine rice','milk', 'kidneys']).should == ['milk', 'kidneys']
+      end
     end
 
     describe 'pantry_might_have' do 
-
+      it 'should return the ingredients that the pantry might have ( e.g ingredient = jasmine rice, pantry_item = rice).' do 
+        @pantry.pantry_might_have(['applesauce', 'condensed milk', 'kidneys']).should == ['applesauce','condensed milk']
+      end
     end
 
     describe 'search' do 
-
+      it 'should return true if the searched item is in the pantry and false otherwise' do
+        @pantry.search("apple").should == true
+        @pantry.search("chicken").should == false
+      end
     end
 
     describe 'item_checker' do 
-
+      it 'should return an array of items that have expired' do 
+        @pantry.item_checker(4).should == [@item4]
+      end
     end
   end
 

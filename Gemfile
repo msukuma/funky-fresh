@@ -52,6 +52,8 @@ group :development, :test do
   # gem "binding_of_caller"
   gem 'launchy'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 # Use ActiveModel has_secure_password
